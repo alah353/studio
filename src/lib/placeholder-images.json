@@ -1,3 +1,76 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero-background",
+      "description": "Aerial view of a cargo ship with colorful containers at sunrise.",
+      "imageUrl": "https://images.unsplash.com/photo-1693643210220-2070c11b1464?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxjYXJnbyUyMHNoaXAlMjBzZWF8ZW58MHx8fHwxNzYzNTgxMjg3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "cargo ship sea"
+    },
+    {
+      "id": "about-team",
+      "description": "Diverse corporate logistics team working in a modern office.",
+      "imageUrl": "https://images.unsplash.com/photo-1758520145408-dedb359d1c49?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxjb3Jwb3JhdGUlMjB0ZWFtJTIwb2ZmaWNlfGVufDB8fHx8MTc2MzU4MTI4N3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "corporate team office"
+    },
+    {
+      "id": "fleet-trucks",
+      "description": "Fleet of modern trucks at a logistics warehouse.",
+      "imageUrl": "https://images.unsplash.com/photo-1571989928541-674d0cf46c4a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxtb2Rlcm4lMjB0cnVja3MlMjB3YXJlaG91c2V8ZW58MHx8fHwxNzYzNTgxMjg3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "modern trucks warehouse"
+    },
+    {
+      "id": "tech-map",
+      "description": "Digital map with animated supply chains.",
+      "imageUrl": "https://images.unsplash.com/photo-1717700299591-470e043edc9c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxkaWdpdGFsJTIwbWFwJTIwc3VwcGx5X2NoYWluc3xlbnwwfHx8fDE3NjM1ODEyODd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "digital map supply_chains"
+    },
+    {
+      "id": "service-land",
+      "description": "A truck driving on a highway at sunset.",
+      "imageUrl": "https://images.unsplash.com/photo-1738507869660-b44ea20ab037?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHx0cnVjayUyMGhpZ2h3YXl8ZW58MHx8fHwxNzYzNTUzNTgyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "truck highway"
+    },
+    {
+      "id": "service-sea",
+      "description": "A large container ship on the ocean.",
+      "imageUrl": "https://images.unsplash.com/photo-1632517306067-b54ab4d1f98d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxjb250YWluZXIlMjBzaGlwJTIwb2NlYW58ZW58MHx8fHwxNzYzNTgxMjg3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "container ship ocean"
+    },
+    {
+      "id": "service-air",
+      "description": "A cargo plane flying in the sky.",
+      "imageUrl": "https://images.unsplash.com/photo-1712590785069-f67ca693eacf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxjYXJnbyUyMHBsYW5lJTIwc2t5fGVufDB8fHx8MTc2MzU4MTI4N3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "cargo plane sky"
+    },
+    {
+      "id": "service-logistics",
+      "description": "Warehouse interior with workers managing packages.",
+      "imageUrl": "https://images.unsplash.com/photo-1664382953403-fc1ac77073a0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx3YXJlaG91c2UlMjB3b3JrZXJzfGVufDB8fHx8MTc2MzU4MTI4N3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "warehouse workers"
+    },
+    {
+      "id": "service-warehouse",
+      "description": "Modern warehouse interior with shelves and packages.",
+      "imageUrl": "https://images.unsplash.com/photo-1610463076431-2717271d692d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx3YXJlaG91c2UlMjBpbnRlcmlvcnxlbnwwfHx8fDE3NjM1MzY4NTl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "warehouse interior"
+    },
+    {
+      "id": "blog-post-1",
+      "description": "Abstract image representing logistics trends.",
+      "imageUrl": "https://images.unsplash.com/photo-1759328380914-968cdb6c0d3f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxsb2dpc3RpY3MlMjB0cmVuZHN8ZW58MHx8fHwxNzYzNTgxMjg3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "logistics trends"
+    },
+    {
+      "id": "blog-post-2",
+      "description": "Image representing supply chain optimization.",
+      "imageUrl": "https://images.unsplash.com/photo-1590497008246-8f3634db768b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxzdXBwbHlfY2hhaW4lMjBvcHRpbWl6YXRpb258ZW58MHx8fHwxNzYzNTgxMjg3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "supply_chain optimization"
+    },
+    {
+      "id": "blog-post-3",
+      "description": "Image related to sustainable logistics.",
+      "imageUrl": "https://images.unsplash.com/photo-1726866672851-5b99c837603c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxzdXN0YWluYWJsZSUyMGxvZ2lzdGljc3xlbnwwfHx8fDE3NjM1ODEyODd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "sustainable logistics"
+    }
+  ]
 }
