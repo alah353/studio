@@ -4,25 +4,25 @@
 
 @layer base {
   :root {
-    --background: 210 25% 12%;
-    --foreground: 205 56% 92%;
-    --card: 210 25% 15%;
-    --card-foreground: 205 56% 92%;
-    --popover: 210 25% 15%;
-    --popover-foreground: 205 56% 92%;
-    --primary: 210 90% 60%;
-    --primary-foreground: 210 25% 12%;
-    --secondary: 210 25% 25%;
-    --secondary-foreground: 205 56% 92%;
-    --muted: 210 25% 25%;
-    --muted-foreground: 205 56% 70%;
-    --accent: 45 85% 55%;
-    --accent-foreground: 210 25% 15%;
+    --background: 207 43% 95%; /* Light Blue */
+    --foreground: 210 25% 12%; /* Deep Blue */
+    --card: 210 43% 100%;
+    --card-foreground: 210 25% 12%;
+    --popover: 210 43% 100%;
+    --popover-foreground: 210 25% 12%;
+    --primary: 205 65% 30%; /* Deep Blue */
+    --primary-foreground: 207 43% 95%;
+    --secondary: 207 43% 90%;
+    --secondary-foreground: 205 65% 30%;
+    --muted: 207 43% 90%;
+    --muted-foreground: 210 25% 40%;
+    --accent: 27 82% 53%; /* Vibrant Orange */
+    --accent-foreground: 207 43% 95%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 210 25% 25%;
-    --input: 210 25% 25%;
-    --ring: 45 85% 55%;
+    --border: 207 43% 85%;
+    --input: 207 43% 85%;
+    --ring: 205 65% 30%;
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
@@ -31,25 +31,25 @@
     --radius: 0.5rem;
   }
   .dark {
-    --background: 210 25% 12%;
-    --foreground: 205 56% 92%;
+    --background: 210 25% 12%; /* Deep Blue */
+    --foreground: 207 43% 95%; /* Light Blue text */
     --card: 210 25% 15%;
-    --card-foreground: 205 56% 92%;
+    --card-foreground: 207 43% 95%;
     --popover: 210 25% 15%;
-    --popover-foreground: 205 56% 92%;
-    --primary: 210 90% 60%;
+    --popover-foreground: 207 43% 95%;
+    --primary: 207 43% 95%; /* Light Blue for primary elements */
     --primary-foreground: 210 25% 12%;
     --secondary: 210 25% 25%;
-    --secondary-foreground: 205 56% 92%;
+    --secondary-foreground: 207 43% 95%;
     --muted: 210 25% 25%;
-    --muted-foreground: 205 56% 70%;
-    --accent: 45 85% 55%;
+    --muted-foreground: 207 43% 70%;
+    --accent: 27 82% 53%; /* Vibrant Orange */
     --accent-foreground: 210 25% 15%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
     --border: 210 25% 25%;
     --input: 210 25% 25%;
-    --ring: 45 85% 55%;
+    --ring: 27 82% 53%;
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;

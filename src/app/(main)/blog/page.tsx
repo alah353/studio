@@ -7,20 +7,20 @@ import { ArrowRight } from 'lucide-react';
 
 const blogPosts = [
   {
-    title: '5 Tendencias en Logística para 2024',
-    excerpt: 'Descubre las innovaciones que están transformando la cadena de suministro, desde la IA hasta la sostenibilidad.',
+    title: '5 Tendencias en Logística para 2024 que Debes Conocer',
+    excerpt: 'Descubre las innovaciones que están transformando la cadena de suministro, desde la inteligencia artificial hasta la sostenibilidad y la logística urbana.',
     date: '15 de Mayo, 2024',
     imageId: 'blog-post-1',
   },
   {
     title: 'Cómo Optimizar tus Costes de Transporte Marítimo',
-    excerpt: 'Consejos prácticos para reducir gastos sin comprometer la eficiencia en tus envíos internacionales.',
+    excerpt: 'Consejos prácticos y estrategias para reducir gastos sin comprometer la eficiencia ni los tiempos de entrega en tus envíos internacionales.',
     date: '28 de Abril, 2024',
     imageId: 'blog-post-2',
   },
   {
     title: 'La Importancia de la Logística Verde en el Mundo Actual',
-    excerpt: 'Analizamos cómo las prácticas sostenibles no solo ayudan al planeta, sino que también mejoran la imagen y eficiencia de tu empresa.',
+    excerpt: 'Analizamos cómo las prácticas sostenibles no solo benefician al planeta, sino que también mejoran la reputación y la eficiencia de tu empresa.',
     date: '10 de Abril, 2024',
     imageId: 'blog-post-3',
   },
@@ -31,9 +31,9 @@ export default function BlogPage() {
     <div className="bg-background">
       <header className="py-16 md:py-24 text-center bg-card">
         <div className="container">
-          <h1 className="font-headline text-4xl font-bold md:text-5xl">Blog y Noticias</h1>
+          <h1 className="font-headline text-4xl font-bold md:text-5xl">Blog y Noticias del Sector</h1>
           <p className="mt-4 mx-auto max-w-2xl text-lg text-muted-foreground">
-            Mantente al día con las últimas novedades, tendencias logísticas y consejos prácticos de nuestros expertos.
+            Mantente al día con las últimas novedades, análisis de tendencias y consejos prácticos de nuestros expertos en logística.
           </p>
         </div>
       </header>

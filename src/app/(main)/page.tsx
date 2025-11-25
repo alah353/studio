@@ -28,18 +28,18 @@ const services = [
 const features = [
   {
     icon: <Zap className="h-8 w-8 text-accent" />,
-    title: 'Potencia y Velocidad',
-    description: 'Como un pura sangre, nuestra logística está diseñada para la máxima velocidad y rendimiento.',
+    title: 'Velocidad y Fiabilidad',
+    description: 'Optimizamos cada ruta para garantizar la entrega más rápida y segura posible. Tu tiempo es nuestra prioridad.',
   },
   {
     icon: <ShieldCheck className="h-8 w-8 text-accent" />,
-    title: 'Fiabilidad Absoluta',
-    description: 'Tu carga es sagrada. La protegemos con la fuerza y la nobleza de un corcel de confianza.',
+    title: 'Seguridad Integral',
+    description: 'Tu carga está protegida en cada etapa del viaje. Ofrecemos seguimiento y monitorización constantes para tu tranquilidad.',
   },
   {
     icon: <Globe className="h-8 w-8 text-accent" />,
-    title: 'Alcance Global Imparable',
-    description: 'Nuestra red galopa sin descanso para conquistar cualquier rincón del planeta para ti.',
+    title: 'Cobertura Global',
+    description: 'Nuestra extensa red de socios nos permite llegar a cualquier rincón del planeta, sin importar la complejidad del destino.',
   },
 ];
 
@@ -59,14 +59,14 @@ export default function HomePage() {
           />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" />
-        <div className="absolute inset-0 bg-black/50" />
-        <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-primary-foreground">
+        <div className="absolute inset-0 bg-black/60" />
+        <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white">
           <div className="container">
             <h1 className="font-headline text-4xl font-extrabold tracking-tight md:text-6xl lg:text-7xl">
-              Horse S.L: La Potencia que Impulsa tu Mundo.
+              SwiftRoute: Tu Mundo, Entregado.
             </h1>
-            <p className="mx-auto mt-6 max-w-3xl text-lg md:text-xl">
-              Desatamos la fuerza de una logística sin precedentes. Velocidad, poder y precisión para llevar tu negocio a la meta.
+            <p className="mx-auto mt-6 max-w-3xl text-lg md:text-xl text-primary-foreground/90">
+              Desbloquea el potencial de tu negocio con nuestra logística de vanguardia. Velocidad, seguridad y alcance global a tu servicio.
             </p>
             <Button asChild size="lg" className="mt-8 bg-accent text-accent-foreground hover:bg-accent/90 font-bold">
               <Link href="/contact">
@@ -81,9 +81,9 @@ export default function HomePage() {
       <section className="py-16 md:py-24 bg-background">
         <div className="container">
           <div className="mx-auto max-w-3xl text-center">
-            <h2 className="font-headline text-3xl font-bold md:text-4xl">Nuestros Servicios de Élite</h2>
+            <h2 className="font-headline text-3xl font-bold md:text-4xl">Nuestros Servicios</h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              Diseñados para la victoria, nuestros servicios logísticos cubren todas las distancias con una potencia inigualable.
+              Soluciones logísticas integrales, diseñadas para cubrir cada una de tus necesidades con la máxima eficiencia.
             </p>
           </div>
           <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
@@ -108,9 +108,9 @@ export default function HomePage() {
       <section className="py-16 md:py-24 bg-card">
         <div className="container">
           <div className="mx-auto max-w-3xl text-center">
-            <h2 className="font-headline text-3xl font-bold md:text-4xl">¿Por Qué Galopar con Nosotros?</h2>
+            <h2 className="font-headline text-3xl font-bold md:text-4xl">¿Por Qué Elegirnos?</h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              No solo movemos mercancías. Inyectamos la potencia de un motor de pura sangre en tu cadena de suministro.
+              Combinamos tecnología de punta, una red global y un equipo de expertos para ofrecer un servicio logístico sin igual.
             </p>
           </div>
           <div className="mt-12 grid grid-cols-1 gap-12 md:grid-cols-3">
@@ -130,13 +130,13 @@ export default function HomePage() {
       {/* CTA Section */}
       <section className="py-16 md:py-24 bg-primary text-primary-foreground">
         <div className="container text-center">
-          <h2 className="font-headline text-3xl font-bold md:text-4xl">¿Listo para liderar la carrera?</h2>
+          <h2 className="font-headline text-3xl font-bold md:text-4xl">¿Listo para optimizar tu logística?</h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg">
-            Contacta con nuestros estrategas y descubre cómo la potencia de Horse S.L. puede transformar tu logística.
+            Contacta con nuestros especialistas y descubre cómo SwiftRoute Logistics puede transformar tu cadena de suministro.
           </p>
           <Button asChild size="lg" className="mt-8 bg-accent text-accent-foreground hover:bg-accent/90 font-bold">
             <Link href="/contact">
-              Habla con un especialista
+              Habla con un experto
             </Link>
           </Button>
         </div>

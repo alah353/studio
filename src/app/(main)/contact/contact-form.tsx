@@ -64,8 +64,8 @@ export function ContactForm() {
   return (
     <Card>
         <CardHeader>
-            <CardTitle className="font-headline text-2xl">Contacta con la Manada</CardTitle>
-            <CardDescription>Rellena el formulario y uno de nuestros estrategas se pondrá en contacto.</CardDescription>
+            <CardTitle className="font-headline text-2xl">Envíanos un Mensaje</CardTitle>
+            <CardDescription>Rellena el formulario y uno de nuestros expertos se pondrá en contacto contigo a la mayor brevedad.</CardDescription>
         </CardHeader>
         <CardContent>
             <Form {...form}>
@@ -105,7 +105,7 @@ export function ContactForm() {
                     <FormItem>
                         <FormLabel>Asunto</FormLabel>
                         <FormControl>
-                        <Input placeholder="Ej: Estrategia para dominio logístico" {...field} />
+                        <Input placeholder="Ej: Cotización para envío internacional" {...field} />
                         </FormControl>
                         <FormMessage />
                     </FormItem>
@@ -116,9 +116,9 @@ export function ContactForm() {
                     name="message"
                     render={({ field }) => (
                     <FormItem>
-                        <FormLabel>Tu Plan de Conquista</FormLabel>
+                        <FormLabel>Mensaje</FormLabel>
                         <FormControl>
-                        <Textarea placeholder="Detalla tus objetivos y te mostraremos el camino..." className="min-h-[120px]" {...field} />
+                        <Textarea placeholder="Detalla tu consulta y te ofreceremos una solución..." className="min-h-[120px]" {...field} />
                         </FormControl>
                         <FormMessage />
                     </FormItem>
@@ -133,9 +133,9 @@ export function ContactForm() {
             {isSuccess && (
                 <Alert className="mt-6 border-accent text-accent-foreground">
                     <CheckCircle className="h-4 w-4 text-accent" />
-                    <AlertTitle>Mensaje Recibido</AlertTitle>
+                    <AlertTitle>¡Mensaje Enviado!</AlertTitle>
                     <AlertDescription>
-                        Hemos recibido tu comunicación. Prepárate para la velocidad.
+                        Hemos recibido tu consulta. Nos pondremos en contacto contigo pronto.
                     </AlertDescription>
                 </Alert>
             )}
