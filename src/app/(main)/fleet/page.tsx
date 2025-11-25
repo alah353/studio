@@ -1,16 +1,14 @@
+'use client';
+
 import Image from 'next/image';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { Truck, Ship, Plane, Wifi, BrainCircuit, Bot } from 'lucide-react';
-
-const fleetImage = PlaceHolderImages.find(p => p.id === 'fleet-trucks');
-const techImage = PlaceHolderImages.find(p => p.id === 'tech-map');
-
-const vehicleTypes = [
-  { icon: <Truck className="h-8 w-8 text-primary" />, title: 'Flota Terrestre', description: 'Camiones y tráileres de última generación, equipados para todo tipo de carga. Garantizamos flexibilidad y eficiencia en rutas nacionales e internacionales.' },
-  { icon: <Ship className="h-8 w-8 text-primary" />, title: 'Conexiones Marítimas', description: 'Nuestra red de alianzas con las principales navieras nos permite ofrecer un servicio marítimo global, fiable y competitivo para carga contenerizada.' },
-  { icon: <Plane className="h-8 w-8 text-primary" />, title: 'Carga Aérea', description: 'Colaboramos con las mejores aerolíneas de carga para ofrecerte soluciones rápidas y seguras para tus envíos más urgentes a cualquier parte del mundo.' },
-];
+import { Truck, Ship, Plane, Wifi, BrainCircuit, Bot, Drill } from 'lucide-react';
+import { fleetData, FleetVehicle } from '@/lib/fleet-data';
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+import { Badge } from '@/components/ui/badge';
 
 const techFeatures = [
     { icon: <Wifi className="h-6 w-6 text-accent" />, title: 'Seguimiento en Tiempo Real', description: 'Visibilidad completa de tus envíos 24/7. Nuestra plataforma te permite conocer la ubicación y el estado de tu carga en todo momento.' },
@@ -18,7 +16,31 @@ const techFeatures = [
     { icon: <Bot className="h-6 w-6 text-accent" />, title: 'Automatización de Almacenes', description: 'Implementamos robótica y sistemas automatizados en nuestros centros logísticos para una gestión de inventario y preparación de pedidos sin errores y a máxima velocidad.' },
 ];
 
+type FilterType = 'all' | 'truck' | 'ship' | 'plane';
+
+
 export default function FleetPage() {
+  const [filter, setFilter] = useState<FilterType>('all');
+
+  const filteredFleet = filter === 'all' ? fleetData : fleetData.filter(v => v.type === filter);
+  
+  const getIconForType = (type: FleetVehicle['type']) => {
+    switch (type) {
+        case 'truck': return <Truck className="h-6 w-6 text-primary" />;
+        case 'ship': return <Ship className="h-6 w-6 text-primary" />;
+        case 'plane': return <Plane className="h-6 w-6 text-primary" />;
+    }
+  }
+
+  const getStatusVariant = (status: FleetVehicle['status']) => {
+    switch (status) {
+        case 'Operativo': return 'default';
+        case 'En Mantenimiento': return 'secondary';
+        case 'En Ruta': return 'outline';
+        default: return 'default';
+    }
+  }
+
   return (
     <div className="bg-background">
       <header className="py-16 md:py-24 text-center bg-card">
@@ -32,55 +54,71 @@ export default function FleetPage() {
 
       <section className="py-16 md:py-24">
         <div className="container">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            {fleetImage && (
-              <div className="rounded-lg overflow-hidden shadow-lg">
-                <Image
-                  src={fleetImage.imageUrl}
-                  alt={fleetImage.description}
-                  data-ai-hint={fleetImage.imageHint}
-                  width={600}
-                  height={450}
-                  className="object-cover w-full"
-                />
-              </div>
-            )}
-            <div>
-              <h2 className="font-headline text-3xl font-bold mb-6">Nuestros Activos</h2>
-              <div className="space-y-6">
-                {vehicleTypes.map((vehicle) => (
-                  <Card key={vehicle.title} className="bg-background">
-                    <CardHeader className="flex flex-row items-center gap-4 pb-2">
-                        {vehicle.icon}
-                        <CardTitle className="font-headline text-xl">{vehicle.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-muted-foreground">{vehicle.description}</p>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </div>
+          <div className="text-center mb-12">
+            <h2 className="font-headline text-3xl font-bold">Nuestros Activos</h2>
+            <p className="mt-4 mx-auto max-w-2xl text-lg text-muted-foreground">Explora nuestra flota y descubre la potencia detrás de cada envío.</p>
           </div>
+          
+          <div className="flex justify-center gap-2 mb-10">
+              <Button onClick={() => setFilter('all')} variant={filter === 'all' ? 'default' : 'outline'}>Todos</Button>
+              <Button onClick={() => setFilter('truck')} variant={filter === 'truck' ? 'default' : 'outline'}><Truck className="mr-2"/> Terrestre</Button>
+              <Button onClick={() => setFilter('ship')} variant={filter === 'ship' ? 'default' : 'outline'}><Ship className="mr-2"/> Marítima</Button>
+              <Button onClick={() => setFilter('plane')} variant={filter === 'plane' ? 'default' : 'outline'}><Plane className="mr-2"/> Aérea</Button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredFleet.map(vehicle => {
+                const image = PlaceHolderImages.find(p => p.id === vehicle.imageId);
+                return (
+                    <Card key={vehicle.id} className="flex flex-col overflow-hidden transition-transform hover:-translate-y-1 hover:shadow-xl">
+                        {image && (
+                            <div className="aspect-w-16 aspect-h-9 bg-muted">
+                                <Image
+                                    src={image.imageUrl}
+                                    alt={image.description}
+                                    data-ai-hint={image.imageHint}
+                                    width={600}
+                                    height={400}
+                                    className="object-cover w-full h-full"
+                                />
+                            </div>
+                        )}
+                        <CardHeader className="flex-row items-start gap-4">
+                            {getIconForType(vehicle.type)}
+                            <div>
+                                <CardTitle className="font-headline text-xl">{vehicle.name}</CardTitle>
+                                <CardDescription>{vehicle.model}</CardDescription>
+                            </div>
+                        </CardHeader>
+                        <CardContent className="flex-grow space-y-4">
+                            <div className="text-sm text-muted-foreground space-y-2">
+                                <p><span className="font-semibold text-foreground">Capacidad:</span> {vehicle.specs.capacity}</p>
+                                <p><span className="font-semibold text-foreground">Ruta Actual:</span> {vehicle.currentRoute}</p>
+                            </div>
+                            <div className="flex items-center justify-between">
+                                <Badge variant={getStatusVariant(vehicle.status)}>{vehicle.status}</Badge>
+                                <Button variant="link" className="px-0">Ver Ficha Técnica</Button>
+                            </div>
+                        </CardContent>
+                    </Card>
+                );
+            })}
+          </div>
+
         </div>
       </section>
       
       <section className="py-16 md:py-24 bg-card">
         <div className="container">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="md:order-last">
-              {techImage && (
-                <div className="rounded-lg overflow-hidden shadow-lg">
-                  <Image
-                    src={techImage.imageUrl}
-                    alt={techImage.description}
-                    data-ai-hint={techImage.imageHint}
-                    width={600}
-                    height={450}
-                    className="object-cover w-full"
+             <div className="relative aspect-video rounded-lg overflow-hidden shadow-lg">
+                <Image
+                    src="https://images.unsplash.com/photo-1586449480537-3a22cf98b04c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxkaWdpdGFsJTIwbWFwfGVufDB8fHx8MTc2NDA4NDcyNnww&ixlib=rb-4.1.0&q=80&w=1080"
+                    alt="Digital map with animated supply chains"
+                    data-ai-hint="digital map"
+                    fill
+                    className="object-cover"
                   />
-                </div>
-              )}
             </div>
             <div>
               <h2 className="font-headline text-3xl font-bold mb-6">Nuestra Tecnología</h2>

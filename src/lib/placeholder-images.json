@@ -13,12 +13,6 @@
       "imageHint": "corporate team"
     },
     {
-      "id": "fleet-trucks",
-      "description": "Fleet of modern trucks at a logistics warehouse.",
-      "imageUrl": "https://images.unsplash.com/photo-1699078878436-dcfe6039758d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxtb2Rlcm4lMjB0cnVja3N8ZW58MHx8fHwxNzY0MDg0NzI2fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "modern trucks"
-    },
-    {
       "id": "tech-map",
       "description": "Digital map with animated supply chains.",
       "imageUrl": "https://images.unsplash.com/photo-1586449480537-3a22cf98b04c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxkaWdpdGFsJTIwbWFwfGVufDB8fHx8MTc2NDA4NDcyNnww&ixlib=rb-4.1.0&q=80&w=1080",
@@ -71,6 +65,42 @@
       "description": "Image related to sustainable logistics.",
       "imageUrl": "https://images.unsplash.com/photo-1753781466620-d2bc4d703b2e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxzdXN0YWluYWJsZSUyMGxvZ2lzdGljc3xlbnwwfHx8fDE3NjQwODQ3MjZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "sustainable logistics"
+    },
+    {
+      "id": "fleet-truck-1",
+      "description": "Side view of a modern white electric truck.",
+      "imageUrl": "https://images.unsplash.com/photo-1591419478162-a4dd21b7ec0a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxlbGVjdHJpYyUyMHRydWNrfGVufDB8fHx8MTc2NDA1NTM4M3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "electric truck"
+    },
+    {
+      "id": "fleet-truck-2",
+      "description": "A blue semi-truck on an open highway.",
+      "imageUrl": "https://images.unsplash.com/photo-1720811559337-c59b75acc4de?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxzZW1pJTIwdHJ1Y2t8ZW58MHx8fHwxNzY0MDg0OTc5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "semi truck"
+    },
+    {
+      "id": "fleet-truck-3",
+      "description": "Sleek silver truck parked at a loading dock.",
+      "imageUrl": "https://images.unsplash.com/photo-1754497804651-23ecaa023bb1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxzaWx2ZXIlMjB0cnVja3xlbnwwfHx8fDE3NjQwNjQ1NjV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "silver truck"
+    },
+    {
+      "id": "fleet-ship-1",
+      "description": "Massive container ship crossing the ocean.",
+      "imageUrl": "https://images.unsplash.com/photo-1573014089159-8ee711dc5a8e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxjb250YWluZXIlMjBzaGlwfGVufDB8fHx8MTc2Mzk5ODY4MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "container ship"
+    },
+    {
+      "id": "fleet-ship-2",
+      "description": "A large cargo ship being loaded at a port.",
+      "imageUrl": "https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxjYXJnbyUyMHBvcnR8ZW58MHx8fHwxNzY0MDgwMDg5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "cargo port"
+    },
+    {
+      "id": "fleet-plane-1",
+      "description": "A cargo airplane taking off from a runway.",
+      "imageUrl": "https://images.unsplash.com/photo-1676926683400-4bdb6790a504?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxjYXJnbyUyMGFpcnBsYW5lfGVufDB8fHx8MTc2NDA4NTgyMXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "cargo airplane"
     }
   ]
 }
