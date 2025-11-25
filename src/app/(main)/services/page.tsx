@@ -16,6 +16,8 @@ import {
 import { ServiceRequestForm } from './service-request-form';
 import { useState } from 'react';
 
+const headerImage = PlaceHolderImages.find(p => p.id === 'services-header');
+
 const services = [
   {
     id: 'land',
@@ -65,12 +67,24 @@ export default function ServicesPage() {
 
   return (
     <div className="bg-background">
-      <header className="py-16 md:py-24 text-center bg-card">
-        <div className="container">
-          <h1 className="font-headline text-4xl font-bold md:text-5xl">Un Mundo de Soluciones a tu Alcance</h1>
-          <p className="mt-4 mx-auto max-w-3xl text-lg text-muted-foreground">
-            Descubre nuestro completo portafolio de servicios logísticos, diseñados para ofrecerte eficiencia, seguridad y alcance global.
-          </p>
+      <header className="relative h-64 md:h-80 w-full">
+        {headerImage && (
+            <Image
+                src={headerImage.imageUrl}
+                alt={headerImage.description}
+                data-ai-hint={headerImage.imageHint}
+                fill
+                className="object-cover"
+            />
+        )}
+        <div className="absolute inset-0 bg-black/60" />
+        <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white">
+          <div className="container">
+             <h1 className="font-headline text-4xl font-bold md:text-5xl">Un Mundo de Soluciones a tu Alcance</h1>
+            <p className="mt-4 mx-auto max-w-3xl text-lg text-primary-foreground/90">
+                Descubre nuestro completo portafolio de servicios logísticos, diseñados para ofrecerte eficiencia, seguridad y alcance global.
+            </p>
+          </div>
         </div>
       </header>
       
@@ -128,3 +142,5 @@ export default function ServicesPage() {
     </div>
   );
 }
+
+    

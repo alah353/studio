@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { ArrowRight } from 'lucide-react';
 
+const headerImage = PlaceHolderImages.find(p => p.id === 'blog-header');
+
 const blogPosts = [
   {
     title: '5 Tendencias en Logística para 2024 que Debes Conocer',
@@ -29,12 +31,24 @@ const blogPosts = [
 export default function BlogPage() {
   return (
     <div className="bg-background">
-      <header className="py-16 md:py-24 text-center bg-card">
-        <div className="container">
-          <h1 className="font-headline text-4xl font-bold md:text-5xl">Blog y Noticias del Sector</h1>
-          <p className="mt-4 mx-auto max-w-2xl text-lg text-muted-foreground">
-            Mantente al día con las últimas novedades, análisis de tendencias y consejos prácticos de nuestros expertos en logística.
-          </p>
+      <header className="relative h-64 md:h-80 w-full">
+        {headerImage && (
+            <Image
+                src={headerImage.imageUrl}
+                alt={headerImage.description}
+                data-ai-hint={headerImage.imageHint}
+                fill
+                className="object-cover"
+            />
+        )}
+        <div className="absolute inset-0 bg-black/60" />
+        <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white">
+          <div className="container">
+             <h1 className="font-headline text-4xl font-bold md:text-5xl">Blog y Noticias del Sector</h1>
+            <p className="mt-4 mx-auto max-w-2xl text-lg text-primary-foreground/90">
+                Mantente al día con las últimas novedades, análisis de tendencias y consejos prácticos de nuestros expertos en logística.
+            </p>
+          </div>
         </div>
       </header>
       
@@ -80,3 +94,5 @@ export default function BlogPage() {
     </div>
   );
 }
+
+    
