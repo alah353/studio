@@ -131,8 +131,8 @@ export function ContactForm() {
                 </form>
             </Form>
             {isSuccess && (
-                <Alert className="mt-6 border-accent text-accent-foreground">
-                    <CheckCircle className="h-4 w-4 text-accent" />
+                <Alert className="mt-6 border-green-500 text-green-500">
+                    <CheckCircle className="h-4 w-4 text-green-500" />
                     <AlertTitle>¡Mensaje Enviado!</AlertTitle>
                     <AlertDescription>
                         Hemos recibido tu consulta. Nos pondremos en contacto contigo pronto.

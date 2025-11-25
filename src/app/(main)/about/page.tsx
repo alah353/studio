@@ -14,10 +14,10 @@ const values = [
 ];
 
 const team = [
-  { name: 'Elena García', role: 'CEO y Fundadora', avatar: 'https://picsum.photos/seed/elena/150/150' },
-  { name: 'Carlos Martínez', role: 'Director de Operaciones', avatar: 'https://picsum.photos/seed/carlos/150/150' },
-  { name: 'Javier Soler', role: 'Jefe de Logística Global', avatar: 'https://picsum.photos/seed/javier/150/150' },
-  { name: 'Sofía Mendoza', role: 'Responsable de Tecnología', avatar: 'https://picsum.photos/seed/sofia-m/150/150' },
+  { name: 'Ali Ahrika', role: 'CEO y Fundador', avatar: 'https://picsum.photos/seed/ali/150/150', bio: 'Con más de 20 años de experiencia en el sector logístico, Ali fundó Horse S.L. con la visión de crear una empresa que combinara la última tecnología con un servicio al cliente excepcional. Su liderazgo ha sido fundamental para el crecimiento y la expansión internacional de la compañía.' },
+  { name: 'Laura Gómez', role: 'Directora Comercial', avatar: 'https://picsum.photos/seed/laura/150/150', bio: 'Experta en desarrollo de negocio y relaciones con clientes, Laura es la fuerza impulsora detrás de nuestra estrategia comercial. Su enfoque en soluciones personalizadas asegura que cada cliente reciba el mejor servicio posible.' },
+  { name: 'Marcos Roca', role: 'Responsable de Flota', avatar: 'https://picsum.photos/seed/marcos/150/150', bio: 'Marcos supervisa nuestra moderna flota de vehículos, garantizando que cada unidad cumpla con los más altos estándares de seguridad y eficiencia. Su pasión por la mecánica y la innovación mantiene a Horse S.L. a la vanguardia.' },
+  { name: 'Sofía Chen', role: 'Especialista en Atención al Cliente', avatar: 'https://picsum.photos/seed/sofia-c/150/150', bio: 'Sofía es el corazón de nuestro equipo de soporte. Con una dedicación inquebrantable, se asegura de que cada consulta y cada incidencia se resuelvan de manera rápida y satisfactoria, garantizando la tranquilidad de nuestros clientes.' },
 ]
 
 export default function AboutPage() {
@@ -27,7 +27,7 @@ export default function AboutPage() {
         <div className="container">
           <h1 className="font-headline text-4xl font-bold md:text-5xl">La Fuerza que Mueve tu Negocio</h1>
           <p className="mt-4 mx-auto max-w-3xl text-lg text-muted-foreground">
-            En SwiftRoute Logistics, no solo transportamos mercancías; impulsamos el crecimiento de tu negocio con soluciones logísticas a medida.
+            En Horse S.L., no solo transportamos mercancías; impulsamos el crecimiento de tu negocio con soluciones logísticas a medida.
           </p>
         </div>
       </header>
@@ -38,7 +38,7 @@ export default function AboutPage() {
             <div>
               <h2 className="font-headline text-3xl font-bold mb-4">Nuestra Historia</h2>
               <p className="text-muted-foreground mb-4">
-                SwiftRoute Logistics nació en 2010 de una visión clara: revolucionar el sector logístico a través de la tecnología y un enfoque centrado en el cliente. Desde nuestros inicios, hemos crecido de forma constante, ampliando nuestra red y perfeccionando nuestros servicios para ofrecer una eficiencia sin precedentes.
+                Horse S.L. nació en 2010 de una visión clara: revolucionar el sector logístico a través de la tecnología y un enfoque centrado en el cliente. Desde nuestros inicios, hemos crecido de forma constante, ampliando nuestra red y perfeccionando nuestros servicios para ofrecer una eficiencia sin precedentes.
               </p>
               <p className="text-muted-foreground">
                 Hoy, somos un equipo de expertos apasionados por la logística, comprometidos con la innovación y dedicados a superar los desafíos de la cadena de suministro de nuestros clientes.
@@ -90,39 +90,28 @@ export default function AboutPage() {
 
       <section className="py-16 md:py-24">
         <div className="container">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-                <div>
+            <div className="grid md:grid-cols-1 gap-12 items-center">
+                <div className="text-center">
                     <h2 className="font-headline text-3xl font-bold mb-4">Nuestro Equipo</h2>
-                    <p className="text-muted-foreground mb-6">
+                    <p className="text-muted-foreground mb-10 max-w-3xl mx-auto">
                         Contamos con un equipo de profesionales altamente cualificados y apasionados por la logística. Su experiencia y dedicación son la clave de nuestro éxito y el de nuestros clientes.
                     </p>
-                    <div className="grid grid-cols-2 gap-6">
-                        {team.map((member) => (
-                        <div key={member.name} className="flex items-center space-x-4">
-                            <Avatar>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    {team.map((member) => (
+                      <Card key={member.name}>
+                        <CardContent className="pt-6 flex flex-col items-center text-center">
+                          <Avatar className="w-24 h-24 mb-4">
                             <AvatarImage src={member.avatar} alt={member.name} />
                             <AvatarFallback>{member.name.charAt(0)}</AvatarFallback>
-                            </Avatar>
-                            <div>
-                            <p className="font-semibold">{member.name}</p>
-                            <p className="text-sm text-muted-foreground">{member.role}</p>
-                            </div>
-                        </div>
-                        ))}
-                    </div>
+                          </Avatar>
+                          <h3 className="font-semibold text-lg">{member.name}</h3>
+                          <p className="text-sm text-accent font-semibold mb-2">{member.role}</p>
+                          <p className="text-xs text-muted-foreground">{member.bio}</p>
+                        </CardContent>
+                      </Card>
+                    ))}
                 </div>
-                {aboutImage && (
-                    <div className="rounded-lg overflow-hidden shadow-lg">
-                        <Image 
-                            src={aboutImage.imageUrl} 
-                            alt={aboutImage.description}
-                            data-ai-hint={aboutImage.imageHint} 
-                            width={600} 
-                            height={400}
-                            className="object-cover w-full h-full"
-                        />
-                    </div>
-                )}
             </div>
         </div>
       </section>

@@ -1,5 +1,6 @@
 import { TrackingForm } from './tracking-form';
 import { PackageSearch } from 'lucide-react';
+import { Chat } from './chat';
 
 export default function TrackingPage() {
   return (
@@ -17,8 +18,9 @@ export default function TrackingPage() {
       </header>
 
       <main className="py-16 md:py-24">
-        <div className="container max-w-4xl">
+        <div className="container max-w-4xl grid gap-16">
             <TrackingForm />
+            <Chat />
         </div>
       </main>
     </div>

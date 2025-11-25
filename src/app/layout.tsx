@@ -16,7 +16,7 @@ const ptSans = PT_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'SwiftRoute Logistics - Potencia y Velocidad en Logística',
+  title: 'Horse S.L. - Potencia y Velocidad en Logística',
   description: 'Soluciones de transporte y logística a nivel global. Velocidad, seguridad e innovación para conectar tu negocio con el mundo.',
 };
 

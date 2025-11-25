@@ -5,19 +5,19 @@ const contactDetails = [
     {
       icon: <Mail className="h-6 w-6 text-accent" />,
       title: "Email",
-      value: "contacto@swiftroute.com",
+      value: "contacto@horsesl.com",
       description: "Para consultas generales y cotizaciones."
     },
     {
       icon: <Phone className="h-6 w-6 text-accent" />,
       title: "Teléfono",
-      value: "+34 912 345 678",
+      value: "+34 977 54 32 10",
       description: "Atención directa de lunes a viernes, 9h-18h."
     },
     {
       icon: <MapPin className="h-6 w-6 text-accent" />,
       title: "Oficina Central",
-      value: "Calle de la Logística 123, 28080 Madrid, España",
+      value: "Polígono Industrial Riuclar, 43006 Tarragona, España",
       description: "Visítanos para una consulta personalizada."
     }
 ]

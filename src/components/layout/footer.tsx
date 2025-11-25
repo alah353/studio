@@ -10,7 +10,7 @@ export function Footer() {
           <div>
             <div className="flex items-center">
               <HorseLogo className="h-8 w-8 text-primary" />
-              <span className="ml-2 text-xl font-bold font-headline">SwiftRoute</span>
+              <span className="ml-2 text-xl font-bold font-headline">Horse S.L.</span>
             </div>
             <p className="mt-4 text-sm text-muted-foreground">
               Potencia y velocidad en logística. Soluciones de transporte veloces, seguras y con alcance global.
@@ -28,7 +28,7 @@ export function Footer() {
               <ul className="mt-4 space-y-2 text-sm">
                 <li><Link href="/about" className="text-muted-foreground hover:text-primary">Sobre Nosotros</Link></li>
                 <li><Link href="/services" className="text-muted-foreground hover:text-primary">Servicios</Link></li>
-                <li><Link href="/fleet" className="text-muted-foreground hover:text-primary">Flota y Tecnología</Link></li>
+                <li><Link href="/fleet" className="text-muted-foreground hover:text-primary">Flota</Link></li>
                 <li><Link href="/tracking" className="text-muted-foreground hover:text-primary">Seguimiento</Link></li>
                 <li><Link href="/blog" className="text-muted-foreground hover:text-primary">Blog</Link></li>
                 <li><Link href="/contact" className="text-muted-foreground hover:text-primary">Contacto</Link></li>
@@ -45,9 +45,9 @@ export function Footer() {
             <div>
               <p className="font-medium font-headline">Contacto</p>
               <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-                <li>Email: contacto@swiftroute.com</li>
-                <li>Teléfono: +34 912 345 678</li>
-                <li>Dirección: Calle de la Logística 123, 28080 Madrid, España</li>
+                <li>Email: contacto@horsesl.com</li>
+                <li>Teléfono: +34 977 54 32 10</li>
+                <li>Dirección: Polígono Industrial Riuclar, 43006 Tarragona, España</li>
               </ul>
             </div>
           </div>
@@ -55,7 +55,7 @@ export function Footer() {
 
         <div className="mt-8 border-t pt-8">
           <div className="sm:flex sm:justify-between">
-            <p className="text-xs text-muted-foreground">&copy; {new Date().getFullYear()} SwiftRoute Logistics. Todos los derechos reservados.</p>
+            <p className="text-xs text-muted-foreground">&copy; {new Date().getFullYear()} Horse S.L. Todos los derechos reservados.</p>
             <p className="mt-4 text-xs text-muted-foreground sm:mt-0">Diseñado para la velocidad y la eficiencia global.</p>
           </div>
         </div>

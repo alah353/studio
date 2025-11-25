@@ -63,7 +63,7 @@ export default function HomePage() {
         <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white">
           <div className="container">
             <h1 className="font-headline text-4xl font-extrabold tracking-tight md:text-6xl lg:text-7xl">
-              SwiftRoute: Tu Mundo, Entregado.
+              Horse S.L: Tu Mundo, Entregado.
             </h1>
             <p className="mx-auto mt-6 max-w-3xl text-lg md:text-xl text-primary-foreground/90">
               Desbloquea el potencial de tu negocio con nuestra logística de vanguardia. Velocidad, seguridad y alcance global a tu servicio.
@@ -132,7 +132,7 @@ export default function HomePage() {
         <div className="container text-center">
           <h2 className="font-headline text-3xl font-bold md:text-4xl">¿Listo para optimizar tu logística?</h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg">
-            Contacta con nuestros especialistas y descubre cómo SwiftRoute Logistics puede transformar tu cadena de suministro.
+            Contacta con nuestros especialistas y descubre cómo Horse S.L. puede transformar tu cadena de suministro.
           </p>
           <Button asChild size="lg" className="mt-8 bg-accent text-accent-foreground hover:bg-accent/90 font-bold">
             <Link href="/contact">

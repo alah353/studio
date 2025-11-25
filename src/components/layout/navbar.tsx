@@ -13,7 +13,7 @@ const navLinks = [
   { href: '/', label: 'Inicio' },
   { href: '/about', label: 'Sobre Nosotros' },
   { href: '/services', label: 'Servicios' },
-  { href: '/fleet', label: 'Flota y Tecnología' },
+  { href: '/fleet', label: 'Flota' },
   { href: '/tracking', label: 'Seguimiento' },
   { href: '/blog', label: 'Blog' },
   { href: '/contact', label: 'Contacto' },
@@ -29,7 +29,7 @@ export function Navbar() {
         <div className="mr-4 flex items-center">
           <Link href="/" className="mr-6 flex items-center space-x-2">
             <HorseLogo className="h-8 w-8 text-primary" />
-            <span className="font-bold font-headline text-lg">SwiftRoute</span>
+            <span className="font-bold font-headline text-lg">Horse S.L.</span>
           </Link>
         </div>
 
@@ -59,7 +59,7 @@ export function Navbar() {
             <SheetContent side="left">
               <Link href="/" className="mb-8 flex items-center" onClick={() => setIsMobileMenuOpen(false)}>
                  <HorseLogo className="h-8 w-8 text-primary" />
-                <span className="ml-2 font-bold font-headline text-lg">SwiftRoute</span>
+                <span className="ml-2 font-bold font-headline text-lg">Horse S.L.</span>
               </Link>
               <nav className="flex flex-col space-y-4">
                 {navLinks.map(({ href, label }) => (
