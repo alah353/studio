@@ -1,7 +1,20 @@
+'use client';
+
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Check } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+import { ServiceRequestForm } from './service-request-form';
+import { useState } from 'react';
 
 const services = [
   {
@@ -42,6 +55,14 @@ const services = [
 ];
 
 export default function ServicesPage() {
+  const [openDialog, setOpenDialog] = useState<string | null>(null);
+
+  const handleSuccess = () => {
+    if (openDialog) {
+        setOpenDialog(null);
+    }
+  }
+
   return (
     <div className="bg-background">
       <header className="py-16 md:py-24 text-center bg-card">
@@ -63,7 +84,7 @@ export default function ServicesPage() {
                   <div className={index % 2 === 1 ? 'md:order-last' : ''}>
                     <h2 className="font-headline text-3xl font-bold mb-4">{service.title}</h2>
                     <p className="text-muted-foreground mb-6">{service.description}</p>
-                    <ul className="space-y-3">
+                    <ul className="space-y-3 mb-8">
                       {service.advantages.map((adv) => (
                         <li key={adv} className="flex items-center">
                           <Check className="h-5 w-5 text-accent mr-3 flex-shrink-0" />
@@ -71,6 +92,20 @@ export default function ServicesPage() {
                         </li>
                       ))}
                     </ul>
+                    <Dialog open={openDialog === service.id} onOpenChange={(isOpen) => setOpenDialog(isOpen ? service.id : null)}>
+                        <DialogTrigger asChild>
+                            <Button className="bg-accent text-accent-foreground hover:bg-accent/90">Solicitar Servicio</Button>
+                        </DialogTrigger>
+                        <DialogContent className="sm:max-w-[625px]">
+                            <DialogHeader>
+                                <DialogTitle className="font-headline text-2xl">{service.title}</DialogTitle>
+                                <DialogDescription>
+                                    Completa el siguiente formulario para solicitar este servicio. Nos pondremos en contacto contigo a la brevedad.
+                                </DialogDescription>
+                            </DialogHeader>
+                            <ServiceRequestForm serviceTitle={service.title} onSuccess={handleSuccess} />
+                        </DialogContent>
+                    </Dialog>
                   </div>
                   {image && (
                     <div className="rounded-lg overflow-hidden shadow-lg aspect-w-4 aspect-h-3">
