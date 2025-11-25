@@ -64,8 +64,8 @@ export function ContactForm() {
   return (
     <Card>
         <CardHeader>
-            <CardTitle className="font-headline text-2xl">Envíanos un Mensaje</CardTitle>
-            <CardDescription>Rellena el formulario y te contactaremos en breve.</CardDescription>
+            <CardTitle className="font-headline text-2xl">Contacta con la Manada</CardTitle>
+            <CardDescription>Rellena el formulario y uno de nuestros estrategas se pondrá en contacto.</CardDescription>
         </CardHeader>
         <CardContent>
             <Form {...form}>
@@ -105,7 +105,7 @@ export function ContactForm() {
                     <FormItem>
                         <FormLabel>Asunto</FormLabel>
                         <FormControl>
-                        <Input placeholder="Ej: Presupuesto para envío internacional" {...field} />
+                        <Input placeholder="Ej: Estrategia para dominio logístico" {...field} />
                         </FormControl>
                         <FormMessage />
                     </FormItem>
@@ -116,26 +116,26 @@ export function ContactForm() {
                     name="message"
                     render={({ field }) => (
                     <FormItem>
-                        <FormLabel>Mensaje</FormLabel>
+                        <FormLabel>Tu Plan de Conquista</FormLabel>
                         <FormControl>
-                        <Textarea placeholder="Cuéntanos cómo podemos ayudarte..." className="min-h-[120px]" {...field} />
+                        <Textarea placeholder="Detalla tus objetivos y te mostraremos el camino..." className="min-h-[120px]" {...field} />
                         </FormControl>
                         <FormMessage />
                     </FormItem>
                     )}
                 />
-                <Button type="submit" className="w-full bg-accent text-accent-foreground hover:bg-accent/90" disabled={isSubmitting}>
+                <Button type="submit" className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-bold" disabled={isSubmitting}>
                     {isSubmitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
                     {isSubmitting ? 'Enviando...' : 'Enviar Mensaje'}
                 </Button>
                 </form>
             </Form>
             {isSuccess && (
-                <Alert className="mt-6">
-                    <CheckCircle className="h-4 w-4" />
-                    <AlertTitle>Mensaje Enviado</AlertTitle>
+                <Alert className="mt-6 border-accent text-accent-foreground">
+                    <CheckCircle className="h-4 w-4 text-accent" />
+                    <AlertTitle>Mensaje Recibido</AlertTitle>
                     <AlertDescription>
-                        Gracias por contactarnos. Te responderemos lo antes posible.
+                        Hemos recibido tu comunicación. Prepárate para la velocidad.
                     </AlertDescription>
                 </Alert>
             )}

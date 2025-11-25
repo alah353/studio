@@ -6,37 +6,37 @@ import { Check } from 'lucide-react';
 const services = [
   {
     id: 'land',
-    title: 'Transporte Terrestre',
-    description: 'Nuestra red de transporte terrestre es la columna vertebral de la logística europea. Ofrecemos servicios de carga completa (FTL) y grupaje (LTL) con una flota moderna y monitorizada para garantizar flexibilidad y seguridad.',
-    advantages: ['Flexibilidad en horarios y rutas', 'Seguimiento GPS en tiempo real', 'Cobertura nacional e internacional', 'Entrega puerta a puerta'],
+    title: 'Transporte Terrestre: Pura Potencia sobre Ruedas',
+    description: 'Nuestra división terrestre es un motor imparable. Con una flota que encarna la fuerza bruta y la agilidad, conquistamos el asfalto. Ofrecemos servicios de Carga Completa (FTL) y Grupaje (LTL) con la precisión de un relojero y la potencia de un muscle car, garantizando que tu mercancía llegue no solo a tiempo, sino con una demostración de poder.',
+    advantages: ['Dominio total de rutas europeas', 'Flota optimizada para máxima potencia y eficiencia', 'Seguimiento en tiempo real: control absoluto', 'Servicio "puerta a puerta" de alta competición'],
     imageId: 'service-land'
   },
   {
     id: 'sea',
-    title: 'Transporte Marítimo',
-    description: 'Conectamos los principales puertos del mundo, gestionando tus envíos FCL (Contenedor Completo) y LCL (Grupaje) con la máxima eficiencia. Ideal para grandes volúmenes y cargas no urgentes.',
-    advantages: ['Solución más económica para grandes distancias', 'Alta capacidad de carga', 'Gestión aduanera integral', 'Red de agentes portuarios global'],
+    title: 'Transporte Marítimo: La Fuerza de los Océanos',
+    description: 'Navegamos los mares con la determinación de un titán. Gestionamos tus contenedores completos (FCL) y grupajes (LCL) con una estrategia naval que optimiza cada milla náutica. Ideal para grandes volúmenes donde la fuerza y la constancia son la clave de la victoria.',
+    advantages: ['Economía de escala para cargas masivas', 'Capacidad de carga colosal', 'Gestión de aduanas con precisión militar', 'Alianzas estratégicas en cada puerto del mundo'],
     imageId: 'service-sea'
   },
   {
     id: 'air',
-    title: 'Transporte Aéreo',
-    description: 'Cuando la velocidad es crítica, nuestro servicio de carga aérea es la solución. Colaboramos con las principales aerolíneas para ofrecer tiempos de tránsito mínimos y máxima prioridad para tus mercancías.',
-    advantages: ['Tiempos de entrega más rápidos', 'Seguridad y menor riesgo de daños', 'Cobertura mundial a los principales aeropuertos', 'Ideal para mercancías de alto valor o perecederas'],
+    title: 'Transporte Aéreo: Velocidad Supersónica',
+    description: 'Cuando la urgencia es tu campo de batalla, nuestro servicio aéreo es tu caza de combate. Rompemos la barrera del sonido para que tus mercancías de alto valor, urgentes o perecederas lleguen a su destino con una velocidad que desafía la física. No volamos, nos teletransportamos.',
+    advantages: ['Tiempos de entrega que destrozan cronómetros', 'Seguridad de nivel presidencial', 'Acceso prioritario a las principales aerolíneas', 'La solución definitiva para cargas críticas'],
     imageId: 'service-air'
   },
   {
     id: 'logistics',
-    title: 'Logística Integral',
-    description: 'Vamos más allá del transporte. Ofrecemos una gestión 360° de tu cadena de suministro, desde la planificación y el aprovisionamiento hasta la entrega final, optimizando costes y tiempos.',
-    advantages: ['Un único interlocutor para toda la cadena', 'Optimización de inventario y costes', 'Visibilidad y control total del proceso', 'Soluciones personalizadas a tu negocio'],
+    title: 'Logística de Combate 360°',
+    description: 'Esto no es logística, es estrategia de guerra comercial. Tomamos el control total de tu cadena de suministro. Desde la planificación y el aprovisionamiento hasta la entrega final, orquestamos cada movimiento para aplastar a la competencia en costes y tiempos.',
+    advantages: ['Un único general para toda tu campaña logística', 'Aniquilación de costes de inventario y operativos', 'Visibilidad total del campo de batalla logístico', 'Estrategias personalizadas para tu conquista del mercado'],
     imageId: 'service-logistics'
   },
   {
     id: 'warehousing',
-    title: 'Almacenamiento y Distribución',
-    description: 'Nuestros almacenes estratégicamente ubicados están equipados con la última tecnología para la gestión de inventario, picking, packing y distribución capilar, adaptándonos a tus necesidades de stock.',
-    advantages: ['Almacenes estratégicamente ubicados', 'Sistemas de gestión de almacén (SGA) avanzados', 'Servicios de valor añadido (etiquetado, empaquetado)', 'Reducción de costes de almacenamiento'],
+    title: 'Almacenamiento Estratégico y Distribución Fulminante',
+    description: 'Nuestros almacenes son fortalezas de eficiencia. Ubicados en puntos neurálgicos, actúan como bases de operaciones avanzadas para tu mercancía. Con tecnología de vanguardia, gestionamos tu inventario y lanzamos operaciones de distribución capilar con la rapidez de un rayo.',
+    advantages: ['Fortalezas logísticas en ubicaciones clave', 'Arsenal tecnológico para una gestión de inventario superior', 'Servicios de valor añadido: preparación para el combate comercial', 'Transforma tus costes fijos en un arma competitiva'],
     imageId: 'service-warehouse'
   },
 ];
@@ -46,9 +46,9 @@ export default function ServicesPage() {
     <div className="bg-background">
       <header className="py-16 md:py-24 text-center bg-card">
         <div className="container">
-          <h1 className="font-headline text-4xl font-bold md:text-5xl">Soluciones Logísticas a tu Medida</h1>
+          <h1 className="font-headline text-4xl font-bold md:text-5xl">Nuestro Arsenal de Servicios</h1>
           <p className="mt-4 mx-auto max-w-3xl text-lg text-muted-foreground">
-            Desde el transporte local hasta la gestión integral de la cadena de suministro global, tenemos un servicio para cada necesidad.
+            Cada servicio es un arma diseñada para la victoria en el competitivo campo de batalla del comercio global.
           </p>
         </div>
       </header>

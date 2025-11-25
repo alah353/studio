@@ -5,20 +5,20 @@ const contactDetails = [
     {
       icon: <Mail className="h-6 w-6 text-accent" />,
       title: "Email",
-      value: "contacto@swiftroute.com",
-      description: "Para consultas generales y presupuestos."
+      value: "contacto@horsesl.com",
+      description: "Para planes de ataque y presupuestos."
     },
     {
       icon: <Phone className="h-6 w-6 text-accent" />,
       title: "Teléfono",
       value: "+34 912 345 678",
-      description: "Atención personalizada de 9:00 a 18:00."
+      description: "Línea directa con nuestro alto mando."
     },
     {
       icon: <MapPin className="h-6 w-6 text-accent" />,
-      title: "Oficina Central",
-      value: "Calle de la Logística 123, 28080 Madrid, España",
-      description: "Visítanos para una consulta presencial."
+      title: "Cuartel General",
+      value: "Calle de la Potencia 1, 28080 Madrid, España",
+      description: "Visítanos para planificar tu próxima ofensiva."
     }
 ]
 
@@ -27,9 +27,9 @@ export default function ContactPage() {
     <div className="bg-background">
       <header className="py-16 md:py-24 text-center bg-card">
         <div className="container">
-          <h1 className="font-headline text-4xl font-bold md:text-5xl">Contacta con Nosotros</h1>
+          <h1 className="font-headline text-4xl font-bold md:text-5xl">Habla con un Estratega</h1>
           <p className="mt-4 mx-auto max-w-2xl text-lg text-muted-foreground">
-            Estamos aquí para ayudarte. Rellena el formulario o utiliza uno de nuestros canales de contacto para hablar con un experto.
+            Estamos listos para la acción. Contacta con nosotros y descubre cómo podemos potenciar tu logística a un nivel superior.
           </p>
         </div>
       </header>
@@ -38,9 +38,9 @@ export default function ContactPage() {
         <div className="container">
           <div className="grid lg:grid-cols-5 gap-12">
             <div className="lg:col-span-2 space-y-8">
-              <h2 className="font-headline text-3xl font-bold">Información de Contacto</h2>
+              <h2 className="font-headline text-3xl font-bold">Canales de Contacto</h2>
               <p className="text-muted-foreground">
-                Nuestro equipo de atención al cliente está listo para ofrecerte una atención personalizada y resolver todas tus dudas.
+                Nuestro equipo de élite está preparado para ofrecerte una atención implacable y resolver tus desafíos logísticos más complejos.
               </p>
               <div className="space-y-6">
                 {contactDetails.map(detail => (

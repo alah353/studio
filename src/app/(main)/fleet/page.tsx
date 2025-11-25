@@ -1,21 +1,21 @@
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { Truck, Ship, Plane, Wifi, Map, Cpu } from 'lucide-react';
+import { Truck, Ship, Plane, Wifi, BrainCircuit, Bot } from 'lucide-react';
 
 const fleetImage = PlaceHolderImages.find(p => p.id === 'fleet-trucks');
 const techImage = PlaceHolderImages.find(p => p.id === 'tech-map');
 
 const vehicleTypes = [
-  { icon: <Truck className="h-8 w-8 text-primary" />, title: 'Camiones y Tráileres', description: 'Flota versátil para carga seca, refrigerada y de gran volumen.' },
-  { icon: <Ship className="h-8 w-8 text-primary" />, title: 'Portacontenedores', description: 'Acceso a una red global de buques para todo tipo de contenedores.' },
-  { icon: <Plane className="h-8 w-8 text-primary" />, title: 'Aviones de Carga', description: 'Partnerships estratégicos para envíos aéreos urgentes y prioritarios.' },
+  { icon: <Truck className="h-8 w-8 text-primary" />, title: 'Caballería Terrestre', description: 'Una estampida de camiones y tráileres de última generación, listos para devorar kilómetros. Carga seca, refrigerada o sobredimensionada: nada se resiste a nuestra potencia.' },
+  { icon: <Ship className="h-8 w-8 text-primary" />, title: 'Armada Marítima', description: 'Nuestra alianza con las principales navieras nos da el poder de un leviatán en los océanos. Controlamos las rutas marítimas para que tu carga llegue con la fuerza de una marea.' },
+  { icon: <Plane className="h-8 w-8 text-primary" />, title: 'Fuerza Aérea de Carga', description: 'Nuestros socios aéreos son los halcones del cielo. Envíos urgentes que viajan a velocidades de vértigo, porque en los negocios, el que golpea primero, golpea dos veces.' },
 ];
 
 const techFeatures = [
-    { icon: <Wifi className="h-6 w-6 text-accent" />, title: 'GPS y Seguimiento en Tiempo Real', description: 'Cada vehículo y contenedor está equipado con tecnología GPS avanzada, permitiendo un seguimiento preciso y en directo de tu mercancía desde cualquier dispositivo.' },
-    { icon: <Map className="h-6 w-6 text-accent" />, title: 'Trazabilidad Completa', description: 'Nuestro sistema de trazabilidad digital registra cada hito del viaje, desde la recogida hasta la entrega, ofreciendo una transparencia total y auditorías fiables.' },
-    { icon: <Cpu className="h-6 w-6 text-accent" />, title: 'Innovaciones Logísticas', description: 'Implementamos algoritmos de optimización de rutas, análisis predictivo de tiempos de entrega e integración API para una gestión de la cadena de suministro más inteligente y eficiente.' },
+    { icon: <Wifi className="h-6 w-6 text-accent" />, title: 'Dominio Total con Seguimiento Predictivo', description: 'No solo ves dónde está tu carga; anticipamos su siguiente movimiento. Nuestra IA analiza rutas, tráfico y clima para un control absoluto en tiempo real.' },
+    { icon: <BrainCircuit className="h-6 w-6 text-accent" />, title: 'IA para Optimización de Rutas', description: 'Nuestros algoritmos son estrategas digitales que diseñan las rutas más rápidas y eficientes. Ahorramos tiempo y combustible, aumentando tu ventaja competitiva.' },
+    { icon: <Bot className="h-6 w-6 text-accent" />, title: 'Automatización y Robótica', description: 'En nuestros centros, la automatización avanzada y la robótica trabajan sin descanso, garantizando una gestión de inventario y preparación de pedidos a una velocidad sobrehumana.' },
 ];
 
 export default function FleetPage() {
@@ -23,9 +23,9 @@ export default function FleetPage() {
     <div className="bg-background">
       <header className="py-16 md:py-24 text-center bg-card">
         <div className="container">
-          <h1 className="font-headline text-4xl font-bold md:text-5xl">Flota Moderna y Tecnología de Vanguardia</h1>
+          <h1 className="font-headline text-4xl font-bold md:text-5xl">Flota Imparable. Tecnología de Combate.</h1>
           <p className="mt-4 mx-auto max-w-3xl text-lg text-muted-foreground">
-            Invertimos en los mejores activos y las herramientas más avanzadas para garantizar un servicio de máxima calidad.
+            Poseemos el músculo y el cerebro. Activos de élite y la tecnología más agresiva para garantizar una superioridad logística total.
           </p>
         </div>
       </header>
@@ -46,7 +46,7 @@ export default function FleetPage() {
               </div>
             )}
             <div>
-              <h2 className="font-headline text-3xl font-bold mb-6">Nuestra Flota</h2>
+              <h2 className="font-headline text-3xl font-bold mb-6">Nuestro Músculo: La Flota</h2>
               <div className="space-y-6">
                 {vehicleTypes.map((vehicle) => (
                   <Card key={vehicle.title} className="bg-background">
@@ -83,7 +83,7 @@ export default function FleetPage() {
               )}
             </div>
             <div>
-              <h2 className="font-headline text-3xl font-bold mb-6">Tecnología que Marca la Diferencia</h2>
+              <h2 className="font-headline text-3xl font-bold mb-6">Nuestro Cerebro: La Tecnología</h2>
               <ul className="space-y-6">
                 {techFeatures.map((feature) => (
                   <li key={feature.title} className="flex items-start">
