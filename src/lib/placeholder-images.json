@@ -19,6 +19,12 @@
       "imageHint": "digital map"
     },
     {
+      "id": "route-map",
+      "description": "A digital map showing a route from one point to another.",
+      "imageUrl": "https://images.unsplash.com/photo-1516392329381-c4d59f131a31?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxyb3V0ZSUyMG1hcHxlbnwwfHx8fDE3NjQxMDkxMjV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "route map"
+    },
+    {
       "id": "service-land",
       "description": "A truck driving on a highway at sunset.",
       "imageUrl": "https://images.unsplash.com/photo-1670509295484-df0c2512fec4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHx0cnVjayUyMGhpZ2h3YXl8ZW58MHx8fHwxNzYzOTc3OTYwfDA&ixlib=rb-4.1.0&q=80&w=1080",
