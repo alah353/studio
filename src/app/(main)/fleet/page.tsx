@@ -3,12 +3,12 @@
 import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { Truck, Ship, Plane, Wifi, BrainCircuit, Bot, Drill } from 'lucide-react';
+import { Truck, Ship, Plane, Wifi, BrainCircuit, Bot } from 'lucide-react';
 import { fleetData, FleetVehicle } from '@/lib/fleet-data';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
+import Link from 'next/link';
 
 const techFeatures = [
     { icon: <Wifi className="h-6 w-6 text-accent" />, title: 'Seguimiento en Tiempo Real', description: 'Visibilidad completa de tus envíos 24/7. Nuestra plataforma te permite conocer la ubicación y el estado de tu carga en todo momento.' },
@@ -97,7 +97,9 @@ export default function FleetPage() {
                             </div>
                             <div className="flex items-center justify-between">
                                 <Badge variant={getStatusVariant(vehicle.status)}>{vehicle.status}</Badge>
-                                <Button variant="link" className="px-0">Ver Ficha Técnica</Button>
+                                <Button asChild variant="link" className="px-0">
+                                  <Link href={`/fleet/${vehicle.id}`}>Ver Ficha Técnica</Link>
+                                </Button>
                             </div>
                         </CardContent>
                     </Card>
