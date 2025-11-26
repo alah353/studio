@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Linkedin, Twitter, Facebook } from 'lucide-react';
-import Image from 'next/image';
+import { HorseLogo } from './horse-logo';
 
 export function Footer() {
   return (
@@ -9,7 +9,7 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div>
             <div className="flex items-center">
-              <Image src="/logo.png" alt="Horse S.L. Logo" width={32} height={32} />
+              <HorseLogo />
               <span className="ml-2 text-xl font-bold font-headline">Horse S.L.</span>
             </div>
             <p className="mt-4 text-sm text-muted-foreground">
