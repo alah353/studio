@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
 import { Menu } from 'lucide-react';
-import { HorseLogo } from '@/components/layout/horse-logo';
+import Image from 'next/image';
 
 const navLinks = [
   { href: '/', label: 'Inicio' },
@@ -28,7 +28,7 @@ export function Navbar() {
       <div className="container flex h-14 max-w-screen-2xl items-center">
         <div className="mr-4 flex items-center">
           <Link href="/" className="mr-6 flex items-center space-x-2">
-            <HorseLogo className="h-8 w-8 text-primary" />
+            <Image src="/logo.png" alt="Horse S.L. Logo" width={32} height={32} />
             <span className="font-bold font-headline text-lg">Horse S.L.</span>
           </Link>
         </div>
@@ -58,7 +58,7 @@ export function Navbar() {
             </SheetTrigger>
             <SheetContent side="left">
               <Link href="/" className="mb-8 flex items-center" onClick={() => setIsMobileMenuOpen(false)}>
-                 <HorseLogo className="h-8 w-8 text-primary" />
+                 <Image src="/logo.png" alt="Horse S.L. Logo" width={32} height={32} />
                 <span className="ml-2 font-bold font-headline text-lg">Horse S.L.</span>
               </Link>
               <nav className="flex flex-col space-y-4">

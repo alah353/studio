@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Linkedin, Twitter, Facebook } from 'lucide-react';
-import { HorseLogo } from '@/components/layout/horse-logo';
+import Image from 'next/image';
 
 export function Footer() {
   return (
@@ -9,7 +9,7 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div>
             <div className="flex items-center">
-              <HorseLogo className="h-8 w-8 text-primary" />
+              <Image src="/logo.png" alt="Horse S.L. Logo" width={32} height={32} />
               <span className="ml-2 text-xl font-bold font-headline">Horse S.L.</span>
             </div>
             <p className="mt-4 text-sm text-muted-foreground">
@@ -35,29 +35,26 @@ export function Footer() {
               </ul>
             </div>
             <div>
-              <p className="font-medium font-headline">Legal</p>
+              <p className="font-medium font-headline">Servicios</p>
               <ul className="mt-4 space-y-2 text-sm">
-                <li><a href="#" className="text-muted-foreground hover:text-primary">Política de Privacidad</a></li>
-                <li><a href="#" className="text-muted-foreground hover:text-primary">Términos de Servicio</a></li>
-                <li><a href="#" className="text-muted-foreground hover:text-primary">Política de Cookies</a></li>
+                <li><Link href="/services#land" className="text-muted-foreground hover:text-primary">Transporte Terrestre</Link></li>
+                <li><Link href="/services#sea" className="text-muted-foreground hover:text-primary">Transporte Marítimo</Link></li>
+                <li><Link href="/services#air" className="text-muted-foreground hover:text-primary">Transporte Aéreo</Link></li>
+                <li><Link href="/services#logistics" className="text-muted-foreground hover:text-primary">Logística Integral</Link></li>
               </ul>
             </div>
             <div>
-              <p className="font-medium font-headline">Contacto</p>
-              <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-                <li>Email: contacto@horsesl.com</li>
-                <li>Teléfono: +34 977 54 32 10</li>
-                <li>Dirección: Polígono Industrial Riuclar, 43006 Tarragona, España</li>
+              <p className="font-medium font-headline">Legal</p>
+              <ul className="mt-4 space-y-2 text-sm">
+                <li><Link href="#" className="text-muted-foreground hover:text-primary">Política de Privacidad</Link></li>
+                <li><Link href="#" className="text-muted-foreground hover:text-primary">Términos de Servicio</Link></li>
               </ul>
             </div>
           </div>
         </div>
 
-        <div className="mt-8 border-t pt-8">
-          <div className="sm:flex sm:justify-between">
-            <p className="text-xs text-muted-foreground">&copy; {new Date().getFullYear()} Horse S.L. Todos los derechos reservados.</p>
-            <p className="mt-4 text-xs text-muted-foreground sm:mt-0">Diseñado para la velocidad y la eficiencia global.</p>
-          </div>
+        <div className="mt-8 border-t pt-8 text-center text-sm text-muted-foreground">
+          <p>&copy; {new Date().getFullYear()} Horse S.L. Todos los derechos reservados.</p>
         </div>
       </div>
     </footer>

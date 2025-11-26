@@ -1,14 +1,14 @@
 import React from 'react';
+import Image from 'next/image';
 
 export function HorseLogo(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="currentColor"
+    <Image
+      src="/logo.png"
+      alt="Horse S.L. logo"
+      width={32}
+      height={32}
       {...props}
-    >
-      <path d="M5.624 4.316l-1.802.046.06-2.652 2.394-.057c.56-.013.918.42.793.969l-.746 3.326a.6.6 0 0 1-.7-.632zm-.24 3.61c.42 0 .76.34.76.76s-.34.76-.76.76-.76-.34-.76-.76.34-.76.76-.76zm1.884 2.193l.004 3.738c0 .52-1.002.51-1.002 0l-.006-7.983c-.002-.544.79-.55.796 0l.03 2.39a.5.5 0 0 0 .52.492l7.426-.64c.484-.04.75.51.38.82l-2.09 1.734a.5.5 0 0 0-.15.652l1.12 1.68c.24.36-.1.81-.51.65l-1.42-.945a2 2 0 0 0-1.726-.002l-1.52.76a.5.5 0 0 1-.43-.02l-1.68-.84a2 2 0 0 0-1.82.16l-.84.63a.5.5 0 0 1-.57.07l-1.48-1.185z" />
-    </svg>
+    />
   );
 }
