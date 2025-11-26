@@ -2,44 +2,44 @@
   "placeholderImages": [
     {
       "id": "hero-background",
-      "description": "Aerial view of a cargo ship with colorful containers at sunrise.",
-      "imageUrl": "https://images.unsplash.com/photo-1676729274503-826c7a728c9c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxjYXJnbyUyMHNoaXAlMjBzZWF8ZW58MHx8fHwxNzY0MDg0NzI2fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "cargo ship sea"
+      "description": "Una flota de camiones de reparto aparcados en fila, listos para la acción.",
+      "imageUrl": "https://images.unsplash.com/photo-1577985051167-3d857f8875d6?q=80&w=1080",
+      "imageHint": "delivery trucks"
     },
     {
       "id": "about-header",
-      "description": "Profesionales de logística en una reunión estratégica en una oficina moderna.",
-      "imageUrl": "https://images.unsplash.com/photo-1556761175-59736f6dfb95?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxsb2dpc3RpY3MlMjB0ZWFtJTIwbWVldGluZ3xlbnwwfHx8fDE3NjQxODc1ODR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "description": "Un equipo de profesionales de logística colaborando en una oficina moderna.",
+      "imageUrl": "https://images.unsplash.com/photo-1556761175-59736f6dfb95?q=80&w=1080",
       "imageHint": "logistics team"
     },
     {
       "id": "services-header",
-      "description": "Vista de un gran puerto logístico con grúas y contenedores al atardecer.",
-      "imageUrl": "https://images.unsplash.com/photo-1578574577315-3f160d34873a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxhZXJpYWwlMjB2aWV3JTIwbG9naXN0aWNzJTIwcG9ydHxlbnwwfHx8fDE3NjQxODc1ODR8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "logistics port"
+      "description": "Un gran buque portacontenedores navegando en mar abierto, simbolizando el alcance global.",
+      "imageUrl": "https://images.unsplash.com/photo-1613686291332-756193d48572?q=80&w=1080",
+      "imageHint": "container ship"
     },
     {
       "id": "fleet-header",
-      "description": "Una flota de camiones modernos aparcados en fila al amanecer.",
-      "imageUrl": "https://images.unsplash.com/photo-1506619216599-9d98f6a6c475?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxmbGVldCUyMG9mJTIwdHJ1Y2tzfGVufDB8fHx8MTc2NDE4NzU4NHww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "fleet trucks"
+      "description": "Un camión blanco conduciendo por una autopista desenfocada, transmitiendo velocidad.",
+      "imageUrl": "https://images.unsplash.com/photo-1487035242928-0272a7489b20?q=80&w=1080",
+      "imageHint": "truck highway"
     },
     {
       "id": "tracking-header",
-      "description": "Un mapa del mundo digital con conexiones y rutas iluminadas.",
-      "imageUrl": "https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxnbG9iYWwlMjBuZXR3b3JrJTIwY29ubmVjdGlvbnN8ZW58MHx8fHwxNzY0MTg3NTg0fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "global network"
+      "description": "Un dedo apuntando a una ubicación en un mapa digital en una tableta.",
+      "imageUrl": "https://images.unsplash.com/photo-1521295121783-8a321d551ad2?q=80&w=1080",
+      "imageHint": "digital map"
     },
     {
       "id": "blog-header",
-      "description": "Un caballo de ajedrez estilizado sobre un fondo tecnológico oscuro.",
-      "imageUrl": "https://images.unsplash.com/photo-1582921429008-25a1b1a35753?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzdHJhdGVneSUyMGNoZXNzJTIwZGFya3xlbnwwfHx8fDE3NjQxODc1ODR8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "strategy chess"
+      "description": "Un primer plano de la cabeza de una pieza de ajedrez de caballo, que representa la estrategia.",
+      "imageUrl": "https://images.unsplash.com/photo-1554941829-202a0b2403b8?q=80&w=1080",
+      "imageHint": "chess horse"
     },
     {
       "id": "contact-header",
-      "description": "Un teléfono y un portátil en un escritorio de oficina moderno por la noche.",
-      "imageUrl": "https://images.unsplash.com/photo-1586953208448-b95a14da4483?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxvZmZpY2UlMjBkZXNrJTIwYXQlMjBuaWdodHxlbnwwfHx8fDE3NjQxODc1ODR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "description": "Un moderno edificio de oficinas de cristal por la noche, que refleja las luces de la ciudad.",
+      "imageUrl": "https://images.unsplash.com/photo-1533109721025-d1ae7de651c6?q=80&w=1080",
       "imageHint": "office night"
     },
     {
@@ -57,7 +57,7 @@
     {
       "id": "route-map",
       "description": "A digital map showing a route from one point to another.",
-      "imageUrl": "https://images.unsplash.com/photo-1516392329381-c4d59f131a31?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxyb3V0ZSUyMG1hcHxlbnwwfHx8fDE3NjQxMDkxMjV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1516392329381-c4d59f131a31?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxyb3V0ZSUyMG1hcHxlbnwwfHx8fDE3NjQxMDkxMjV8MA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "route map"
     },
     {
