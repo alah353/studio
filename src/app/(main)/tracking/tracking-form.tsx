@@ -1,11 +1,11 @@
 'use client';
 
-import { useFormState, useFormStatus } from 'react-dom';
-import { useEffect } from 'react';
+import { useActionState, useEffect } from 'react';
+import { useFormStatus } from 'react-dom';
 import { handleTrackShipment, FormState } from './actions';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2, AlertCircle, MapPin, Clock, PackageCheck } from 'lucide-react';
@@ -28,7 +28,7 @@ function SubmitButton() {
 
 export function TrackingForm() {
   const initialState: FormState = { message: '', error: false };
-  const [state, formAction] = useFormState(handleTrackShipment, initialState);
+  const [state, formAction] = useActionState(handleTrackShipment, initialState);
   const { toast } = useToast();
 
   useEffect(() => {
