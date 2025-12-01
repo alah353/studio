@@ -4,7 +4,7 @@ import React from 'react';
 export function HorseLogo(props: { className?: string }) {
   return (
     <Image
-      src="/ferrarilogo.png"
+      src="/ferrari.png"
       alt="Logo"
       width={32}
       height={32}
