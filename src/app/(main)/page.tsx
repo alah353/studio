@@ -87,7 +87,7 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="relative h-[70vh] min-h-[600px] w-full">
         <Image
-          src="/unnamed.jpg"
+          src="/portacontenedores.png"
           alt="Cabecera de la página de inicio"
           fill
           className="object-cover"
