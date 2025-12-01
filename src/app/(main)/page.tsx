@@ -56,10 +56,10 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-black/30" />
         <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white">
           <div className="container">
-            <h1 className="font-headline text-4xl font-extrabold tracking-tight md:text-6xl lg:text-7xl">
+            <h1 className="font-headline text-5xl font-extrabold tracking-tight md:text-6xl lg:text-7xl [text-shadow:_0_2px_4px_rgb(0_0_0_/_50%)]">
               Horse S.L: Tu Mundo, Entregado.
             </h1>
-            <p className="mx-auto mt-6 max-w-3xl text-lg md:text-xl text-white/90">
+            <p className="mx-auto mt-6 max-w-3xl text-lg text-white/90 md:text-xl [text-shadow:_0_1px_3px_rgb(0_0_0_/_40%)]">
               Desbloquea el potencial de tu negocio con nuestra logística de vanguardia. Velocidad, seguridad y alcance global a tu servicio.
             </p>
             <Button asChild size="lg" className="mt-8 bg-accent text-accent-foreground hover:bg-accent/90 font-bold">
