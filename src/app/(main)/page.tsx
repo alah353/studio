@@ -59,7 +59,7 @@ export default function HomePage() {
             <h1 className="font-headline text-4xl font-extrabold tracking-tight md:text-6xl lg:text-7xl">
               Horse S.L: Tu Mundo, Entregado.
             </h1>
-            <p className="mx-auto mt-6 max-w-3xl text-lg md:text-xl text-primary-foreground/90">
+            <p className="mx-auto mt-6 max-w-3xl text-lg md:text-xl text-white/90">
               Desbloquea el potencial de tu negocio con nuestra logística de vanguardia. Velocidad, seguridad y alcance global a tu servicio.
             </p>
             <Button asChild size="lg" className="mt-8 bg-accent text-accent-foreground hover:bg-accent/90 font-bold">
