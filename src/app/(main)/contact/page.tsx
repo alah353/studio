@@ -1,9 +1,6 @@
 import { ContactForm } from './contact-form';
 import { Mail, Phone, MapPin } from 'lucide-react';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 import Image from 'next/image';
-
-const headerImage = PlaceHolderImages.find(p => p.id === 'contact-header');
 
 const contactDetails = [
     {
@@ -30,15 +27,12 @@ export default function ContactPage() {
   return (
     <div className="bg-background">
       <header className="relative h-64 md:h-80 w-full">
-        {headerImage && (
-            <Image
-                src={headerImage.imageUrl}
-                alt={headerImage.description}
-                data-ai-hint={headerImage.imageHint}
-                fill
-                className="object-cover"
-            />
-        )}
+        <Image
+            src="/contacto.png"
+            alt="Cabecera de la sección de contacto"
+            fill
+            className="object-cover"
+        />
         <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white">
           <div className="container">
@@ -82,5 +76,3 @@ export default function ContactPage() {
     </div>
   );
 }
-
-    
