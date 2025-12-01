@@ -10,8 +10,6 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
 
-const headerImage = PlaceHolderImages.find(p => p.id === 'fleet-header');
-
 const techFeatures = [
     { icon: <Wifi className="h-6 w-6 text-accent" />, title: 'Seguimiento en Tiempo Real', description: 'Visibilidad completa de tus envíos 24/7. Nuestra plataforma te permite conocer la ubicación y el estado de tu carga en todo momento.' },
     { icon: <BrainCircuit className="h-6 w-6 text-accent" />, title: 'IA para Optimización de Rutas', description: 'Nuestros algoritmos analizan datos en tiempo real para diseñar las rutas más rápidas y eficientes, reduciendo costes y tiempos de entrega.' },
@@ -46,15 +44,12 @@ export default function FleetPage() {
   return (
     <div className="bg-background">
       <header className="relative h-64 md:h-80 w-full">
-        {headerImage && (
-            <Image
-                src={headerImage.imageUrl}
-                alt={headerImage.description}
-                data-ai-hint={headerImage.imageHint}
-                fill
-                className="object-cover"
-            />
-        )}
+        <Image
+            src="/flota.png"
+            alt="Cabecera de la sección de flota"
+            fill
+            className="object-cover"
+        />
         <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white">
           <div className="container">
@@ -159,5 +154,3 @@ export default function FleetPage() {
     </div>
   );
 }
-
-    
