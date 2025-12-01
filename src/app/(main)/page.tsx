@@ -41,8 +41,6 @@ const features = [
   },
 ];
 
-const ctaImage = PlaceHolderImages.find(p => p.id === 'services-header');
-
 export default function HomePage() {
   return (
     <div>
@@ -126,15 +124,12 @@ export default function HomePage() {
 
       {/* CTA Section */}
       <section className="relative py-16 md:py-24">
-        {ctaImage && (
-            <Image
-                src={ctaImage.imageUrl}
-                alt={ctaImage.description}
-                data-ai-hint={ctaImage.imageHint}
-                fill
-                className="object-cover"
-            />
-        )}
+        <Image
+            src="/portacontenedores.png"
+            alt="Buque de portacontenedores en el mar"
+            fill
+            className="object-cover"
+        />
         <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 container text-center text-white">
           <h2 className="font-headline text-3xl font-bold md:text-4xl">¿Listo para optimizar tu logística?</h2>
