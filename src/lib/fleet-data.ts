@@ -17,7 +17,7 @@ export const fleetData: FleetVehicle[] = [
     {
         id: 'truck-001',
         type: 'truck',
-        name: 'Hércules 01',
+        name: 'NAC-101',
         model: 'Volvo FH Electric',
         imageId: 'fleet-truck-1',
         specs: { capacity: '44 Toneladas', range: '300 km por carga' },
@@ -28,7 +28,7 @@ export const fleetData: FleetVehicle[] = [
     {
         id: 'truck-002',
         type: 'truck',
-        name: 'Centauro 05',
+        name: 'NAC-102',
         model: 'Scania R 450',
         imageId: 'fleet-truck-2',
         specs: { capacity: '40 Toneladas', range: '2,500 km' },
@@ -39,7 +39,7 @@ export const fleetData: FleetVehicle[] = [
     {
         id: 'truck-003',
         type: 'truck',
-        name: 'Titán 03',
+        name: 'NAC-103',
         model: 'Mercedes-Benz Actros L',
         imageId: 'fleet-truck-3',
         specs: { capacity: '42 Toneladas', range: '2,800 km' },
@@ -50,7 +50,7 @@ export const fleetData: FleetVehicle[] = [
     {
         id: 'ship-001',
         type: 'ship',
-        name: 'Poseidón',
+        name: 'GLO-201',
         model: 'Triple-E Class',
         imageId: 'fleet-ship-1',
         specs: { capacity: '18,270 TEU', range: 'Global' },
@@ -61,7 +61,7 @@ export const fleetData: FleetVehicle[] = [
     {
         id: 'ship-002',
         type: 'ship',
-        name: 'Leviatán',
+        name: 'GLO-202',
         model: 'Evergreen A-Class',
         imageId: 'fleet-ship-2',
         specs: { capacity: '23,992 TEU', range: 'Global' },
@@ -72,7 +72,7 @@ export const fleetData: FleetVehicle[] = [
     {
         id: 'plane-001',
         type: 'plane',
-        name: 'Ícaro 777',
+        name: 'AIR-301',
         model: 'Boeing 777F',
         imageId: 'fleet-plane-1',
         specs: { capacity: '102 Toneladas', range: '9,070 km' },
