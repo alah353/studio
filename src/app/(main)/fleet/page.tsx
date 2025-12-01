@@ -53,7 +53,7 @@ export default function FleetPage() {
         <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white">
           <div className="container">
-            <h1 className="font-headline text-4xl font-bold md:text-5xl">Flota Moderna y Tecnología Avanzada</h1>
+            <h1 className="font-headline text-4xl font-bold md:text-5xl text-white">Flota Moderna y Tecnología Avanzada</h1>
             <p className="mt-4 mx-auto max-w-3xl text-lg text-primary-foreground/90">
                 Combinamos activos de primer nivel con la tecnología más innovadora para garantizar una logística superior.
             </p>

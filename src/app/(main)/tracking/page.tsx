@@ -22,7 +22,7 @@ export default function TrackingPage() {
         <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white">
           <div className="container">
-             <h1 className="font-headline text-4xl font-bold md:text-5xl">Seguimiento de Envíos</h1>
+             <h1 className="font-headline text-4xl font-bold md:text-5xl text-white">Seguimiento de Envíos</h1>
             <p className="mt-4 mx-auto max-w-2xl text-lg text-primary-foreground/90">
                 Introduce tu número de seguimiento para consultar el estado y la ubicación de tu envío en tiempo real.
             </p>
