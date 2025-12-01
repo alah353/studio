@@ -250,7 +250,7 @@ export default function HomePage() {
           <h2 className="font-headline text-3xl font-bold md:text-4xl">
             ¿Listo para optimizar tu logística?
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-primary-foreground/90">
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-white/90">
             Contacta con nuestros especialistas y descubre cómo Horse S.L. puede
             transformar tu cadena de suministro.
           </p>

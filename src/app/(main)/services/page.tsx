@@ -76,7 +76,7 @@ export default function ServicesPage() {
         <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white">
           <div className="container">
              <h1 className="font-headline text-4xl font-bold md:text-5xl text-white">Un Mundo de Soluciones a tu Alcance</h1>
-            <p className="mt-4 mx-auto max-w-3xl text-lg text-primary-foreground/90">
+            <p className="mt-4 mx-auto max-w-3xl text-lg text-white/90">
                 Descubre nuestro completo portafolio de servicios logísticos, diseñados para ofrecerte eficiencia, seguridad y alcance global.
             </p>
           </div>
