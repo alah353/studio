@@ -6,8 +6,8 @@ export function HorseLogo(props: { className?: string }) {
     <Image
       src="/logocaballo.png"
       alt="Horse S.L. Logo"
-      width={120}
-      height={120}
+      width={80}
+      height={80}
       className={props.className}
     />
   );
