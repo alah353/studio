@@ -110,11 +110,11 @@ export default function ServicesPage() {
                         <DialogTrigger asChild>
                             <Button className="bg-accent text-accent-foreground hover:bg-accent/90">Solicitar Servicio</Button>
                         </DialogTrigger>
-                        <DialogContent className="sm:max-w-[625px]">
+                        <DialogContent className="sm:max-w-4xl">
                             <DialogHeader>
-                                <DialogTitle className="font-headline text-2xl">{service.title}</DialogTitle>
+                                <DialogTitle className="font-headline text-2xl">Solicitud de Servicio: {service.title}</DialogTitle>
                                 <DialogDescription>
-                                    Completa el siguiente formulario para solicitar este servicio. Nos pondremos en contacto contigo a la brevedad.
+                                    Cuanto más detalle nos facilite sobre la mercancía, cantidades, medidas y fechas, más precisa será nuestra oferta.
                                 </DialogDescription>
                             </DialogHeader>
                             <ServiceRequestForm serviceTitle={service.title} onSuccess={handleSuccess} />
@@ -142,5 +142,3 @@ export default function ServicesPage() {
     </div>
   );
 }
-
-    

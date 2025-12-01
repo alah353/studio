@@ -176,15 +176,13 @@ export default function HomePage() {
                     </div>
                   </Card>
 
-                  <DialogContent className="sm:max-w-[625px]">
+                  <DialogContent className="sm:max-w-4xl">
                     <DialogHeader>
                       <DialogTitle className="font-headline text-2xl">
-                        {service.title}
+                        Solicitud de Servicio: {service.title}
                       </DialogTitle>
                       <DialogDescription>
-                        Completa el siguiente formulario para solicitar este
-                        servicio. Nos pondremos en contacto contigo a la
-                        brevedad.
+                        Cuanto más detalle nos facilite sobre la mercancía, cantidades, medidas y fechas, más precisa será nuestra oferta.
                       </DialogDescription>
                     </DialogHeader>
                     <ServiceRequestForm
