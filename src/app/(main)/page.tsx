@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight, Globe, ShieldCheck, Ship, Truck, Plane, Zap } from 'lucide-react';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 const services = [
   {
@@ -39,6 +40,8 @@ const features = [
     description: 'Nuestra extensa red de socios nos permite llegar a cualquier rincón del planeta, sin importar la complejidad del destino.',
   },
 ];
+
+const ctaImage = PlaceHolderImages.find(p => p.id === 'services-header');
 
 export default function HomePage() {
   return (
@@ -122,10 +125,20 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 md:py-24 bg-primary text-primary-foreground">
-        <div className="container text-center">
+      <section className="relative py-16 md:py-24">
+        {ctaImage && (
+            <Image
+                src={ctaImage.imageUrl}
+                alt={ctaImage.description}
+                data-ai-hint={ctaImage.imageHint}
+                fill
+                className="object-cover"
+            />
+        )}
+        <div className="absolute inset-0 bg-black/60" />
+        <div className="relative z-10 container text-center text-white">
           <h2 className="font-headline text-3xl font-bold md:text-4xl">¿Listo para optimizar tu logística?</h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg">
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-primary-foreground/90">
             Contacta con nuestros especialistas y descubre cómo Horse S.L. puede transformar tu cadena de suministro.
           </p>
           <Button asChild size="lg" className="mt-8 bg-accent text-accent-foreground hover:bg-accent/90 font-bold">
