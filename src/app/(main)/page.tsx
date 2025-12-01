@@ -2,10 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { ArrowRight, Globe, ShieldCheck, Ship, Truck, Plane, Zap } from 'lucide-react';
-
-const heroImage = PlaceHolderImages.find(p => p.id === 'hero-background');
 
 const services = [
   {
@@ -48,16 +45,13 @@ export default function HomePage() {
     <div>
       {/* Hero Section */}
       <section className="relative h-[70vh] min-h-[600px] w-full">
-        {heroImage && (
-          <Image
-            src={heroImage.imageUrl}
-            alt={heroImage.description}
-            data-ai-hint={heroImage.imageHint}
-            fill
-            className="object-cover"
-            priority
-          />
-        )}
+        <Image
+          src="/cabecerainicio.jpg"
+          alt="Cabecera de inicio de Horse S.L."
+          fill
+          className="object-cover"
+          priority
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" />
         <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white">
