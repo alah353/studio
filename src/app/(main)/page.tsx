@@ -87,7 +87,7 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="relative h-[70vh] min-h-[600px] w-full">
         <Image
-          src="/cabecerainicio.jpg"
+          src="/inicio.png"
           alt="Cabecera de inicio de Horse S.L."
           fill
           className="object-cover"
