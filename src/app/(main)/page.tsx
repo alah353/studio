@@ -1,27 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight, Globe, ShieldCheck, Ship, Truck, Plane, Zap } from 'lucide-react';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
-
-const services = [
-  {
-    icon: <Truck className="h-10 w-10 text-primary" />,
-    title: 'Transporte Terrestre',
-    description: 'Nuestra flota de carretera, ágil y potente, garantiza entregas veloces en toda Europa.',
-  },
-  {
-    icon: <Ship className="h-10 w-10 text-primary" />,
-    title: 'Transporte Marítimo',
-    description: 'Dominamos los océanos para conectar continentes, moviendo grandes volúmenes con fuerza y fiabilidad.',
-  },
-  {
-    icon: <Plane className="h-10 w-10 text-primary" />,
-    title: 'Transporte Aéreo',
-    description: 'La máxima expresión de velocidad para tus envíos más críticos, directos a cualquier destino global.',
-  },
-];
+import { ArrowRight, Globe, ShieldCheck, Zap } from 'lucide-react';
 
 const features = [
   {
@@ -75,27 +55,13 @@ export default function HomePage() {
       {/* Services Overview */}
       <section className="py-16 md:py-24 bg-background">
         <div className="container">
-          <div className="mx-auto max-w-3xl text-center">
-            <h2 className="font-headline text-3xl font-bold md:text-4xl">Nuestros Servicios</h2>
-            <p className="mt-4 text-lg text-muted-foreground">
-              Soluciones logísticas integrales, diseñadas para cubrir cada una de tus necesidades con la máxima eficiencia.
-            </p>
-          </div>
-          <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
-            {services.map((service) => (
-              <Card key={service.title} className="text-center transition-transform hover:-translate-y-2 hover:shadow-lg border-primary/20 bg-card">
-                <CardHeader>
-                  <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-primary/10">
-                    {service.icon}
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <h3 className="font-headline text-xl font-semibold">{service.title}</h3>
-                  <p className="mt-2 text-muted-foreground">{service.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          <Image
+            src="/servicios.png"
+            alt="Nuestros servicios"
+            width={1200}
+            height={400}
+            className="w-full h-auto"
+          />
         </div>
       </section>
       
