@@ -4,8 +4,6 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { CheckCircle, Target, Eye, Rocket, Zap, Award } from 'lucide-react';
 
-const headerImage = PlaceHolderImages.find(p => p.id === 'about-header');
-
 const values = [
   { icon: <Zap className="h-6 w-6 text-accent" />, title: 'Velocidad', description: 'Actuamos con rapidez y decisión para superar tus expectativas.' },
   { icon: <Rocket className="h-6 w-6 text-accent" />, title: 'Innovación', description: 'Aplicamos la última tecnología para optimizar cada proceso logístico.' },
@@ -24,15 +22,12 @@ export default function AboutPage() {
   return (
     <div className="bg-background">
       <header className="relative h-64 md:h-80 w-full">
-        {headerImage && (
-            <Image
-                src={headerImage.imageUrl}
-                alt={headerImage.description}
-                data-ai-hint={headerImage.imageHint}
-                fill
-                className="object-cover"
-            />
-        )}
+        <Image
+            src="/sobre1.png"
+            alt="Cabecera de la sección Sobre Nosotros"
+            fill
+            className="object-cover"
+        />
         <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white">
           <div className="container">
@@ -130,5 +125,3 @@ export default function AboutPage() {
     </div>
   );
 }
-
-    
