@@ -65,6 +65,7 @@ export function ServiceRequestForm({ serviceTitle, onSuccess }: ServiceRequestFo
     // Notify parent component about success to close dialog
     setTimeout(() => {
         onSuccess();
+        // Reset success state for next time dialog opens
         setIsSuccess(false);
     }, 2000);
   }
