@@ -1,11 +1,27 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+
 export default function TermsOfServicePage() {
+    const [lastUpdatedDate, setLastUpdatedDate] = useState('');
+
+    useEffect(() => {
+        setLastUpdatedDate(
+            new Date().toLocaleDateString('es-ES', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+            })
+        );
+    }, []);
+
   return (
     <div className="bg-background">
       <main className="py-16 md:py-24">
         <div className="container max-w-4xl">
           <h1 className="font-headline text-4xl font-bold mb-8">Términos de Servicio</h1>
           <div className="prose prose-invert lg:prose-xl mx-auto text-muted-foreground space-y-6">
-            <p><strong>Última actualización:</strong> {new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+            <p><strong>Última actualización:</strong> {lastUpdatedDate}</p>
 
             <h2 className="font-headline text-2xl font-bold text-foreground">1. Acuerdo de los Términos</h2>
             <p>Estos Términos de Servicio constituyen un acuerdo legalmente vinculante hecho entre usted, ya sea personalmente o en nombre de una entidad ("usted") y Horse S.L. ("nosotros", "nuestro"), con respecto a su acceso y uso del sitio web, así como cualquier otra forma de medio, canal de medios, sitio web móvil o aplicación móvil relacionada, vinculada o conectada de otro modo (colectivamente, el "Sitio").</p>

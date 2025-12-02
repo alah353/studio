@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowLeft, HardDrive, Gauge, MapPin, Wrench, CheckCircle } from 'lucide-react';
 import { FleetVehicle } from '@/lib/fleet-data';
+import { format } from 'date-fns';
 
 export async function generateStaticParams() {
   return fleetData.map((vehicle) => ({
@@ -33,14 +34,6 @@ export default function VehicleDetailPage({ params }: { params: { id: string } }
         case 'En Ruta': return 'outline';
         default: return 'default';
     }
-  }
-  
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
   }
 
   return (
@@ -142,7 +135,7 @@ export default function VehicleDetailPage({ params }: { params: { id: string } }
                                     </div>
                                     <div>
                                         <p className="font-semibold">{event.event}</p>
-                                        <p className="text-sm text-muted-foreground">{formatDate(event.date)}</p>
+                                        <p className="text-sm text-muted-foreground">{format(new Date(event.date), 'dd/MM/yyyy')}</p>
                                     </div>
                                 </li>
                             ))}

@@ -5,7 +5,7 @@ import { useFormStatus } from 'react-dom';
 import { handleTrackShipment, FormState } from './actions';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2, AlertCircle, MapPin, Clock, PackageCheck } from 'lucide-react';
@@ -56,7 +56,7 @@ export function TrackingForm() {
           </div>
         </form>
 
-        {state.message && state.error && (
+        {state.message && state.error && !state.data && (
             <Alert variant="destructive" className="mt-6">
                 <AlertCircle className="h-4 w-4" />
                 <AlertTitle>Error</AlertTitle>
