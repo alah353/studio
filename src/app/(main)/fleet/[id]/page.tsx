@@ -10,6 +10,12 @@ import Link from 'next/link';
 import { ArrowLeft, HardDrive, Gauge, MapPin, Wrench, CheckCircle } from 'lucide-react';
 import { FleetVehicle } from '@/lib/fleet-data';
 
+export async function generateStaticParams() {
+  return fleetData.map((vehicle) => ({
+    id: vehicle.id,
+  }));
+}
+
 export default function VehicleDetailPage({ params }: { params: { id: string } }) {
   const vehicle = fleetData.find((v) => v.id === params.id);
 
@@ -27,6 +33,14 @@ export default function VehicleDetailPage({ params }: { params: { id: string } }
         case 'En Ruta': return 'outline';
         default: return 'default';
     }
+  }
+  
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
   }
 
   return (
@@ -128,7 +142,7 @@ export default function VehicleDetailPage({ params }: { params: { id: string } }
                                     </div>
                                     <div>
                                         <p className="font-semibold">{event.event}</p>
-                                        <p className="text-sm text-muted-foreground">{new Date(event.date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                                        <p className="text-sm text-muted-foreground">{formatDate(event.date)}</p>
                                     </div>
                                 </li>
                             ))}
