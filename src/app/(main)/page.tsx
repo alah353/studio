@@ -76,6 +76,9 @@ const services = [
 export default function HomePage() {
   const [openDialog, setOpenDialog] = useState<string | null>(null);
 
+  const mainHero = PlaceHolderImages.find(p => p.id === 'main-hero');
+  const mainCta = PlaceHolderImages.find(p => p.id === 'main-cta');
+
   const handleSuccess = () => {
     if (openDialog) {
       setOpenDialog(null);
@@ -86,13 +89,16 @@ export default function HomePage() {
     <div>
       {/* Hero Section */}
       <section className="relative h-[70vh] min-h-[600px] w-full">
-        <Image
-          src="/portacontenedores.png"
-          alt="Cabecera de la página de inicio"
-          fill
-          className="object-cover"
-          priority
-        />
+        {mainHero && (
+          <Image
+            src={mainHero.imageUrl}
+            alt={mainHero.description}
+            data-ai-hint={mainHero.imageHint}
+            fill
+            className="object-cover"
+            priority
+          />
+        )}
 
         <div className="absolute inset-0 bg-black/30" />
         <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white">
@@ -239,12 +245,15 @@ export default function HomePage() {
 
       {/* CTA Section */}
       <section className="relative py-16 md:py-24">
-        <Image
-          src="/portacontenedores.png"
-          alt="Buque de portacontenedores en el mar"
-          fill
-          className="object-cover"
-        />
+        {mainCta && (
+          <Image
+            src={mainCta.imageUrl}
+            alt={mainCta.description}
+            data-ai-hint={mainCta.imageHint}
+            fill
+            className="object-cover"
+          />
+        )}
         <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 container text-center text-white">
           <h2 className="font-headline text-3xl font-bold md:text-4xl">
@@ -266,3 +275,5 @@ export default function HomePage() {
     </div>
   );
 }
+
+    

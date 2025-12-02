@@ -1,8 +1,17 @@
+'use client';
+
 import Link from 'next/link';
 import { Linkedin, Twitter, Facebook } from 'lucide-react';
 import { HorseLogo } from './horse-logo';
+import { useState, useEffect } from 'react';
 
 export function Footer() {
+  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+
+  useEffect(() => {
+    setCurrentYear(new Date().getFullYear());
+  }, []);
+
   return (
     <footer className="border-t bg-card">
       <div className="container mx-auto max-w-screen-2xl px-4 py-8 sm:px-6 lg:px-8">
@@ -16,9 +25,9 @@ export function Footer() {
               Potencia y velocidad en logística. Soluciones de transporte veloces, seguras y con alcance global.
             </p>
             <div className="mt-6 flex space-x-4">
-              <a href="https://www.linkedin.com/login" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary"><Linkedin /></a>
-              <a href="https://twitter.com/login" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary"><Twitter /></a>
-              <a href="https://www.facebook.com/login" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary"><Facebook /></a>
+              <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary"><Linkedin /></a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary"><Twitter /></a>
+              <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary"><Facebook /></a>
             </div>
           </div>
 
@@ -54,7 +63,7 @@ export function Footer() {
         </div>
 
         <div className="mt-8 border-t pt-8 text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} Horse S.L. Todos los derechos reservados.</p>
+          <p>&copy; {currentYear} Horse S.L. Todos los derechos reservados.</p>
         </div>
       </div>
     </footer>

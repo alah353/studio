@@ -23,6 +23,9 @@ export default function FleetPage() {
   const [filter, setFilter] = useState<FilterType>('all');
 
   const filteredFleet = filter === 'all' ? fleetData : fleetData.filter(v => v.type === filter);
+
+  const fleetHeader = PlaceHolderImages.find(p => p.id === 'fleet-header');
+  const techMap = PlaceHolderImages.find(p => p.id === 'tech-map');
   
   const getIconForType = (type: FleetVehicle['type']) => {
     switch (type) {
@@ -44,12 +47,15 @@ export default function FleetPage() {
   return (
     <div className="bg-background">
       <header className="relative h-64 md:h-80 w-full">
-        <Image
-            src="/flota.png"
-            alt="Cabecera de la sección de flota"
-            fill
-            className="object-cover"
-        />
+        {fleetHeader && (
+          <Image
+              src={fleetHeader.imageUrl}
+              alt={fleetHeader.description}
+              data-ai-hint={fleetHeader.imageHint}
+              fill
+              className="object-cover"
+          />
+        )}
         <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white">
           <div className="container">
@@ -124,13 +130,15 @@ export default function FleetPage() {
         <div className="container">
           <div className="grid md:grid-cols-2 gap-12 items-center">
              <div className="relative aspect-video rounded-lg overflow-hidden shadow-lg">
-                <Image
-                    src="https://images.unsplash.com/photo-1586449480537-3a22cf98b04c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxkaWdpdGFsJTIwbWFwfGVufDB8fHx8MTc2NDA4NDcyNnww&ixlib=rb-4.1.0&q=80&w=1080"
-                    alt="Digital map with animated supply chains"
-                    data-ai-hint="digital map"
-                    fill
-                    className="object-cover"
-                  />
+                {techMap && (
+                  <Image
+                      src={techMap.imageUrl}
+                      alt={techMap.description}
+                      data-ai-hint={techMap.imageHint}
+                      fill
+                      className="object-cover"
+                    />
+                )}
             </div>
             <div>
               <h2 className="font-headline text-3xl font-bold mb-6">Nuestra Tecnología</h2>
@@ -154,3 +162,5 @@ export default function FleetPage() {
     </div>
   );
 }
+
+    
