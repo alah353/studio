@@ -15,7 +15,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Loader2, CheckCircle } from 'lucide-react';
+import { Loader2, CheckCircle, AlertTriangle } from 'lucide-react';
 import { useState } from 'react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
@@ -37,6 +37,7 @@ const formSchema = z.object({
 export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -48,17 +49,33 @@ export function ContactForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     setIsSuccess(false);
-    console.log(values);
+    setIsError(false);
 
-    // Simulate API call
-    setTimeout(() => {
-        setIsSubmitting(false);
+    try {
+      const response = await fetch("https://formspree.io/f/xqarbyaj", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify(values),
+      });
+
+      if (response.ok) {
         setIsSuccess(true);
         form.reset();
-    }, 1500)
+      } else {
+        setIsError(true);
+      }
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+    } finally {
+        setIsSubmitting(false);
+    }
   }
 
   return (
@@ -136,6 +153,15 @@ export function ContactForm() {
                     <AlertTitle>¡Mensaje Enviado!</AlertTitle>
                     <AlertDescription>
                         Hemos recibido tu consulta. Nos pondremos en contacto contigo pronto.
+                    </AlertDescription>
+                </Alert>
+            )}
+            {isError && (
+                 <Alert variant="destructive" className="mt-6">
+                    <AlertTriangle className="h-4 w-4" />
+                    <AlertTitle>Error al enviar</AlertTitle>
+                    <AlertDescription>
+                        Hubo un problema al enviar tu mensaje. Por favor, inténtalo de nuevo más tarde.
                     </AlertDescription>
                 </Alert>
             )}

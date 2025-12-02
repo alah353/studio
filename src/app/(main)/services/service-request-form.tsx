@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Loader2, CheckCircle } from 'lucide-react';
+import { Loader2, CheckCircle, AlertTriangle } from 'lucide-react';
 import { useState } from 'react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -52,6 +52,7 @@ type ServiceRequestFormProps = {
 export function ServiceRequestForm({ serviceTitle, onSuccess }: ServiceRequestFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -79,19 +80,34 @@ export function ServiceRequestForm({ serviceTitle, onSuccess }: ServiceRequestFo
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     setIsSuccess(false);
-    console.log({ service: serviceTitle, ...values });
+    setIsError(false);
 
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    setIsSubmitting(false);
-    setIsSuccess(true);
-    form.reset();
-    
-    setTimeout(() => {
-        onSuccess();
-        setIsSuccess(false);
-    }, 2000);
+    try {
+        const response = await fetch("https://formspree.io/f/xqarbyaj", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({ service: serviceTitle, ...values }),
+        });
+
+        if (response.ok) {
+            setIsSuccess(true);
+            form.reset();
+            setTimeout(() => {
+                onSuccess();
+                setIsSuccess(false);
+            }, 2000);
+        } else {
+            setIsError(true);
+        }
+    } catch (error) {
+        console.error(error);
+        setIsError(true);
+    } finally {
+        setIsSubmitting(false);
+    }
   }
 
   if (isSuccess) {
@@ -101,6 +117,18 @@ export function ServiceRequestForm({ serviceTitle, onSuccess }: ServiceRequestFo
             <AlertTitle>¡Solicitud Enviada!</AlertTitle>
             <AlertDescription>
                 Hemos recibido tu solicitud para {serviceTitle}. Nos pondremos en contacto contigo pronto.
+            </AlertDescription>
+        </Alert>
+    )
+  }
+
+   if (isError) {
+    return (
+        <Alert variant="destructive" className="mt-6">
+            <AlertTriangle className="h-4 w-4" />
+            <AlertTitle>Error al enviar</AlertTitle>
+            <AlertDescription>
+                Hubo un problema al enviar tu solicitud. Por favor, inténtalo de nuevo más tarde o contacta con nosotros directamente.
             </AlertDescription>
         </Alert>
     )
