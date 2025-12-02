@@ -1,13 +1,18 @@
 'use client';
 
 import { useState } from 'react';
-import { trackShipment, TrackShipmentOutput } from '@/ai/flows/real-time-shipment-tracking';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Loader2, AlertCircle, MapPin, Clock, PackageCheck } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+
+type TrackShipmentOutput = {
+    status: string;
+    route: string;
+    estimatedDeliveryTime: string;
+};
 
 export function TrackingForm() {
   const [trackingNumber, setTrackingNumber] = useState('');
@@ -35,24 +40,20 @@ export function TrackingForm() {
     setIsLoading(true);
 
     try {
-      // Simulate network delay
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      const response = await fetch('/api/tracking', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ trackingNumber }),
+      });
 
-      let data;
-      if (trackingNumber === '123456789') {
-        data = {
-            status: 'En tránsito',
-            route: 'Madrid, España -> París, Francia',
-            estimatedDeliveryTime: '2 días'
-        };
-      } else {
-        data = await trackShipment({ trackingNumber });
-      }
-
-      if (!data) {
-        throw new Error('No se encontró el envío. Por favor, verifica el número de seguimiento.');
-      }
+      const data = await response.json();
       
+      if (!response.ok) {
+        throw new Error(data.error || 'Ocurrió un error inesperado.');
+      }
+
       setResult(data);
     } catch (err: any) {
       const message = err.message || 'Ocurrió un error inesperado.';
