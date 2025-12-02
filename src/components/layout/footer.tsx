@@ -16,9 +16,9 @@ export function Footer() {
               Potencia y velocidad en logística. Soluciones de transporte veloces, seguras y con alcance global.
             </p>
             <div className="mt-6 flex space-x-4">
-              <a href="#" className="text-muted-foreground hover:text-primary"><Linkedin /></a>
-              <a href="#" className="text-muted-foreground hover:text-primary"><Twitter /></a>
-              <a href="#" className="text-muted-foreground hover:text-primary"><Facebook /></a>
+              <a href="https://www.linkedin.com/login" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary"><Linkedin /></a>
+              <a href="https://twitter.com/login" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary"><Twitter /></a>
+              <a href="https://www.facebook.com/login" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary"><Facebook /></a>
             </div>
           </div>
 
