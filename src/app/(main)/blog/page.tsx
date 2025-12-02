@@ -4,29 +4,9 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/componen
 import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { ArrowRight } from 'lucide-react';
+import { blogPosts } from '@/lib/blog-data';
 
 const headerImage = PlaceHolderImages.find(p => p.id === 'blog-header');
-
-const blogPosts = [
-  {
-    title: '5 Tendencias en Logística para 2024 que Debes Conocer',
-    excerpt: 'Descubre las innovaciones que están transformando la cadena de suministro, desde la inteligencia artificial hasta la sostenibilidad y la logística urbana.',
-    date: '15 de Mayo, 2024',
-    imageId: 'blog-post-1',
-  },
-  {
-    title: 'Cómo Optimizar tus Costes de Transporte Marítimo',
-    excerpt: 'Consejos prácticos y estrategias para reducir gastos sin comprometer la eficiencia ni los tiempos de entrega en tus envíos internacionales.',
-    date: '28 de Abril, 2024',
-    imageId: 'blog-post-2',
-  },
-  {
-    title: 'La Importancia de la Logística Verde en el Mundo Actual',
-    excerpt: 'Analizamos cómo las prácticas sostenibles no solo benefician al planeta, sino que también mejoran la reputación y la eficiencia de tu empresa.',
-    date: '10 de Abril, 2024',
-    imageId: 'blog-post-3',
-  },
-];
 
 export default function BlogPage() {
   return (
@@ -80,7 +60,7 @@ export default function BlogPage() {
                   </CardContent>
                   <CardFooter>
                     <Button asChild variant="link" className="px-0">
-                      <Link href="#">
+                      <Link href={`/blog/${post.slug}`}>
                         Leer más <ArrowRight className="ml-2 h-4 w-4" />
                       </Link>
                     </Button>
@@ -94,5 +74,3 @@ export default function BlogPage() {
     </div>
   );
 }
-
-    
