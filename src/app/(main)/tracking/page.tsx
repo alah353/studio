@@ -1,3 +1,5 @@
+'use client';
+
 import { TrackingForm } from './tracking-form';
 import { PackageSearch } from 'lucide-react';
 import { Chat } from './chat';

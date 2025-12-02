@@ -7,9 +7,7 @@ import Link from 'next/link';
 import { ArrowLeft, Calendar } from 'lucide-react';
 
 type BlogPostPageProps = {
-  params: {
-    slug: string;
-  };
+  params: { slug: string };
 };
 
 export async function generateStaticParams() {
