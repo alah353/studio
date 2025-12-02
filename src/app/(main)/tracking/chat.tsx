@@ -17,8 +17,7 @@ import { Bot, Loader2, Send, User } from 'lucide-react';
 import { useState } from 'react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { handleChat } from './chat-actions';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 
 const formSchema = z.object({
   prompt: z.string().min(1),
@@ -46,10 +45,29 @@ export function Chat() {
     setMessages(prev => [...prev, userMessage]);
     form.reset();
 
-    const response = await handleChat(values.prompt);
-    
-    const botMessage: Message = { role: 'bot', text: response };
-    setMessages(prev => [...prev, botMessage]);
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ prompt: values.prompt }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+      const botMessage: Message = { role: 'bot', text: data.response };
+      setMessages(prev => [...prev, botMessage]);
+
+    } catch (error) {
+      console.error('Error handling chat:', error);
+      const errorMessage: Message = { role: 'bot', text: 'Lo siento, ha ocurrido un error. Por favor, inténtalo de nuevo más tarde.' };
+      setMessages(prev => [...prev, errorMessage]);
+    }
+
 
     setIsSubmitting(false);
   }
