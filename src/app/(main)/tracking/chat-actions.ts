@@ -1,5 +1,3 @@
-'use server';
-
 import {ai} from '@/ai/genkit';
 import { trackShipment } from '@/ai/flows/real-time-shipment-tracking';
 import { z } from 'zod';
