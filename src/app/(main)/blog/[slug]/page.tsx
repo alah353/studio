@@ -12,7 +12,13 @@ export async function generateStaticParams() {
     }));
 }
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
+type BlogPostPageProps = {
+    params: {
+        slug: string;
+    };
+};
+
+export default function BlogPostPage({ params }: BlogPostPageProps) {
   const post = blogPosts.find((p) => p.slug === params.slug);
 
   if (!post) {
