@@ -13,9 +13,7 @@ export async function generateStaticParams() {
 }
 
 type BlogPostPageProps = {
-    params: {
-        slug: string;
-    };
+    params: { slug: string };
 };
 
 export default function BlogPostPage({ params }: BlogPostPageProps) {
