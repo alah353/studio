@@ -14,6 +14,27 @@ type TrackShipmentOutput = {
     estimatedDeliveryTime: string;
 };
 
+// Mock function to simulate API response
+const getMockTrackingData = (trackingNumber: string): TrackShipmentOutput | null => {
+    if (trackingNumber === '123456789') {
+        return {
+            status: 'En tránsito',
+            route: 'Madrid, España -> París, Francia',
+            estimatedDeliveryTime: '2 días'
+        };
+    }
+    if (trackingNumber.startsWith('ERR')) {
+        return null; // Simulate not found
+    }
+    // Fictional data for any other valid-looking number
+    return {
+        status: 'En preparación',
+        route: 'Almacén Central (Tarragona)',
+        estimatedDeliveryTime: '4 días'
+    };
+};
+
+
 export function TrackingForm() {
   const [trackingNumber, setTrackingNumber] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -39,19 +60,14 @@ export function TrackingForm() {
 
     setIsLoading(true);
 
-    try {
-      const response = await fetch('/api/tracking', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ trackingNumber }),
-      });
+    // Simulate network delay
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
-      const data = await response.json();
+    try {
+      const data = getMockTrackingData(trackingNumber);
       
-      if (!response.ok) {
-        throw new Error(data.error || 'Ocurrió un error inesperado.');
+      if (!data) {
+        throw new Error('No se encontró el envío. Por favor, verifica el número de seguimiento.');
       }
 
       setResult(data);

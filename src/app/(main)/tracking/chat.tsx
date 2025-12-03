@@ -28,6 +28,21 @@ type Message = {
     text: string;
 }
 
+// Mock function to simulate API response
+const getMockResponse = (prompt: string): string => {
+    const lowerCasePrompt = prompt.toLowerCase();
+    if (lowerCasePrompt.includes('123456789')) {
+        return 'El envío 123456789 está actualmente "En tránsito" en la ruta Madrid, España -> París, Francia. La entrega estimada es en 2 días.';
+    }
+    if (lowerCasePrompt.includes('retraso')) {
+        return 'Lamento escuchar sobre el retraso. ¿Podrías proporcionarme tu número de seguimiento para poder ayudarte mejor?';
+    }
+    if (lowerCasePrompt.includes('hola') || lowerCasePrompt.includes('ayuda')) {
+        return '¡Hola! Soy el asistente virtual de Horse S.L. ¿En qué puedo ayudarte hoy? Puedes preguntarme sobre el estado de un envío o reportar una incidencia.';
+    }
+    return 'Lo siento, no he entendido tu consulta. Por favor, prueba a reformular tu pregunta o proporciona un número de seguimiento.';
+}
+
 export function Chat() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -45,21 +60,12 @@ export function Chat() {
     setMessages(prev => [...prev, userMessage]);
     form.reset();
 
+    // Simulate network delay
+    await new Promise(resolve => setTimeout(resolve, 500));
+
     try {
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ prompt: values.prompt }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const data = await response.json();
-      const botMessage: Message = { role: 'bot', text: data.response };
+      const botResponseText = getMockResponse(values.prompt);
+      const botMessage: Message = { role: 'bot', text: botResponseText };
       setMessages(prev => [...prev, botMessage]);
 
     } catch (error) {
@@ -67,7 +73,6 @@ export function Chat() {
       const errorMessage: Message = { role: 'bot', text: 'Lo siento, ha ocurrido un error. Por favor, inténtalo de nuevo más tarde.' };
       setMessages(prev => [...prev, errorMessage]);
     }
-
 
     setIsSubmitting(false);
   }
