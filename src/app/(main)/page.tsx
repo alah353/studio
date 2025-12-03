@@ -77,7 +77,6 @@ export default function HomePage() {
   const [openDialog, setOpenDialog] = useState<string | null>(null);
 
   const mainHero = PlaceHolderImages.find(p => p.id === 'main-hero');
-  const mainCta = PlaceHolderImages.find(p => p.id === 'main-cta');
 
   const handleSuccess = () => {
     if (openDialog) {
@@ -245,15 +244,12 @@ export default function HomePage() {
 
       {/* CTA Section */}
       <section className="relative py-16 md:py-24">
-        {mainCta && (
-          <Image
-            src={mainCta.imageUrl}
-            alt={mainCta.description}
-            data-ai-hint={mainCta.imageHint}
-            fill
-            className="object-cover"
-          />
-        )}
+        <Image
+          src="/portacontenedores.png"
+          alt="Buque portacontenedores en el mar"
+          fill
+          className="object-cover"
+        />
         <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 container text-center text-white">
           <h2 className="font-headline text-3xl font-bold md:text-4xl">
