@@ -24,7 +24,7 @@ export default function FleetPage() {
 
   const filteredFleet = filter === 'all' ? fleetData : fleetData.filter(v => v.type === filter);
 
-  const fleetHeader = PlaceHolderImages.find(p => p.id === 'fleet-header');
+  
   const techMap = PlaceHolderImages.find(p => p.id === 'tech-map');
   
   const getIconForType = (type: FleetVehicle['type']) => {
@@ -47,15 +47,15 @@ export default function FleetPage() {
   return (
     <div className="bg-background">
       <header className="relative h-64 md:h-80 w-full">
-        {fleetHeader && (
+        
           <Image
-              src={fleetHeader.imageUrl}
-              alt={fleetHeader.description}
-              data-ai-hint={fleetHeader.imageHint}
+              src="/unnamed.jpg"
+              alt="Nuestra flota"
+              
               fill
               className="object-cover"
           />
-        )}
+        
         <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white">
           <div className="container">
@@ -86,18 +86,18 @@ export default function FleetPage() {
                 const image = PlaceHolderImages.find(p => p.id === vehicle.imageId);
                 return (
                     <Card key={vehicle.id} className="flex flex-col overflow-hidden transition-transform hover:-translate-y-1 hover:shadow-xl">
-                        {image && (
+                        
                             <div className="aspect-w-16 aspect-h-9 bg-muted">
                                 <Image
-                                    src={image.imageUrl}
-                                    alt={image.description}
-                                    data-ai-hint={image.imageHint}
+                                    src={vehicle.imageUrl}
+                                    alt={vehicle.name}
+                                    
                                     width={600}
                                     height={400}
                                     className="object-cover w-full h-full"
                                 />
                             </div>
-                        )}
+                        
                         <CardHeader className="flex-row items-start gap-4">
                             {getIconForType(vehicle.type)}
                             <div>

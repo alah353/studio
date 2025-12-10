@@ -56,7 +56,7 @@ const services = [
 
 export default function ServicesPage() {
   const [openDialog, setOpenDialog] = useState<string | null>(null);
-  const servicesHeader = PlaceHolderImages.find(p => p.id === 'services-header');
+  
 
   const handleSuccess = () => {
     if (openDialog) {
@@ -67,15 +67,15 @@ export default function ServicesPage() {
   return (
     <div className="bg-background">
       <header className="relative h-64 md:h-80 w-full">
-        {servicesHeader && (
+        
           <Image
-              src={servicesHeader.imageUrl}
-              alt={servicesHeader.description}
-              data-ai-hint={servicesHeader.imageHint}
+              src="/servicios1.png"
+              alt="Nuestros Servicios"
+              
               fill
               className="object-cover"
           />
-        )}
+        
         <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white">
           <div className="container">

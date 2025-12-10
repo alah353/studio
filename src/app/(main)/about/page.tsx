@@ -24,15 +24,15 @@ export default function AboutPage() {
   return (
     <div className="bg-background">
       <header className="relative h-64 md:h-80 w-full">
-        {aboutHeader && (
+        
           <Image
-              src={aboutHeader.imageUrl}
-              alt={aboutHeader.description}
-              data-ai-hint={aboutHeader.imageHint}
+              src="/sobre1.png"
+              alt="Sobre nosotros"
+              
               fill
               className="object-cover"
           />
-        )}
+        
         <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white">
           <div className="container">
