@@ -81,7 +81,7 @@ export const fleetData: FleetVehicle[] = [
         name: 'AIR-301',
         model: 'Boeing 777F',
         imageId: 'fleet-plane-1',
-        imageUrl: 'https://images.unsplash.com/photo-1676926683400-4bdb6790a504?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxjYXJnbyUyMGFpcnBsYW5lfGVufDB8fHx8MTc2NDA4NTgyMXww&ixlib-rb-4.1.0&q=80&w=1080',
+        imageUrl: 'https://images.unsplash.com/photo-1676926683400-4bdb6790a504?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxjYXJnbyUyMGFpcnBsYW5lfGVufDB8fHx8MTc2NDA4NTgyMXww&ixlib=rb-4.1.0&q=80&w=1080',
         specs: { capacity: '102 Toneladas', range: '9,070 km' },
         status: 'En Ruta',
         currentRoute: 'Madrid -> Ciudad de México',
