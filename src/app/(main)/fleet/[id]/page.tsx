@@ -24,7 +24,6 @@ export default function VehicleDetailPage({ params }: { params: { id: string } }
     notFound();
   }
 
-  const image = PlaceHolderImages.find((p) => p.id === vehicle.imageId);
   const mapImage = PlaceHolderImages.find((p) => p.id === 'route-map');
 
   const getStatusVariant = (status: FleetVehicle['status']) => {
@@ -52,18 +51,18 @@ export default function VehicleDetailPage({ params }: { params: { id: string } }
           <div className="grid md:grid-cols-5 gap-12">
             <div className="md:col-span-3 space-y-8">
               <Card>
-                  {image && (
+                  
                     <div className="relative aspect-w-16 aspect-h-9 rounded-t-lg overflow-hidden">
                       <Image
-                        src={image.imageUrl}
-                        alt={image.description}
-                        data-ai-hint={image.imageHint}
+                        src={vehicle.imageUrl}
+                        alt={vehicle.name}
+                        
                         width={800}
                         height={600}
                         className="object-cover w-full h-full"
                       />
                     </div>
-                  )}
+                  
                    <CardHeader>
                         <CardTitle className="font-headline text-4xl">{vehicle.name}</CardTitle>
                         <CardDescription className="text-lg text-muted-foreground">{vehicle.model}</CardDescription>
