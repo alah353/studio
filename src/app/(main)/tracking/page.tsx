@@ -57,13 +57,13 @@ export default function TrackingPage() {
   const getStatusInfo = (status: ShipmentData['estat']) => {
     switch (status) {
       case 'En magatzem':
-        return { color: 'bg-red-500', icon: <Warehouse className="h-5 w-5" />, width: '10%' };
+        return { color: 'bg-red-500', width: '10%' };
       case 'En trànsit':
-        return { color: 'bg-blue-500', icon: <Truck className="h-5 w-5" />, width: '50%' };
+        return { color: 'bg-blue-500', width: '50%' };
       case 'Lliurat':
-        return { color: 'bg-green-500', icon: <CheckCircle className="h-5 w-5" />, width: '100%' };
+        return { color: 'bg-green-500', width: '100%' };
       default:
-        return { color: 'bg-gray-400', icon: <Package className="h-5 w-5" />, width: '0%' };
+        return { color: 'bg-gray-400', width: '0%' };
     }
   };
   
