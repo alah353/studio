@@ -8,14 +8,14 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Loader2, AlertCircle, Package, Truck, CheckCircle, MapPin, Calendar, Warehouse } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-// Definició del tipus de dades de l'enviament
+// Definició del tipus de dades de l'enviament (corregit per coincidir amb l'API)
 type ShipmentData = {
-  tracking_code: string;
-  origin: string;
-  destination: string;
+  codi_seguiment: string;
+  origen: string;
+  desti: string;
   eta: string;
-  current_location: string;
-  status: 'En magatzem' | 'En trànsit' | 'Lliurat';
+  ubicacio_actual: string;
+  estat: 'En magatzem' | 'En trànsit' | 'Lliurat';
 };
 
 const STEPS = ['En magatzem', 'En trànsit', 'Lliurat'];
@@ -36,7 +36,7 @@ export default function TrackingPage() {
     setShipmentData(null);
 
     try {
-      const response = await fetch(`https://sheetdb.io/api/v1/rgytng002juic/search?tracking_code=${trackingCode}`);
+      const response = await fetch(`https://sheetdb.io/api/v1/rgytng002juic/search?codi_seguiment=${trackingCode}`);
       if (!response.ok) {
         throw new Error('No s\'ha pogut connectar amb el servidor. Intenta-ho més tard.');
       }
@@ -55,7 +55,7 @@ export default function TrackingPage() {
     }
   };
 
-  const getStatusInfo = (status: ShipmentData['status']) => {
+  const getStatusInfo = (status: ShipmentData['estat']) => {
     switch (status) {
       case 'En magatzem':
         return { color: 'bg-red-500', icon: <Warehouse className="h-5 w-5" />, width: '10%' };
@@ -68,7 +68,7 @@ export default function TrackingPage() {
     }
   };
   
-  const currentStatusIndex = shipmentData ? STEPS.indexOf(shipmentData.status) : -1;
+  const currentStatusIndex = shipmentData ? STEPS.indexOf(shipmentData.estat) : -1;
 
   return (
     <div className="bg-background py-16 md:py-24">
@@ -88,6 +88,7 @@ export default function TrackingPage() {
                 placeholder="Ex: HS-12345678"
                 className="flex-grow text-base"
                 disabled={isLoading}
+                onKeyUp={(e) => e.key === 'Enter' && handleSearch()}
               />
               <Button onClick={handleSearch} disabled={isLoading} className="w-full sm:w-auto bg-accent text-accent-foreground hover:bg-accent/90 font-bold">
                 {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
@@ -108,7 +109,7 @@ export default function TrackingPage() {
         {shipmentData && (
           <Card className="mt-8 shadow-lg overflow-hidden">
             <CardHeader>
-              <CardTitle className="font-headline text-2xl">Resultats per: {shipmentData.tracking_code}</CardTitle>
+              <CardTitle className="font-headline text-2xl">Resultats per: {shipmentData.codi_seguiment}</CardTitle>
               <CardDescription>A continuació es mostra la informació més recent del teu enviament.</CardDescription>
             </CardHeader>
             <CardContent>
@@ -117,8 +118,8 @@ export default function TrackingPage() {
                 <h3 className="font-semibold mb-4">Estat de l'Enviament</h3>
                 <div className="relative h-2 bg-muted rounded-full">
                    <div 
-                     className={cn("absolute top-0 left-0 h-2 rounded-full transition-all duration-500", getStatusInfo(shipmentData.status).color)} 
-                     style={{ width: getStatusInfo(shipmentData.status).width }}
+                     className={cn("absolute top-0 left-0 h-2 rounded-full transition-all duration-500", getStatusInfo(shipmentData.estat).color)} 
+                     style={{ width: getStatusInfo(shipmentData.estat).width }}
                    />
                 </div>
                 <div className="mt-2 flex justify-between text-xs text-muted-foreground">
@@ -135,14 +136,14 @@ export default function TrackingPage() {
                   <Package className="h-6 w-6 text-accent flex-shrink-0" />
                   <div>
                     <p className="font-semibold text-muted-foreground">Origen</p>
-                    <p className="font-bold text-foreground">{shipmentData.origin}</p>
+                    <p className="font-bold text-foreground">{shipmentData.origen}</p>
                   </div>
                 </div>
                  <div className="flex items-center gap-3">
                   <Truck className="h-6 w-6 text-accent flex-shrink-0" />
                   <div>
                     <p className="font-semibold text-muted-foreground">Destí</p>
-                    <p className="font-bold text-foreground">{shipmentData.destination}</p>
+                    <p className="font-bold text-foreground">{shipmentData.desti}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -156,7 +157,7 @@ export default function TrackingPage() {
                   <MapPin className="h-6 w-6 text-accent flex-shrink-0" />
                   <div>
                     <p className="font-semibold text-muted-foreground">Ubicació actual</p>
-                    <p className="font-bold text-foreground">{shipmentData.current_location}</p>
+                    <p className="font-bold text-foreground">{shipmentData.ubicacio_actual}</p>
                   </div>
                 </div>
               </div>
