@@ -5,11 +5,12 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Loader2, AlertCircle, Package, Truck, CheckCircle, MapPin, Calendar, Warehouse } from 'lucide-react';
+import { Loader2, AlertCircle, Package, Truck, CheckCircle, MapPin, Calendar, Warehouse, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 type ShipmentData = {
   codi_seguiment: string;
+  client: string;
   origen: string;
   desti: string;
   eta: string;
@@ -107,13 +108,21 @@ export default function TrackingPage() {
         {shipmentData && (
           <Card className="mt-8 shadow-lg overflow-hidden">
             <CardHeader>
-              <CardTitle className="font-headline text-2xl">Resultats per: {shipmentData.codi_seguiment}</CardTitle>
-              <CardDescription>A continuació es mostra la informació més recent del teu enviament.</CardDescription>
+              <div className="flex justify-between items-start">
+                  <div>
+                    <CardTitle className="font-headline text-2xl">Resultats per: {shipmentData.codi_seguiment}</CardTitle>
+                    <CardDescription>A continuació es mostra la informació més recent del teu enviament.</CardDescription>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground pt-1">
+                    <User className="h-4 w-4" />
+                    <span>{shipmentData.client}</span>
+                  </div>
+              </div>
             </CardHeader>
             <CardContent>
               {/* Timeline / Barra de progrés */}
               <div className="mb-8">
-                <h3 className="font-semibold mb-4">Estat de l'Enviament</h3>
+                <h3 className="font-semibold mb-4 text-foreground">Estat de l'Enviament: <span className="font-bold">{shipmentData.estat}</span></h3>
                 <div className="relative h-2 bg-muted rounded-full">
                    <div 
                      className={cn("absolute top-0 left-0 h-2 rounded-full transition-all duration-500", getStatusInfo(shipmentData.estat).color)} 
@@ -129,33 +138,33 @@ export default function TrackingPage() {
                 </div>
               </div>
               
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 text-sm">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-x-6 gap-y-8 text-sm">
                 <div className="flex items-center gap-3">
                   <Package className="h-6 w-6 text-accent flex-shrink-0" />
                   <div>
                     <p className="font-semibold text-muted-foreground">Origen</p>
-                    <p className="font-bold text-foreground">{shipmentData.origen}</p>
+                    <p className="font-bold text-foreground text-base">{shipmentData.origen}</p>
                   </div>
                 </div>
                  <div className="flex items-center gap-3">
                   <Truck className="h-6 w-6 text-accent flex-shrink-0" />
                   <div>
                     <p className="font-semibold text-muted-foreground">Destí</p>
-                    <p className="font-bold text-foreground">{shipmentData.desti}</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Calendar className="h-6 w-6 text-accent flex-shrink-0" />
-                  <div>
-                    <p className="font-semibold text-muted-foreground">Data prevista (ETA)</p>
-                    <p className="font-bold text-foreground">{shipmentData.eta}</p>
+                    <p className="font-bold text-foreground text-base">{shipmentData.desti}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
                   <MapPin className="h-6 w-6 text-accent flex-shrink-0" />
                   <div>
                     <p className="font-semibold text-muted-foreground">Ubicació actual</p>
-                    <p className="font-bold text-foreground">{shipmentData.ubicacio_actual}</p>
+                    <p className="font-bold text-foreground text-base">{shipmentData.ubicacio_actual}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Calendar className="h-6 w-6 text-accent flex-shrink-0" />
+                  <div>
+                    <p className="font-semibold text-muted-foreground">Data prevista (ETA)</p>
+                    <p className="font-bold text-foreground text-base">{shipmentData.eta}</p>
                   </div>
                 </div>
               </div>
