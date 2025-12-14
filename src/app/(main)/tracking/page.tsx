@@ -8,7 +8,6 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Loader2, AlertCircle, Package, Truck, CheckCircle, MapPin, Calendar, Warehouse } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-// Assegura't que el teu full de càlcul (SheetDB) tingui aquests noms a les capçaleres de les columnes.
 type ShipmentData = {
   codi_seguiment: string;
   origen: string;
