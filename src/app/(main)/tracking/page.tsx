@@ -37,9 +37,8 @@ export default function TrackingPage() {
 
     try {
       const response = await fetch(`https://sheetdb.io/api/v1/rgytng002juic/search?codi_seguiment=${trackingCode}`);
-      if (!response.ok) {
-        throw new Error('No s\'ha pogut connectar amb el servidor. Intenta-ho més tard.');
-      }
+      // No llancem error si !response.ok perque SheetDB pot tornar un 200 amb array buit o altres codis.
+      // La comprovació real és si les dades existeixen.
       const data: ShipmentData[] = await response.json();
 
       if (data.length > 0) {
