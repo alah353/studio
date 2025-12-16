@@ -5,12 +5,11 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Loader2, AlertCircle, Package, Truck, CheckCircle, MapPin, Calendar, Warehouse, User } from 'lucide-react';
+import { Loader2, AlertCircle, Package, Truck, MapPin, Calendar, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-// Definició del tipus de dades que esperem de l'API
 type ShipmentData = {
-  code: string; // La columna de cerca principal
+  code: string;
   client: string;
   origen: string;
   desti: string;
@@ -123,7 +122,6 @@ export default function TrackingPage() {
               </div>
             </CardHeader>
             <CardContent>
-              {/* Barra de progrés */}
               <div className="mb-8">
                 <h3 className="font-semibold mb-4 text-foreground">Estat de l'Enviament: <span className="font-bold">{shipmentData.estat}</span></h3>
                 <div className="relative h-2 bg-muted rounded-full">
