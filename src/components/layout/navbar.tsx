@@ -28,7 +28,7 @@ export function Navbar() {
       <div className="container flex h-20 max-w-screen-2xl items-center">
         <div className="mr-4 flex items-center">
           <Link href="/" className="mr-6 flex items-center space-x-2">
-            <HorseLogo className="h-16 w-auto" />
+            <HorseLogo />
             <span className="font-bold font-headline text-2xl text-white">Horse S.L.</span>
           </Link>
         </div>
