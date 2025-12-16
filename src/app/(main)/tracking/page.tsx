@@ -8,8 +8,9 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Loader2, AlertCircle, Package, Truck, CheckCircle, MapPin, Calendar, Warehouse, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
+// Definició del tipus de dades que esperem de l'API
 type ShipmentData = {
-  codi_seguiment: string;
+  code: string; // La columna de cerca principal
   client: string;
   origen: string;
   desti: string;
@@ -19,6 +20,7 @@ type ShipmentData = {
 };
 
 const STEPS = ['En magatzem', 'En trànsit', 'Lliurat'];
+const API_URL = 'https://sheetdb.io/api/v1/rgytng002juic';
 
 export default function TrackingPage() {
   const [trackingCode, setTrackingCode] = useState('');
@@ -31,24 +33,25 @@ export default function TrackingPage() {
       setError('Si us plau, introdueix un codi de seguiment.');
       return;
     }
+    
+    console.log("Cercant codi:", trackingCode);
     setIsLoading(true);
     setError(null);
     setShipmentData(null);
 
     try {
-      const response = await fetch(`https://sheetdb.io/api/v1/rgytng002juic/search?codi_seguiment=${trackingCode}`);
-      // No llancem error si !response.ok perque SheetDB pot tornar un 200 amb array buit o altres codis.
-      // La comprovació real és si les dades existeixen.
+      const response = await fetch(`${API_URL}/search?code=${trackingCode}`);
       const data: ShipmentData[] = await response.json();
+      console.log("Dades rebudes:", data);
 
       if (data.length > 0) {
         setShipmentData(data[0]);
       } else {
-        setError('Codi no trobat. Si us plau, verifica el codi i torna a intentar-ho.');
+        setError('No hem trobat cap enviament amb aquest codi.');
       }
     } catch (err) {
-      setError('Hi ha hagut un error en la connexió. Intenta-ho de nou més tard.');
       console.error(err);
+      setError('Error connectant amb el servidor.');
     } finally {
       setIsLoading(false);
     }
@@ -83,7 +86,7 @@ export default function TrackingPage() {
               <Input
                 type="text"
                 value={trackingCode}
-                onChange={(e) => setTrackingCode(e.target.value)}
+                onChange={(e) => setTrackingCode(e.target.value.trim())}
                 placeholder="Ex: HS-12345678"
                 className="flex-grow text-base"
                 disabled={isLoading}
@@ -110,7 +113,7 @@ export default function TrackingPage() {
             <CardHeader>
               <div className="flex justify-between items-start">
                   <div>
-                    <CardTitle className="font-headline text-2xl">Resultats per: {shipmentData.codi_seguiment}</CardTitle>
+                    <CardTitle className="font-headline text-2xl">Resultats per: {shipmentData.code}</CardTitle>
                     <CardDescription>A continuació es mostra la informació més recent del teu enviament.</CardDescription>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-muted-foreground pt-1">
@@ -120,7 +123,7 @@ export default function TrackingPage() {
               </div>
             </CardHeader>
             <CardContent>
-              {/* Timeline / Barra de progrés */}
+              {/* Barra de progrés */}
               <div className="mb-8">
                 <h3 className="font-semibold mb-4 text-foreground">Estat de l'Enviament: <span className="font-bold">{shipmentData.estat}</span></h3>
                 <div className="relative h-2 bg-muted rounded-full">
