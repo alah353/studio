@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 export function HorseLogo({ className }: { className?: string }) {
   return (
     <Image
-      src="/logocaballo1.png"
+      src="/caballodefinitivoletra1.png"
       alt="Horse S.L. Logo"
       width={80}
       height={80}
