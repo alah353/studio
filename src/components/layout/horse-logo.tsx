@@ -10,7 +10,7 @@ export function HorseLogo({ className }: { className?: string }) {
       alt="Horse S.L. Logo"
       width={120}
       height={120}
-      className={cn('w-auto', className)}
+      className={cn('w-[3600px] h-[3600px]', className)}
       priority
     />
   );
