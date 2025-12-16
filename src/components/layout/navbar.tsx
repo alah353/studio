@@ -28,7 +28,7 @@ export function Navbar() {
       <div className="container flex h-20 max-w-screen-2xl items-center">
         <div className="mr-4 flex items-center">
           <Link href="/" className="mr-6 flex items-center space-x-2">
-            <HorseLogo />
+            <HorseLogo className="h-8" />
             <span className="font-bold font-headline text-2xl text-white">Horse S.L.</span>
           </Link>
         </div>
@@ -58,7 +58,7 @@ export function Navbar() {
             </SheetTrigger>
             <SheetContent side="left">
               <Link href="/" className="mb-8 flex items-center" onClick={() => setIsMobileMenuOpen(false)}>
-                 <HorseLogo />
+                 <HorseLogo className="h-8" />
                 <span className="ml-2 font-bold font-headline text-lg text-white">Horse S.L.</span>
               </Link>
               <nav className="flex flex-col space-y-4">

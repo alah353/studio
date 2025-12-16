@@ -8,9 +8,9 @@ export function HorseLogo({ className }: { className?: string }) {
     <Image
       src="/caballodefinitivoletra1.png"
       alt="Horse S.L. Logo"
-      width={240}
-      height={240}
-      className={cn('h-20 w-auto', className)}
+      width={120}
+      height={120}
+      className={cn('w-auto', className)}
       priority
     />
   );
