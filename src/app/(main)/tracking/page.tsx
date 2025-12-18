@@ -38,23 +38,19 @@ export default function TrackingPage() {
     setShipmentData(null);
 
     const searchUrl = `${API_URL}/search?tracking_code=${trackingCode}`;
-    console.log(`[DEBUG] Intentant cerca amb URL: ${searchUrl}`);
-
+    
     try {
       const response = await fetch(searchUrl);
       const data: ShipmentData[] = await response.json();
       
-      console.log(`[DEBUG] Dades rebudes:`, JSON.stringify(data, null, 2));
-
       if (data.length > 0) {
         setShipmentData(data[0]);
       } else {
-        console.log("[DEBUG] La cerca no ha retornat resultats. L'API ha retornat un array buit.");
         setError('No hem trobat cap enviament amb aquest codi. Si us plau, verifica que el codi sigui correcte.');
       }
     } catch (err) {
-      console.error(`[DEBUG] Error durant el fetch:`, err);
-      setError('Error connectant amb el servidor. Comprova la consola per a més detalls.');
+      console.error(err);
+      setError('Hi ha hagut un error en connectar amb el servidor de seguiment. Si us plau, intenta-ho de nou més tard.');
     } finally {
       setIsLoading(false);
     }
@@ -63,7 +59,7 @@ export default function TrackingPage() {
   const getStatusInfo = (status: ShipmentData['status']) => {
     switch (status) {
       case 'En magatzem':
-        return { color: 'bg-red-500', width: '10%' };
+        return { color: 'bg-orange-500', width: '10%' };
       case 'En trànsit':
         return { color: 'bg-blue-500', width: '50%' };
       case 'Lliurat':
@@ -131,7 +127,7 @@ export default function TrackingPage() {
                 <h3 className="font-semibold mb-4 text-foreground">Estat de l'Enviament: <span className="font-bold">{shipmentData.status}</span></h3>
                 <div className="relative h-2 bg-muted rounded-full">
                    <div 
-                     className={cn("absolute top-0 left-0 h-2 rounded-full transition-all duration-500", getStatusInfo(shipmentData.status).color)} 
+                     className={cn("absolute top-0 left-0 h-2 rounded-full transition-all duration-500 ease-out", getStatusInfo(shipmentData.status).color)} 
                      style={{ width: getStatusInfo(shipmentData.status).width }}
                    />
                 </div>
