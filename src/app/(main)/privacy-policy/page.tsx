@@ -21,7 +21,7 @@ export default function PrivacyPolicyPage() {
         <div className="container max-w-4xl">
           <h1 className="font-headline text-4xl font-bold mb-8">Política de Privacidad</h1>
           <div className="prose prose-invert lg:prose-xl mx-auto text-muted-foreground space-y-6">
-            <p><strong>Última actualización:</strong> {lastUpdatedDate}</p>
+            <p><strong>Última actualización:</strong> {lastUpdatedDate || '...'}</p>
 
             <h2 className="font-headline text-2xl font-bold text-foreground">1. Introducción</h2>
             <p>Bienvenido a Horse S.L. ("nosotros", "nuestro"). Nos comprometemos a proteger su privacidad. Esta Política de Privacidad explica cómo recopilamos, usamos, divulgamos y salvaguardamos su información cuando visita nuestro sitio web.</p>
