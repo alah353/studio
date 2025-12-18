@@ -9,7 +9,8 @@ import { Loader2, AlertCircle, Package, Truck, MapPin, Calendar, User } from 'lu
 import { cn } from '@/lib/utils';
 
 type ShipmentData = {
-  code: string;
+  code?: string;
+  tracking_code?: string;
   client: string;
   origen: string;
   desti: string;
@@ -37,25 +38,41 @@ export default function TrackingPage() {
     setError(null);
     setShipmentData(null);
 
-    const searchUrl = `${API_URL}/search?code=${trackingCode}`;
-    console.log("Cercant amb la URL:", searchUrl);
+    // Intentarem cercar amb 'code' i després amb 'tracking_code' per més robustesa
+    const searchParams = [`code=${trackingCode}`, `tracking_code=${trackingCode}`];
+    let data: ShipmentData[] = [];
 
-    try {
-      const response = await fetch(searchUrl);
-      const data: ShipmentData[] = await response.json();
-      console.log("Dades rebudes de l'API:", data);
+    for (const param of searchParams) {
+      const searchUrl = `${API_URL}/search?${param}`;
+      console.log(`[DEBUG] Intentant cerca amb URL: ${searchUrl}`);
 
-      if (data.length > 0) {
-        setShipmentData(data[0]);
-      } else {
-        setError('No hem trobat cap enviament amb aquest codi.');
+      try {
+        const response = await fetch(searchUrl);
+        const result: ShipmentData[] = await response.json();
+        
+        console.log(`[DEBUG] Dades rebudes per a '${param}':`, JSON.stringify(result, null, 2));
+
+        if (result.length > 0) {
+          data = result;
+          console.log(`[DEBUG] Èxit! Trobades dades amb el paràmetre '${param.split('=')[0]}'.`);
+          break; // Hem trobat resultats, sortim del bucle
+        }
+      } catch (err) {
+        console.error(`[DEBUG] Error durant el fetch amb '${param}':`, err);
+        setError('Error connectant amb el servidor. Comprova la consola per a més detalls.');
+        setIsLoading(false);
+        return;
       }
-    } catch (err) {
-      console.error("Error durant el fetch:", err);
-      setError('Error connectant amb el servidor. Comprova la consola per a més detalls.');
-    } finally {
-      setIsLoading(false);
     }
+
+    if (data.length > 0) {
+      setShipmentData(data[0]);
+    } else {
+      console.log("[DEBUG] La cerca no ha retornat resultats per a cap paràmetre. L'API ha retornat un array buit.");
+      setError('No hem trobat cap enviament amb aquest codi. Si us plau, verifica que el codi sigui correcte i que la capçalera de la columna a l\'Excel sigui "code" o "tracking_code".');
+    }
+
+    setIsLoading(false);
   };
 
   const getStatusInfo = (status: ShipmentData['estat']) => {
@@ -72,6 +89,7 @@ export default function TrackingPage() {
   };
   
   const currentStatusIndex = shipmentData ? STEPS.indexOf(shipmentData.estat) : -1;
+  const displayCode = shipmentData ? shipmentData.code || shipmentData.tracking_code : '';
 
   return (
     <div className="bg-background py-16 md:py-24">
@@ -93,7 +111,7 @@ export default function TrackingPage() {
                 disabled={isLoading}
                 onKeyUp={(e) => e.key === 'Enter' && handleSearch()}
               />
-              <Button onClick={handleSearch} disabled={isLoading} className="w-full sm:w-auto bg-accent text-accent-foreground hover:bg-accent/90 font-bold">
+              <Button onClick={handleSearch} disabled={isLoading || !trackingCode} className="w-full sm:w-auto bg-accent text-accent-foreground hover:bg-accent/90 font-bold">
                 {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
                 {isLoading ? 'Cercant...' : 'Cercar'}
               </Button>
@@ -114,7 +132,7 @@ export default function TrackingPage() {
             <CardHeader>
               <div className="flex justify-between items-start">
                   <div>
-                    <CardTitle className="font-headline text-2xl">Resultats per: {shipmentData.code}</CardTitle>
+                    <CardTitle className="font-headline text-2xl">Resultats per: {displayCode}</CardTitle>
                     <CardDescription>A continuació es mostra la informació més recent del teu enviament.</CardDescription>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-muted-foreground pt-1">
