@@ -25,11 +25,11 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-20 max-w-screen-2xl items-center">
+      <div className="container flex h-24 max-w-screen-2xl items-center">
         <div className="mr-4 flex items-center">
-          <Link href="/" className="mr-6 flex items-center space-x-2">
-            <HorseLogo className="h-8 w-auto" />
-            <span className="font-bold font-headline text-2xl text-white">Horse S.L.</span>
+          <Link href="/" className="mr-6 flex items-center space-x-4">
+            <HorseLogo />
+            <span className="hidden sm:inline-block font-bold font-headline text-3xl text-white">Horse S.L.</span>
           </Link>
         </div>
 
@@ -58,7 +58,7 @@ export function Navbar() {
             </SheetTrigger>
             <SheetContent side="left">
               <Link href="/" className="mb-8 flex items-center" onClick={() => setIsMobileMenuOpen(false)}>
-                 <HorseLogo className="h-8 w-auto" />
+                 <HorseLogo className="w-24 h-auto" />
                 <span className="ml-2 font-bold font-headline text-lg text-white">Horse S.L.</span>
               </Link>
               <nav className="flex flex-col space-y-4">
