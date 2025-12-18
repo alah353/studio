@@ -33,15 +33,17 @@ export default function TrackingPage() {
       return;
     }
     
-    console.log("Cercant codi:", trackingCode);
     setIsLoading(true);
     setError(null);
     setShipmentData(null);
 
+    const searchUrl = `${API_URL}/search?code=${trackingCode}`;
+    console.log("Cercant amb la URL:", searchUrl);
+
     try {
-      const response = await fetch(`${API_URL}/search?code=${trackingCode}`);
+      const response = await fetch(searchUrl);
       const data: ShipmentData[] = await response.json();
-      console.log("Dades rebudes:", data);
+      console.log("Dades rebudes de l'API:", data);
 
       if (data.length > 0) {
         setShipmentData(data[0]);
@@ -49,8 +51,8 @@ export default function TrackingPage() {
         setError('No hem trobat cap enviament amb aquest codi.');
       }
     } catch (err) {
-      console.error(err);
-      setError('Error connectant amb el servidor.');
+      console.error("Error durant el fetch:", err);
+      setError('Error connectant amb el servidor. Comprova la consola per a més detalls.');
     } finally {
       setIsLoading(false);
     }
