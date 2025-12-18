@@ -9,14 +9,13 @@ import { Loader2, AlertCircle, Package, Truck, MapPin, Calendar, User } from 'lu
 import { cn } from '@/lib/utils';
 
 type ShipmentData = {
-  code?: string;
-  tracking_code?: string;
+  tracking_code: string;
   client: string;
-  origen: string;
-  desti: string;
+  origin: string;
+  destination: string;
   eta: string;
-  ubicacio_actual: string;
-  estat: 'En magatzem' | 'En trànsit' | 'Lliurat';
+  location: string;
+  status: 'En magatzem' | 'En trànsit' | 'Lliurat';
 };
 
 const STEPS = ['En magatzem', 'En trànsit', 'Lliurat'];
@@ -51,7 +50,7 @@ export default function TrackingPage() {
         setShipmentData(data[0]);
       } else {
         console.log("[DEBUG] La cerca no ha retornat resultats. L'API ha retornat un array buit.");
-        setError('No hem trobat cap enviament amb aquest codi. Si us plau, verifica que el codi sigui correcte i que la capçalera de la columna a l\'Excel sigui "tracking_code".');
+        setError('No hem trobat cap enviament amb aquest codi. Si us plau, verifica que el codi sigui correcte.');
       }
     } catch (err) {
       console.error(`[DEBUG] Error durant el fetch:`, err);
@@ -61,7 +60,7 @@ export default function TrackingPage() {
     }
   };
 
-  const getStatusInfo = (status: ShipmentData['estat']) => {
+  const getStatusInfo = (status: ShipmentData['status']) => {
     switch (status) {
       case 'En magatzem':
         return { color: 'bg-red-500', width: '10%' };
@@ -74,8 +73,8 @@ export default function TrackingPage() {
     }
   };
   
-  const currentStatusIndex = shipmentData ? STEPS.indexOf(shipmentData.estat) : -1;
-  const displayCode = shipmentData ? shipmentData.code || shipmentData.tracking_code : '';
+  const currentStatusIndex = shipmentData ? STEPS.indexOf(shipmentData.status) : -1;
+  const displayCode = shipmentData ? shipmentData.tracking_code : '';
 
   return (
     <div className="bg-background py-16 md:py-24">
@@ -129,11 +128,11 @@ export default function TrackingPage() {
             </CardHeader>
             <CardContent>
               <div className="mb-8">
-                <h3 className="font-semibold mb-4 text-foreground">Estat de l'Enviament: <span className="font-bold">{shipmentData.estat}</span></h3>
+                <h3 className="font-semibold mb-4 text-foreground">Estat de l'Enviament: <span className="font-bold">{shipmentData.status}</span></h3>
                 <div className="relative h-2 bg-muted rounded-full">
                    <div 
-                     className={cn("absolute top-0 left-0 h-2 rounded-full transition-all duration-500", getStatusInfo(shipmentData.estat).color)} 
-                     style={{ width: getStatusInfo(shipmentData.estat).width }}
+                     className={cn("absolute top-0 left-0 h-2 rounded-full transition-all duration-500", getStatusInfo(shipmentData.status).color)} 
+                     style={{ width: getStatusInfo(shipmentData.status).width }}
                    />
                 </div>
                 <div className="mt-2 flex justify-between text-xs text-muted-foreground">
@@ -150,21 +149,21 @@ export default function TrackingPage() {
                   <Package className="h-6 w-6 text-accent flex-shrink-0" />
                   <div>
                     <p className="font-semibold text-muted-foreground">Origen</p>
-                    <p className="font-bold text-foreground text-base">{shipmentData.origen}</p>
+                    <p className="font-bold text-foreground text-base">{shipmentData.origin}</p>
                   </div>
                 </div>
                  <div className="flex items-center gap-3">
                   <Truck className="h-6 w-6 text-accent flex-shrink-0" />
                   <div>
                     <p className="font-semibold text-muted-foreground">Destí</p>
-                    <p className="font-bold text-foreground text-base">{shipmentData.desti}</p>
+                    <p className="font-bold text-foreground text-base">{shipmentData.destination}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
                   <MapPin className="h-6 w-6 text-accent flex-shrink-0" />
                   <div>
                     <p className="font-semibold text-muted-foreground">Ubicació actual</p>
-                    <p className="font-bold text-foreground text-base">{shipmentData.ubicacio_actual}</p>
+                    <p className="font-bold text-foreground text-base">{shipmentData.location}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
