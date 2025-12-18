@@ -6,10 +6,10 @@ import { HorseLogo } from './horse-logo';
 import { useState, useEffect } from 'react';
 
 export function Footer() {
-  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+  const [currentYear, setCurrentYear] = useState('');
 
   useEffect(() => {
-    setCurrentYear(new Date().getFullYear());
+    setCurrentYear(new Date().getFullYear().toString());
   }, []);
 
   return (
@@ -63,7 +63,7 @@ export function Footer() {
         </div>
 
         <div className="mt-8 border-t pt-8 text-center text-sm text-muted-foreground">
-          <p>&copy; {currentYear} Horse S.L. Todos los derechos reservados.</p>
+          {currentYear && <p>&copy; {currentYear} Horse S.L. Todos los derechos reservados.</p>}
         </div>
       </div>
     </footer>
