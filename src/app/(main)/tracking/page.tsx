@@ -38,41 +38,27 @@ export default function TrackingPage() {
     setError(null);
     setShipmentData(null);
 
-    // Intentarem cercar amb 'code' i després amb 'tracking_code' per més robustesa
-    const searchParams = [`code=${trackingCode}`, `tracking_code=${trackingCode}`];
-    let data: ShipmentData[] = [];
+    const searchUrl = `${API_URL}/search?tracking_code=${trackingCode}`;
+    console.log(`[DEBUG] Intentant cerca amb URL: ${searchUrl}`);
 
-    for (const param of searchParams) {
-      const searchUrl = `${API_URL}/search?${param}`;
-      console.log(`[DEBUG] Intentant cerca amb URL: ${searchUrl}`);
+    try {
+      const response = await fetch(searchUrl);
+      const data: ShipmentData[] = await response.json();
+      
+      console.log(`[DEBUG] Dades rebudes:`, JSON.stringify(data, null, 2));
 
-      try {
-        const response = await fetch(searchUrl);
-        const result: ShipmentData[] = await response.json();
-        
-        console.log(`[DEBUG] Dades rebudes per a '${param}':`, JSON.stringify(result, null, 2));
-
-        if (result.length > 0) {
-          data = result;
-          console.log(`[DEBUG] Èxit! Trobades dades amb el paràmetre '${param.split('=')[0]}'.`);
-          break; // Hem trobat resultats, sortim del bucle
-        }
-      } catch (err) {
-        console.error(`[DEBUG] Error durant el fetch amb '${param}':`, err);
-        setError('Error connectant amb el servidor. Comprova la consola per a més detalls.');
-        setIsLoading(false);
-        return;
+      if (data.length > 0) {
+        setShipmentData(data[0]);
+      } else {
+        console.log("[DEBUG] La cerca no ha retornat resultats. L'API ha retornat un array buit.");
+        setError('No hem trobat cap enviament amb aquest codi. Si us plau, verifica que el codi sigui correcte i que la capçalera de la columna a l\'Excel sigui "tracking_code".');
       }
+    } catch (err) {
+      console.error(`[DEBUG] Error durant el fetch:`, err);
+      setError('Error connectant amb el servidor. Comprova la consola per a més detalls.');
+    } finally {
+      setIsLoading(false);
     }
-
-    if (data.length > 0) {
-      setShipmentData(data[0]);
-    } else {
-      console.log("[DEBUG] La cerca no ha retornat resultats per a cap paràmetre. L'API ha retornat un array buit.");
-      setError('No hem trobat cap enviament amb aquest codi. Si us plau, verifica que el codi sigui correcte i que la capçalera de la columna a l\'Excel sigui "code" o "tracking_code".');
-    }
-
-    setIsLoading(false);
   };
 
   const getStatusInfo = (status: ShipmentData['estat']) => {
