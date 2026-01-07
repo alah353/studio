@@ -63,7 +63,9 @@ export default function DashboardPage() {
   }
 
   if (!user) {
-    return null; // or a redirect component
+    // Aquesta línia evita que es renderitzi res si no hi ha usuari,
+    // just abans de la redirecció.
+    return null; 
   }
 
   return (
@@ -71,7 +73,7 @@ export default function DashboardPage() {
         <div className="flex justify-center">
             <Card className="w-full max-w-2xl shadow-lg">
                 <CardHeader className="text-center">
-                <CardTitle className="font-headline text-3xl">Benvingut, {user.nom}!</CardTitle>
+                <CardTitle className="font-headline text-3xl">Benvingut a la teva zona privada, {user.nom}!</CardTitle>
                 <CardDescription>Aquest és el teu panell de control personalitzat.</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
