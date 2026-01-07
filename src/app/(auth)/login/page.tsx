@@ -20,7 +20,7 @@ import Link from 'next/link';
 const API_URL = 'https://sheetdb.io/api/v1/rgytng002juic';
 
 export default function LoginPage() {
-  const [usuari, setUsuari] = useState('');
+  const [usuariInput, setUsuariInput] = useState('');
   const [contrasenya, setContrasenya] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -31,23 +31,45 @@ export default function LoginPage() {
     setIsLoading(true);
     setError(null);
 
-    if (!usuari || !contrasenya) {
+    if (!usuariInput || !contrasenya) {
       setError('Tots els camps són obligatoris.');
       setIsLoading(false);
       return;
     }
 
     try {
-      const response = await fetch(
-        `${API_URL}/search?sheet=usuaris&usuari=${encodeURIComponent(usuari)}&contrasenya=${encodeURIComponent(contrasenya)}`
-      );
+      // 1. Fetch all users from the 'usuaris' sheet
+      const response = await fetch(`${API_URL}?sheet=usuaris`);
+      if (!response.ok) {
+        throw new Error('No s\'ha pogut connectar a la base de dades.');
+      }
       const data = await response.json();
+      
+      // 2. Log API data for debugging
+      console.log('Dades API:', data);
 
-      if (data.length > 0) {
-        const user = data[0];
-        localStorage.setItem('user', JSON.stringify({ nom: user.nom, empresa: user.empresa }));
+      // 3. Find the user with robust comparison
+      const foundUser = data.find((user: any) => {
+        const usuariMatches = user.usuari && user.usuari.trim().toLowerCase() === usuariInput.trim().toLowerCase();
+        // Explicitly convert both passwords to string for comparison
+        const passwordMatches = user.password !== undefined && String(user.password) === String(contrasenya);
+        return usuariMatches && passwordMatches;
+      });
+
+      if (foundUser) {
+        // 4. If correct, save user data and redirect
+        console.log('Login exitós per a:', foundUser.nom);
+        const userToStore = {
+          usuario: foundUser.usuari,
+          nom: foundUser.nom,
+          empresa: foundUser.empresa,
+          rol: foundUser.rol,
+        };
+        localStorage.setItem('user', JSON.stringify(userToStore));
         router.push('/dashboard');
       } else {
+        // 5. If incorrect, show error
+        console.log(`Intent de login fallit per a l'usuari: "${usuariInput}"`);
         setError('Dades incorrectes. Si us plau, verifica les teves credencials.');
       }
     } catch (err) {
@@ -75,8 +97,8 @@ export default function LoginPage() {
               type="text"
               placeholder="El teu usuari"
               required
-              value={usuari}
-              onChange={(e) => setUsuari(e.target.value)}
+              value={usuariInput}
+              onChange={(e) => setUsuariInput(e.target.value)}
               disabled={isLoading}
             />
           </div>
@@ -85,6 +107,7 @@ export default function LoginPage() {
             <Input
               id="contrasenya"
               type="password"
+              placeholder="La teva contrasenya"
               required
               value={contrasenya}
               onChange={(e) => setContrasenya(e.target.value)}
