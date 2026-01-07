@@ -19,10 +19,10 @@ export function Footer() {
           <div>
             <div className="flex items-center">
               <HorseLogo />
-              <span className="ml-2 text-xl font-bold font-headline">Horse S.L.</span>
+              <span className="ml-2 text-xl font-bold font-heading">Horse S.L.</span>
             </div>
             <p className="mt-4 text-sm text-muted-foreground">
-              Potencia y velocidad en logística. Soluciones de transporte veloces, seguras y con alcance global.
+              Soluciones logísticas integrales y seguimiento de envíos en tiempo real.
             </p>
             <div className="mt-6 flex space-x-4">
               <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary"><Linkedin /></a>
@@ -33,7 +33,7 @@ export function Footer() {
 
           <div className="grid grid-cols-2 gap-8 lg:col-span-2 sm:grid-cols-3">
             <div>
-              <p className="font-medium font-headline">Navegación</p>
+              <p className="font-medium font-heading">Navegación</p>
               <ul className="mt-4 space-y-2 text-sm">
                 <li><Link href="/about" className="text-muted-foreground hover:text-primary">Sobre Nosotros</Link></li>
                 <li><Link href="/services" className="text-muted-foreground hover:text-primary">Servicios</Link></li>
@@ -44,7 +44,7 @@ export function Footer() {
               </ul>
             </div>
             <div>
-              <p className="font-medium font-headline">Servicios</p>
+              <p className="font-medium font-heading">Servicios</p>
               <ul className="mt-4 space-y-2 text-sm">
                 <li><Link href="/services#land" className="text-muted-foreground hover:text-primary">Transporte Terrestre</Link></li>
                 <li><Link href="/services#sea" className="text-muted-foreground hover:text-primary">Transporte Marítimo</Link></li>
@@ -53,7 +53,7 @@ export function Footer() {
               </ul>
             </div>
             <div>
-              <p className="font-medium font-headline">Legal</p>
+              <p className="font-medium font-heading">Legal</p>
               <ul className="mt-4 space-y-2 text-sm">
                 <li><Link href="/privacy-policy" className="text-muted-foreground hover:text-primary">Política de Privacidad</Link></li>
                 <li><Link href="/terms-of-service" className="text-muted-foreground hover:text-primary">Términos de Servicio</Link></li>

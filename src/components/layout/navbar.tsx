@@ -39,7 +39,7 @@ export function Navbar() {
         <div className="mr-4 flex items-center">
           <Link href="/" className="mr-6 flex items-center space-x-4">
             <HorseLogo />
-            <span className="hidden sm:inline-block font-bold font-headline text-3xl text-white">Horse S.L.</span>
+            <span className="hidden sm:inline-block font-bold font-heading text-3xl text-white">Horse S.L.</span>
           </Link>
         </div>
 
@@ -79,7 +79,7 @@ export function Navbar() {
             <SheetContent side="left">
               <Link href="/" className="mb-8 flex items-center" onClick={() => setIsMobileMenuOpen(false)}>
                  <HorseLogo className="w-24 h-auto" />
-                <span className="ml-2 font-bold font-headline text-lg text-white">Horse S.L.</span>
+                <span className="ml-2 font-bold font-heading text-lg text-white">Horse S.L.</span>
               </Link>
               <nav className="flex flex-col space-y-4">
                 {[...navLinks, { href: isLoggedIn ? "/dashboard" : "/login", label: isLoggedIn ? "Dashboard" : "Login" }].map(({ href, label }) => (

@@ -2,22 +2,26 @@ import type { Metadata } from 'next';
 import { Toaster } from '@/components/ui/toaster';
 import './globals.css';
 import { cn } from '@/lib/utils';
-import { Space_Grotesk, PT_Sans } from 'next/font/google';
+import { Montserrat, Open_Sans } from 'next/font/google';
 
-const spaceGrotesk = Space_Grotesk({
+const montserrat = Montserrat({
   subsets: ['latin'],
-  variable: '--font-headline',
+  weight: ['600', '700'],
+  variable: '--font-heading',
 });
 
-const ptSans = PT_Sans({
+const openSans = Open_Sans({
   subsets: ['latin'],
-  weight: ['400', '700'],
+  weight: ['400', '600'],
   variable: '--font-body',
 });
 
 export const metadata: Metadata = {
-  title: 'Horse S.L. - Potencia y Velocidad en Logística',
-  description: 'Soluciones de transporte y logística a nivel global. Velocidad, seguridad e innovación para conectar tu negocio con el mundo.',
+  title: 'Horse S.L - Logística Global',
+  description: 'Soluciones logísticas integrales y seguimiento de envíos en tiempo real.',
+  icons: {
+    icon: '/caballodefinitivoletra1.png',
+  },
 };
 
 export default function RootLayout({
@@ -27,12 +31,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className="dark">
-      <body className={cn('min-h-screen bg-background font-body antialiased', spaceGrotesk.variable, ptSans.variable)}>
+      <body className={cn('min-h-screen bg-background font-body antialiased', montserrat.variable, openSans.variable)}>
         {children}
         <Toaster />
       </body>
     </html>
   );
 }
-
-    
