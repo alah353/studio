@@ -2,11 +2,11 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
-import { Menu } from 'lucide-react';
+import { Menu, User } from 'lucide-react';
 import { HorseLogo } from './horse-logo';
 
 const navLinks = [
@@ -22,6 +22,16 @@ const navLinks = [
 export function Navbar() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // Check for user in localStorage only on client-side
+    if (typeof window !== 'undefined') {
+      const user = localStorage.getItem('user');
+      setIsLoggedIn(!!user);
+    }
+  }, [pathname]); // Re-check on route change
+
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -33,7 +43,7 @@ export function Navbar() {
           </Link>
         </div>
 
-        <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
+        <nav className="hidden md:flex items-center space-x-4 text-sm font-medium">
           {navLinks.map(({ href, label }) => (
             <Link
               key={href}
@@ -46,6 +56,16 @@ export function Navbar() {
               {label}
             </Link>
           ))}
+           <Link
+              href={isLoggedIn ? "/dashboard" : "/login"}
+              className={cn(
+                'transition-colors hover:text-primary',
+                (pathname === '/dashboard' || pathname === '/login') ? 'text-primary' : 'text-foreground/60'
+              )}
+            >
+              <User className="h-5 w-5" />
+              <span className="sr-only">{isLoggedIn ? "Dashboard" : "Login"}</span>
+            </Link>
         </nav>
 
         <div className="flex flex-1 items-center justify-end md:hidden">
@@ -62,7 +82,7 @@ export function Navbar() {
                 <span className="ml-2 font-bold font-headline text-lg text-white">Horse S.L.</span>
               </Link>
               <nav className="flex flex-col space-y-4">
-                {navLinks.map(({ href, label }) => (
+                {[...navLinks, { href: isLoggedIn ? "/dashboard" : "/login", label: isLoggedIn ? "Dashboard" : "Login" }].map(({ href, label }) => (
                   <Link
                     key={href}
                     href={href}
