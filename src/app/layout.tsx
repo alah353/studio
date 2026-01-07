@@ -17,8 +17,8 @@ const openSans = Open_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'Horse S.L - Logística Global',
-  description: 'Soluciones logísticas integrales y seguimiento de envíos en tiempo real.',
+  title: 'Horse S.L. - Solucions Logístiques Globals',
+  description: 'Operador logístic de confiança. Seguiment d\'enviaments en temps real a horse-logistics.cat.',
   icons: {
     icon: '/caballodefinitivoletra1.png',
   },

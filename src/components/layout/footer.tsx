@@ -63,7 +63,7 @@ export function Footer() {
         </div>
 
         <div className="mt-8 border-t pt-8 text-center text-sm text-muted-foreground">
-          {currentYear ? <p>&copy; {currentYear} Horse S.L. Todos los derechos reservados.</p> : <div className="h-5" />}
+          {currentYear ? <p>&copy; {currentYear} Horse S.L. - Tots els drets reservats.</p> : <div className="h-5" />}
         </div>
       </div>
     </footer>
