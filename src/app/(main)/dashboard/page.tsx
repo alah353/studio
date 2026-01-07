@@ -161,10 +161,18 @@ const WorkerView = ({ shipments }: { shipments: Shipment[] }) => {
 const ClientView = ({ shipments, user }: { shipments: Shipment[], user: UserData }) => {
   const clientShipments = useMemo(() => {
     if (!user.empresa) return [];
-    const userCompany = user.empresa.trim().toLowerCase();
-    return shipments.filter(s => 
-        s.client && s.client.trim().toLowerCase() === userCompany
-    );
+    
+    // Debugging log
+    console.log("Comparando Usuario:", user.empresa, "con primer Tracking:", shipments[0]?.client);
+
+    const userCompany = user.empresa.toString().toLowerCase().trim();
+    
+    return shipments.filter(shipment => {
+      if (!shipment.client) return false;
+      const shipmentClient = shipment.client.toString().toLowerCase().trim();
+      return shipmentClient === userCompany;
+    });
+
   }, [shipments, user.empresa]);
 
   if (clientShipments.length === 0) {
