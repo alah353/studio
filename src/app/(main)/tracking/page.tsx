@@ -16,7 +16,13 @@ type ShipmentData = {
   eta: string;
   location: string;
   status: 'En magatzem' | 'En trànsit' | 'Lliurat';
+  usuari?: string;
 };
+
+type UserDataFromSheet = {
+  usuari: string;
+  empresa: string;
+}
 
 const STEPS = ['En magatzem', 'En trànsit', 'Lliurat'];
 const API_URL = 'https://sheetdb.io/api/v1/rgytng002juic';
@@ -44,7 +50,25 @@ export default function TrackingPage() {
       const data: ShipmentData[] = await response.json();
       
       if (data.length > 0) {
-        setShipmentData(data[0]);
+        let shipment = data[0];
+
+        // If there is a user ID associated with the shipment, fetch the user data
+        // to get the official company name from the 'usuaris' sheet.
+        if (shipment.usuari) {
+          const userSearchUrl = `${API_URL}/search?sheet=usuaris&usuari=${shipment.usuari}`;
+          const userResponse = await fetch(userSearchUrl);
+
+          if (userResponse.ok) {
+            const userData: UserDataFromSheet[] = await userResponse.json();
+            if (userData.length > 0) {
+              // Overwrite the client name with the official one from the user record
+              shipment = { ...shipment, client: userData[0].empresa };
+            }
+          }
+        }
+        
+        setShipmentData(shipment);
+
       } else {
         setError('No hem trobat cap enviament amb aquest codi. Si us plau, verifica que el codi sigui correcte.');
       }
