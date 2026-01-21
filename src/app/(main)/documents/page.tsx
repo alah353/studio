@@ -19,7 +19,7 @@ type DocumentLine = {
   num_factura: string;
   data: string;
   usuari: string;
-  descripcio: string;
+  concepte: string;
   unitats: string;
   preu_unitari: string;
   iva: string;
@@ -63,11 +63,23 @@ const COMPANY_INFO = {
     email: 'facturacion@horsesl.com'
 };
 
+// Helper function to parse dd/mm/yyyy dates
+const parseSpanishDate = (dateString: string): Date => {
+    if (!dateString || typeof dateString !== 'string') return new Date();
+    const parts = dateString.split('/');
+    if (parts.length === 3) {
+        const [day, month, year] = parts;
+        // Month is 0-indexed in JS Date constructor
+        return new Date(Number(year), Number(month) - 1, Number(day));
+    }
+    return new Date(dateString); // Fallback for other formats
+};
+
 
 // --- 2. COMPONENT DE FACTURA IMPRIMIBLE ---
 
 const PrintableInvoice = ({ invoice, companyInfo }: { invoice: ProcessedInvoice, companyInfo: typeof COMPANY_INFO }) => (
-    <div className="bg-white text-black p-8 A4-size">
+    <div className="bg-white text-black p-8" id="zona-factura">
         <header className="flex justify-between items-start pb-8 border-b-2 border-gray-200">
             <div>
                 <HorseLogo className="w-48 h-auto" />
@@ -81,7 +93,7 @@ const PrintableInvoice = ({ invoice, companyInfo }: { invoice: ProcessedInvoice,
             <div className="text-right">
                 <h1 className="text-4xl font-bold text-gray-800">FACTURA</h1>
                 <p className="text-gray-700 mt-2">#{invoice.num_factura}</p>
-                <p className="text-sm text-gray-500">Data: {new Date(invoice.data).toLocaleDateString('es-ES')}</p>
+                <p className="text-sm text-gray-500">Data: {parseSpanishDate(invoice.data).toLocaleDateString('es-ES')}</p>
             </div>
         </header>
 
@@ -99,7 +111,7 @@ const PrintableInvoice = ({ invoice, companyInfo }: { invoice: ProcessedInvoice,
             <table className="w-full text-sm">
                 <thead className="bg-gray-50">
                     <tr>
-                        <th className="p-3 text-left font-semibold text-gray-600">Descripció</th>
+                        <th className="p-3 text-left font-semibold text-gray-600">Concepte</th>
                         <th className="p-3 text-right font-semibold text-gray-600">Quant.</th>
                         <th className="p-3 text-right font-semibold text-gray-600">Preu Unit.</th>
                         <th className="p-3 text-right font-semibold text-gray-600">Total</th>
@@ -108,7 +120,7 @@ const PrintableInvoice = ({ invoice, companyInfo }: { invoice: ProcessedInvoice,
                 <tbody>
                     {invoice.items.map((item, index) => (
                         <tr key={index} className="border-b">
-                            <td className="p-3">{item.descripcio}</td>
+                            <td className="p-3">{item.concepte}</td>
                             <td className="p-3 text-right">{item.unitats}</td>
                             <td className="p-3 text-right">{parseFloat(item.preu_unitari).toFixed(2)} €</td>
                             <td className="p-3 text-right">{(parseFloat(item.preu_unitari) * parseInt(item.unitats)).toFixed(2)} €</td>
@@ -141,20 +153,26 @@ const PrintableInvoice = ({ invoice, companyInfo }: { invoice: ProcessedInvoice,
         </footer>
         <style jsx global>{`
           @media print {
-            body {
+            body * {
+              visibility: hidden;
+            }
+            #zona-factura,
+            #zona-factura * {
+              visibility: visible;
+            }
+            #zona-factura {
+              position: absolute;
+              left: 0;
+              top: 0;
+              width: 100%;
+              margin: 0;
+              padding: 2rem;
+              border: none;
+              box-shadow: none;
+            }
+             body {
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
-            }
-            .no-print {
-                display: none !important;
-            }
-            .A4-size {
-                width: 210mm;
-                height: 297mm;
-                margin: 0;
-                padding: 0;
-                box-shadow: none;
-                border: none;
             }
           }
         `}</style>
@@ -280,7 +298,7 @@ export default function DocumentsPage() {
                 total,
             };
         }).filter((invoice): invoice is ProcessedInvoice => invoice !== null)
-          .sort((a, b) => new Date(b.data).getTime() - new Date(a.data).getTime());
+          .sort((a, b) => parseSpanishDate(b.data).getTime() - parseSpanishDate(a.data).getTime());
 
 
     }, [documents, users, currentUser]);
@@ -354,7 +372,7 @@ export default function DocumentsPage() {
                                 <CardHeader className="bg-card-foreground/5 p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center">
                                     <div>
                                         <CardTitle className="font-headline text-xl">Factura #{invoice.num_factura}</CardTitle>
-                                        <p className="text-sm text-muted-foreground">Data: {new Date(invoice.data).toLocaleDateString('es-ES')}</p>
+                                        <p className="text-sm text-muted-foreground">Data: {parseSpanishDate(invoice.data).toLocaleDateString('es-ES')}</p>
                                     </div>
                                     <div className="text-left sm:text-right mt-2 sm:mt-0">
                                         {getStatusBadge(invoice.estat)}
@@ -366,7 +384,7 @@ export default function DocumentsPage() {
                                         <Table>
                                             <TableHeader>
                                                 <TableRow>
-                                                    <TableHead>Descripció</TableHead>
+                                                    <TableHead>Concepte</TableHead>
                                                     <TableHead className="text-right">Quant.</TableHead>
                                                     <TableHead className="text-right">Preu Unit.</TableHead>
                                                     <TableHead className="text-right">IVA</TableHead>
@@ -376,7 +394,7 @@ export default function DocumentsPage() {
                                             <TableBody>
                                                 {invoice.items.map((item, index) => (
                                                     <TableRow key={index}>
-                                                        <TableCell>{item.descripcio}</TableCell>
+                                                        <TableCell>{item.concepte}</TableCell>
                                                         <TableCell className="text-right">{item.unitats}</TableCell>
                                                         <TableCell className="text-right">{parseFloat(item.preu_unitari).toFixed(2)} €</TableCell>
                                                         <TableCell className="text-right">{item.iva}%</TableCell>
