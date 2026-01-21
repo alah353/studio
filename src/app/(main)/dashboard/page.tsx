@@ -27,6 +27,7 @@ type Shipment = {
   status: 'Lliurat' | 'En trànsit' | 'En magatzem' | 'Retingut' | 'Incidència';
   eta: string;
   location: string;
+  usuari?: string;
 };
 
 const API_URL = 'https://sheetdb.io/api/v1/rgytng002juic';
@@ -161,20 +162,21 @@ const WorkerView = ({ shipments }: { shipments: Shipment[] }) => {
 
 const ClientView = ({ shipments, user }: { shipments: Shipment[], user: UserData }) => {
   const clientShipments = useMemo(() => {
-    if (!user.empresa) return [];
+    if (!user.usuario) return [];
     
-    const userCompany = user.empresa.toString().toLowerCase().trim();
+    const currentUserEmail = user.usuario.toString().toLowerCase().trim();
     
     return shipments.filter(shipment => {
-      if (!shipment.client) return false;
-      const shipmentClient = shipment.client.toString().toLowerCase().trim();
-      return shipmentClient === userCompany;
+      // The user has added a 'usuari' column to link shipments to users directly.
+      if (!shipment.usuari) return false;
+      const shipmentUser = shipment.usuari.toString().toLowerCase().trim();
+      return shipmentUser === currentUserEmail;
     });
 
-  }, [shipments, user.empresa]);
+  }, [shipments, user]);
 
   if (clientShipments.length === 0) {
-    return <p>No se han encontrado envíos para tu empresa ({user.empresa}).</p>;
+    return <p>No se han encontrado envíos para tu usuario ({user.usuario}).</p>;
   }
 
   return (
@@ -347,3 +349,5 @@ export default function DashboardPage() {
     </div>
   );
 }
+
+    
