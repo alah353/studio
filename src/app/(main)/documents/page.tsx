@@ -11,7 +11,7 @@ import { Separator } from '@/components/ui/separator';
 
 // --- 1. CONFIGURACIÓ I TIPUS ---
 
-const API_URL = 'https://sheetdb.io/api/v1/rgytng002juic';
+const API_URL = 'https://sheetdb.io/api/v1/rqytnq8t2ju1z';
 // Canvia aquest valor per provar amb 'Ali' (treballador) o un altre usuari.
 const CURRENT_USER_EMAIL = 'Stib';
 

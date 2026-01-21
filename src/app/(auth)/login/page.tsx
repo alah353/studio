@@ -17,7 +17,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { AlertCircle, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 
-const API_URL = 'https://sheetdb.io/api/v1/rgytng002juic';
+const API_URL = 'https://sheetdb.io/api/v1/rqytnq8t2ju1z';
 
 export default function LoginPage() {
   const [usuariInput, setUsuariInput] = useState('');
