@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useMemo } from 'react';
+import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
@@ -8,14 +9,12 @@ import { Badge } from '@/components/ui/badge';
 import { Loader2, AlertTriangle, Printer, Download } from 'lucide-react';
 import { HorseLogo } from '@/components/layout/horse-logo';
 import { Separator } from '@/components/ui/separator';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 // --- 1. CONFIGURACIÓ I TIPUS ---
 
 const API_URL = 'https://sheetdb.io/api/v1/rgytng002juic';
-// Canvia aquest valor per provar amb 'Ali' (treballador) o un altre usuari.
-const CURRENT_USER_EMAIL = 'Stib';
 
-// Tipus de dades rebuts de l'API
 type DocumentLine = {
   num_factura: string;
   data: string;
@@ -30,14 +29,22 @@ type DocumentLine = {
 type User = {
   usuari: string; // Email
   nom: string;
-  rol: 'admin' | 'administrador' | 'treballador' | 'client';
+  rol: 'admin' | 'administrador' | 'administardor' | 'treballador' | 'client';
   empresa: string;
   fiscalid: string;
   adreca: string;
   telefon: string;
 };
 
-// Tipus de dades per a una factura processada i agrupada
+// User data from localStorage
+type UserData = {
+    usuario: string; // This is the key in localStorage, it's 'usuario' not 'usuari'
+    nom: string;
+    empresa: string;
+    rol: 'admin' | 'administrador' | 'administardor' | 'treballador' | 'client';
+};
+
+
 type ProcessedInvoice = {
   num_factura: string;
   data: string;
@@ -158,16 +165,33 @@ const PrintableInvoice = ({ invoice, companyInfo }: { invoice: ProcessedInvoice,
 // --- 3. COMPONENT PRINCIPAL DE LA PÀGINA ---
 
 export default function DocumentsPage() {
-    const [currentUser, setCurrentUser] = useState<User | null>(null);
+    const [currentUser, setCurrentUser] = useState<UserData | null>(null);
     const [documents, setDocuments] = useState<DocumentLine[]>([]);
     const [users, setUsers] = useState<User[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [printingInvoiceId, setPrintingInvoiceId] = useState<string | null>(null);
+    const router = useRouter();
 
     useEffect(() => {
+        // 1. Proteger la ruta y cargar datos de usuario
+        const userDataString = localStorage.getItem('user');
+        if (userDataString) {
+            try {
+                setCurrentUser(JSON.parse(userDataString));
+            } catch (e) {
+                router.push('/login');
+                return;
+            }
+        } else {
+            router.push('/login');
+            return;
+        }
+
+        // 2. Cargar datos de API
         const fetchData = async () => {
             setLoading(true);
+            setError(null);
             try {
                 const [usersRes, documentsRes] = await Promise.all([
                     fetch(`${API_URL}?sheet=usuaris`),
@@ -183,13 +207,6 @@ export default function DocumentsPage() {
 
                 setUsers(usersData);
                 setDocuments(documentsData);
-                
-                const foundUser = usersData.find(u => u.usuari.toLowerCase().trim() === CURRENT_USER_EMAIL.toLowerCase().trim());
-                if (foundUser) {
-                    setCurrentUser(foundUser);
-                } else {
-                    throw new Error(`Usuari '${CURRENT_USER_EMAIL}' no trobat.`);
-                }
 
             } catch (e: any) {
                 console.error(e);
@@ -199,7 +216,7 @@ export default function DocumentsPage() {
             }
         };
         fetchData();
-    }, []);
+    }, [router]);
 
     const processedInvoices = useMemo((): ProcessedInvoice[] => {
         if (!documents.length || !users.length || !currentUser) return [];
@@ -207,14 +224,17 @@ export default function DocumentsPage() {
         let filteredDocs: DocumentLine[];
         const userRole = currentUser.rol.toLowerCase();
 
-        if (['admin', 'administrador', 'treballador'].includes(userRole)) {
+        // Filter documents based on role
+        if (['admin', 'administrador', 'administardor', 'treballador'].includes(userRole)) {
             filteredDocs = documents;
         } else if (userRole === 'client') {
-            filteredDocs = documents.filter(doc => doc.usuari.toLowerCase().trim() === CURRENT_USER_EMAIL.toLowerCase().trim());
+            const currentUserEmail = currentUser.usuario.toLowerCase().trim();
+            filteredDocs = documents.filter(doc => doc.usuari && doc.usuari.toLowerCase().trim() === currentUserEmail);
         } else {
-            return []; // Sense accés
+            return []; // No access for other roles
         }
 
+        // Group by invoice number
         const groupedByInvoiceNumber = filteredDocs.reduce<Record<string, DocumentLine[]>>((acc, doc) => {
             if (!doc.num_factura) return acc;
             acc[doc.num_factura] = acc[doc.num_factura] || [];
@@ -222,12 +242,14 @@ export default function DocumentsPage() {
             return acc;
         }, {});
 
+        // Process each group into an invoice object
         return Object.values(groupedByInvoiceNumber).map((items: DocumentLine[]): ProcessedInvoice | null => {
             if (!items.length) return null;
 
             const firstItem = items[0];
-            const clientInfo = users.find(u => u.usuari.toLowerCase().trim() === firstItem.usuari.toLowerCase().trim());
+            const clientInfo = users.find(u => u.usuari && u.usuari.toLowerCase().trim() === firstItem.usuari.toLowerCase().trim());
 
+            // If we can't find the client's fiscal data, we can't generate a proper invoice.
             if (!clientInfo) return null;
 
             const subtotal = items.reduce((sum, item) => {
@@ -257,7 +279,9 @@ export default function DocumentsPage() {
                 totalIva,
                 total,
             };
-        }).filter((invoice): invoice is ProcessedInvoice => invoice !== null);
+        }).filter((invoice): invoice is ProcessedInvoice => invoice !== null)
+          .sort((a, b) => new Date(b.data).getTime() - new Date(a.data).getTime());
+
 
     }, [documents, users, currentUser]);
 
@@ -327,18 +351,18 @@ export default function DocumentsPage() {
                     {processedInvoices.length > 0 ? (
                         processedInvoices.map(invoice => (
                             <Card key={invoice.num_factura} className="overflow-hidden shadow-lg">
-                                <CardHeader className="bg-card-foreground/5 p-4 flex-row justify-between items-center">
+                                <CardHeader className="bg-card-foreground/5 p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center">
                                     <div>
                                         <CardTitle className="font-headline text-xl">Factura #{invoice.num_factura}</CardTitle>
                                         <p className="text-sm text-muted-foreground">Data: {new Date(invoice.data).toLocaleDateString('es-ES')}</p>
                                     </div>
-                                    <div className="text-right">
+                                    <div className="text-left sm:text-right mt-2 sm:mt-0">
                                         {getStatusBadge(invoice.estat)}
-                                        <p className="text-sm font-semibold mt-1">{invoice.clientInfo.empresa}</p>
+                                        { currentUser && !['client'].includes(currentUser.rol) && <p className="text-sm font-semibold mt-1">{invoice.clientInfo.empresa}</p> }
                                     </div>
                                 </CardHeader>
                                 <CardContent className="p-0">
-                                    <div className="p-4">
+                                    <div className="p-4 overflow-x-auto">
                                         <Table>
                                             <TableHeader>
                                                 <TableRow>
@@ -385,7 +409,7 @@ export default function DocumentsPage() {
                          <Card>
                             <CardContent className="p-8 text-center">
                                 <h3 className="font-headline text-xl">No s'han trobat documents</h3>
-                                <p className="text-muted-foreground mt-2">No hi ha cap document que coincideixi amb els teus criteris de cerca.</p>
+                                <p className="text-muted-foreground mt-2">No hi ha cap document que coincideixi amb els teus criteris.</p>
                             </CardContent>
                         </Card>
                     )}

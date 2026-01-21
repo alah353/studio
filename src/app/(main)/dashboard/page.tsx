@@ -2,11 +2,12 @@
 
 import { useEffect, useState, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Input } from '@/components/ui/input';
-import { LogOut, Package, Truck, AlertTriangle, Search } from 'lucide-react';
+import { LogOut, Package, Truck, AlertTriangle, Search, FileText } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
 
@@ -162,9 +163,6 @@ const ClientView = ({ shipments, user }: { shipments: Shipment[], user: UserData
   const clientShipments = useMemo(() => {
     if (!user.empresa) return [];
     
-    // Debugging log
-    console.log("Comparando Usuario:", user.empresa, "con primer Tracking:", shipments[0]?.client);
-
     const userCompany = user.empresa.toString().toLowerCase().trim();
     
     return shipments.filter(shipment => {
@@ -328,10 +326,18 @@ export default function DashboardPage() {
         <div className="container py-10">
             <header className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
                 <h1 className="text-3xl font-bold">Hola, {user.nom}</h1>
-                <Button onClick={handleLogout} variant="destructive" size="sm">
-                    <LogOut className="mr-2 h-4 w-4" />
-                    Cerrar Sesión
-                </Button>
+                <div className="flex items-center gap-4">
+                    <Button asChild variant="outline">
+                        <Link href="/documents">
+                            <FileText className="mr-2 h-4 w-4" />
+                            Mis Documentos
+                        </Link>
+                    </Button>
+                    <Button onClick={handleLogout} variant="destructive" size="sm">
+                        <LogOut className="mr-2 h-4 w-4" />
+                        Cerrar Sesión
+                    </Button>
+                </div>
             </header>
             
             <main>
