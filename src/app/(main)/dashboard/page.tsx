@@ -28,7 +28,7 @@ type Shipment = {
   location: string;
 };
 
-const API_URL = 'https://sheetdb.io/api/v1/rqytnq8t2ju1z';
+const API_URL = 'https://sheetdb.io/api/v1/rgytng002juic';
 
 // --- COMPONENTES AUXILIARES ---
 

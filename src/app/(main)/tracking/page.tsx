@@ -19,7 +19,7 @@ type ShipmentData = {
 };
 
 const STEPS = ['En magatzem', 'En trànsit', 'Lliurat'];
-const API_URL = 'https://sheetdb.io/api/v1/rqytnq8t2ju1z';
+const API_URL = 'https://sheetdb.io/api/v1/rgytng002juic';
 
 export default function TrackingPage() {
   const [trackingCode, setTrackingCode] = useState('');
