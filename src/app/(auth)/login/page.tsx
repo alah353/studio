@@ -45,36 +45,29 @@ export default function LoginPage() {
       }
       const data = await response.json();
       
-      // 2. Log API data for debugging
-      console.log('Dades API:', data);
-
-      // 3. Find the user with robust comparison
+      // 2. Find the user
       const foundUser = data.find((user: any) => {
         const usuariMatches = user.usuari && user.usuari.trim().toLowerCase() === usuariInput.trim().toLowerCase();
-        // Explicitly convert both passwords to string for comparison
         const passwordMatches = user.password !== undefined && String(user.password) === String(contrasenya);
         return usuariMatches && passwordMatches;
       });
 
       if (foundUser) {
-        // 4. If correct, save user data and redirect
-        console.log('Login exitós per a:', foundUser.nom);
+        // 3. Save user data using 'horse_user' key
         const userToStore = {
           usuario: foundUser.usuari,
           nom: foundUser.nom,
           empresa: foundUser.empresa,
           rol: foundUser.rol,
         };
-        localStorage.setItem('user', JSON.stringify(userToStore));
+        localStorage.setItem('horse_user', JSON.stringify(userToStore));
         router.push('/dashboard');
       } else {
-        // 5. If incorrect, show error
-        console.log(`Intent de login fallit per a l'usuari: "${usuariInput}"`);
         setError('Dades incorrectes. Si us plau, verifica les teves credencials.');
       }
     } catch (err) {
       console.error(err);
-      setError("Hi ha hagut un error en connectar amb el servidor. Si us plau, intenta-ho de nou més tard.");
+      setError("Hi ha hagut un error en connectar amb el servidor.");
     } finally {
       setIsLoading(false);
     }
@@ -123,7 +116,7 @@ export default function LoginPage() {
           )}
         </CardContent>
         <CardFooter className="flex flex-col gap-4">
-          <Button type="submit" className="w-full" disabled={isLoading}>
+          <Button type="submit" className="w-full bg-amber-500 hover:bg-amber-600 text-black font-semibold" disabled={isLoading}>
             {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
             {isLoading ? 'Entrant...' : 'Entrar'}
           </Button>

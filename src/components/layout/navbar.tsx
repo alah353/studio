@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
-import { Menu, User } from 'lucide-react';
+import { Menu, User, CalendarPlus } from 'lucide-react';
 import { HorseLogo } from './horse-logo';
 
 const navLinks = [
@@ -25,12 +25,11 @@ export function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    // Check for user in localStorage only on client-side
     if (typeof window !== 'undefined') {
-      const user = localStorage.getItem('user');
+      const user = localStorage.getItem('horse_user');
       setIsLoggedIn(!!user);
     }
-  }, [pathname]); // Re-check on route change
+  }, [pathname]);
 
 
   return (
@@ -56,6 +55,20 @@ export function Navbar() {
               {label}
             </Link>
           ))}
+          
+          {isLoggedIn && (
+            <Link
+              href="/booking"
+              className={cn(
+                'flex items-center gap-1 transition-colors hover:text-amber-500',
+                pathname === '/booking' ? 'text-amber-500' : 'text-foreground/60'
+              )}
+            >
+              <CalendarPlus className="h-4 w-4" />
+              <span>Booking</span>
+            </Link>
+          )}
+
            <Link
               href={isLoggedIn ? "/dashboard" : "/login"}
               className={cn(
@@ -82,7 +95,7 @@ export function Navbar() {
                 <span className="ml-2 font-bold font-heading text-lg text-white">Horse S.L.</span>
               </Link>
               <nav className="flex flex-col space-y-4">
-                {[...navLinks, { href: isLoggedIn ? "/dashboard" : "/login", label: isLoggedIn ? "Dashboard" : "Login" }].map(({ href, label }) => (
+                {navLinks.map(({ href, label }) => (
                   <Link
                     key={href}
                     href={href}
@@ -95,6 +108,28 @@ export function Navbar() {
                     {label}
                   </Link>
                 ))}
+                {isLoggedIn && (
+                  <Link
+                    href="/booking"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={cn(
+                      'text-lg',
+                      pathname === '/booking' ? 'text-amber-500 font-semibold' : 'text-muted-foreground'
+                    )}
+                  >
+                    Booking
+                  </Link>
+                )}
+                <Link
+                  href={isLoggedIn ? "/dashboard" : "/login"}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={cn(
+                    'text-lg',
+                    pathname === '/dashboard' || pathname === '/login' ? 'text-primary font-semibold' : 'text-muted-foreground'
+                  )}
+                >
+                  {isLoggedIn ? "Dashboard" : "Login"}
+                </Link>
               </nav>
             </SheetContent>
           </Sheet>
