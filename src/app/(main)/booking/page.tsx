@@ -74,7 +74,8 @@ export default function BookingPage() {
       try {
         const parsedUser = JSON.parse(horseUser);
         setUser(parsedUser);
-        fetchHistory(parsedUser.usuario);
+        // Enviem l'objecte sencer per gestionar el filtratge per rol
+        fetchHistory(parsedUser);
       } catch (e) {
         localStorage.removeItem('horse_user');
         router.push('/login');
@@ -82,19 +83,33 @@ export default function BookingPage() {
     }
   }, [router]);
 
-  // 2. FUNCIÓ GET (Històric)
-  const fetchHistory = async (userEmail: string) => {
+  // 2. FUNCIÓ GET (Històric amb filtratge per Rol)
+  const fetchHistory = async (currentUser: UserData) => {
     setLoading(true);
     try {
       const response = await fetch(API_URL);
       const data: BookingRequest[] = await response.json();
       
-      const userFiltered = data
-        .filter((item) => item.usuari === userEmail)
-        .reverse(); // Les noves surtin primer
+      let finalData: BookingRequest[] = [];
+      
+      // Normalització del rol
+      const role = (currentUser.rol || '').toLowerCase().trim();
+      
+      // Lògica de filtratge: Administradors veuen tot, clients veuen el seu
+      if (role === 'administrador' || role === 'admin') {
+        finalData = data;
+      } else {
+        const userEmail = (currentUser.usuario || '').toLowerCase().trim();
+        finalData = data.filter((item) => {
+          const itemUser = (item.usuari || '').toLowerCase().trim();
+          return itemUser === userEmail;
+        });
+      }
         
-      setSolicituds(userFiltered);
+      // Invertim perquè les noves surtin primer
+      setSolicituds(finalData.reverse()); 
     } catch (err) {
+      console.error(err);
       setError('No s\'ha pogut carregar l\'històric.');
     } finally {
       setLoading(false);
@@ -140,7 +155,7 @@ export default function BookingPage() {
         setOrigen('');
         setDesti('');
         setCarrega('');
-        fetchHistory(user.usuario);
+        fetchHistory(user);
       } else {
         setError('Error al enviar la sol·licitud.');
       }
@@ -265,17 +280,17 @@ export default function BookingPage() {
           <section className="space-y-6">
             <h2 className="text-xl font-bold flex items-center gap-2">
               <Package className="h-5 w-5 text-amber-500" />
-              Les meves sol·licituds
+              {user.rol?.toLowerCase() === 'administrador' || user.rol?.toLowerCase() === 'admin' ? 'Panell d\'Administració' : 'Les meves sol·licituds'}
             </h2>
 
             {loading ? (
               <div className="flex flex-col items-center justify-center py-12 text-muted-foreground gap-4">
                 <Loader2 className="h-8 w-8 animate-spin text-amber-500" />
-                <p>Carregant el teu històric...</p>
+                <p>Carregant dades...</p>
               </div>
             ) : solicituds.length === 0 ? (
               <div className="text-center py-12 border-2 border-dashed border-gray-800 rounded-xl text-muted-foreground">
-                <p>Encara no tens cap sol·licitud registrada.</p>
+                <p>Encara no hi ha cap sol·licitud registrada.</p>
               </div>
             ) : (
               <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar">
@@ -286,6 +301,9 @@ export default function BookingPage() {
                         <div className="space-y-1">
                           <p className="text-xs font-mono text-amber-500/70">{item.id}</p>
                           <p className="text-sm font-semibold">{item.data}</p>
+                          {(user.rol?.toLowerCase() === 'administrador' || user.rol?.toLowerCase() === 'admin') && (
+                            <p className="text-[10px] text-muted-foreground italic font-medium">Client: {item.usuari}</p>
+                          )}
                         </div>
                         <div className="flex flex-col items-end gap-2">
                           <Badge 
