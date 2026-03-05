@@ -75,7 +75,7 @@ export default function BookingPage() {
         const parsedUser = JSON.parse(horseUser);
         setUser(parsedUser);
         // Enviem l'objecte sencer per gestionar el filtratge per rol
-        fetchHistory(parsedUser);
+        fetchSolicituds(parsedUser);
       } catch (e) {
         localStorage.removeItem('horse_user');
         router.push('/login');
@@ -83,34 +83,37 @@ export default function BookingPage() {
     }
   }, [router]);
 
-  // 2. FUNCIÓ GET (Històric amb filtratge per Rol)
-  const fetchHistory = async (currentUser: UserData) => {
+  // 2. FUNCIÓ GET (Històric amb lògica robusta)
+  const fetchSolicituds = async (usuariActual: any) => {
     setLoading(true);
     try {
+      // Extracció segura de dades de l'usuari (A prova de bales)
+      const userRole = String(usuariActual.rol || usuariActual.Rol || '').toLowerCase();
+      const userName = String(usuariActual.usuario || usuariActual.usuari || usuariActual.Usuari || '').toLowerCase().trim();
+
       const response = await fetch(API_URL);
+      if (!response.ok) throw new Error('Error en la resposta de la xarxa');
       const data: BookingRequest[] = await response.json();
       
-      let finalData: BookingRequest[] = [];
+      let meves: BookingRequest[] = [];
       
-      // Normalització del rol
-      const role = (currentUser.rol || '').toLowerCase().trim();
-      
-      // Lògica de filtratge: Administradors veuen tot, clients veuen el seu
-      if (role === 'administrador' || role === 'admin') {
-        finalData = data;
+      // Lògica de filtratge robusta
+      if (userRole.includes('admin')) {
+        // L'administrador ho veu tot
+        meves = data;
       } else {
-        const userEmail = (currentUser.usuario || '').toLowerCase().trim();
-        finalData = data.filter((item) => {
-          const itemUser = (item.usuari || '').toLowerCase().trim();
-          return itemUser === userEmail;
+        // El client només veu el seu (comparació insensible a majúscules)
+        meves = data.filter((s: any) => {
+          const solUser = String(s.usuari || s.Usuari || '').toLowerCase().trim();
+          return solUser === userName;
         });
       }
         
       // Invertim perquè les noves surtin primer
-      setSolicituds(finalData.reverse()); 
+      setSolicituds(meves.reverse()); 
     } catch (err) {
-      console.error(err);
-      setError('No s\'ha pogut carregar l\'històric.');
+      console.error('Error carregant sol·licituds:', err);
+      setError('No s\'ha pogut carregar l\'històric dades.');
     } finally {
       setLoading(false);
     }
@@ -155,7 +158,7 @@ export default function BookingPage() {
         setOrigen('');
         setDesti('');
         setCarrega('');
-        fetchHistory(user);
+        fetchSolicituds(user);
       } else {
         setError('Error al enviar la sol·licitud.');
       }
@@ -280,7 +283,7 @@ export default function BookingPage() {
           <section className="space-y-6">
             <h2 className="text-xl font-bold flex items-center gap-2">
               <Package className="h-5 w-5 text-amber-500" />
-              {user.rol?.toLowerCase() === 'administrador' || user.rol?.toLowerCase() === 'admin' ? 'Panell d\'Administració' : 'Les meves sol·licituds'}
+              {String(user.rol).toLowerCase().includes('admin') ? 'Panell d\'Administració' : 'Les meves sol·licituds'}
             </h2>
 
             {loading ? (
@@ -301,7 +304,7 @@ export default function BookingPage() {
                         <div className="space-y-1">
                           <p className="text-xs font-mono text-amber-500/70">{item.id}</p>
                           <p className="text-sm font-semibold">{item.data}</p>
-                          {(user.rol?.toLowerCase() === 'administrador' || user.rol?.toLowerCase() === 'admin') && (
+                          {String(user.rol).toLowerCase().includes('admin') && (
                             <p className="text-[10px] text-muted-foreground italic font-medium">Client: {item.usuari}</p>
                           )}
                         </div>
