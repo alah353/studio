@@ -7,9 +7,8 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { LogOut, Package, Truck, Search, FileText, CalendarPlus, MapPin, Clock } from 'lucide-react';
+import { LogOut, Package, Truck, FileText, CalendarPlus, MapPin, Clock } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
-import { cn } from '@/lib/utils';
 
 type UserData = {
   usuario: string;
@@ -29,7 +28,8 @@ type Shipment = {
   usuari?: string;
 };
 
-const API_URL = 'https://sheetdb.io/api/v1/rgytng002juic';
+// URL de l'API apuntant específicament a la pestanya de tracking
+const API_URL = 'https://sheetdb.io/api/v1/rgytng002juic?sheet=tracking';
 
 export default function DashboardPage() {
   const [user, setUser] = useState<UserData | null>(null);
@@ -52,7 +52,8 @@ export default function DashboardPage() {
             const response = await fetch(API_URL);
             if (!response.ok) throw new Error('Error al connectar amb l\'API');
             const data: Shipment[] = await response.json();
-            setShipments(data);
+            // Invertim l'ordre per veure els darrers primer
+            setShipments(data.reverse());
         } catch (error) {
             console.error('Error carregant enviaments:', error);
         } finally {
@@ -63,19 +64,24 @@ export default function DashboardPage() {
     fetchShipments();
   }, [router]);
 
+  // Lògica de filtratge a prova de bales
   const filteredShipments = useMemo(() => {
     if (!user) return [];
     
-    const userRole = String(user.rol || '').toLowerCase();
-    const userEmail = String(user.usuario || '').toLowerCase().trim();
+    // Normalitzem rol i usuari per a la comparació
+    const userRole = String(user.rol || '').toLowerCase().trim();
+    const currentUserEmail = String(user.usuario || '').toLowerCase().trim();
 
+    // L'administrador o el treballador ho veuen TOT
     if (userRole.includes('admin') || userRole.includes('treballador')) {
       return shipments;
     }
 
-    return shipments.filter(s => 
-      String(s.usuari || '').toLowerCase().trim() === userEmail
-    );
+    // El client només veu els seus (comparació insensible a majúscules/minúscules)
+    return shipments.filter(s => {
+      const shipmentUser = String(s.usuari || '').toLowerCase().trim();
+      return shipmentUser === currentUserEmail;
+    });
   }, [shipments, user]);
 
   const handleLogout = () => {
@@ -84,7 +90,7 @@ export default function DashboardPage() {
   };
 
   const getStatusBadge = (status: string) => {
-    const s = status.toLowerCase();
+    const s = String(status || '').toLowerCase();
     if (s.includes('lliurat')) return <Badge className="bg-green-600">Lliurat</Badge>;
     if (s.includes('trànsit')) return <Badge className="bg-blue-600">En trànsit</Badge>;
     if (s.includes('magatzem')) return <Badge className="bg-amber-600">En magatzem</Badge>;
@@ -128,11 +134,13 @@ export default function DashboardPage() {
                         <div className="flex items-center gap-3">
                             <Truck className="h-6 w-6 text-amber-500" />
                             <div>
-                                <CardTitle className="font-heading">Seguiment d'Enviaments</CardTitle>
-                                <CardDescription>
+                                <CardTitle className="font-heading">
                                     {String(user.rol).toLowerCase().includes('admin') 
-                                        ? 'Vista global de tots els enviaments de la xarxa.' 
-                                        : 'Llista de les teves trameses en curs i finalitzades.'}
+                                        ? 'Panell d\'Administració: Tots els enviaments' 
+                                        : 'Seguiment dels teus enviaments'}
+                                </CardTitle>
+                                <CardDescription>
+                                    Vista detallada de l'estat actual de la xarxa logística.
                                 </CardDescription>
                             </div>
                         </div>
@@ -149,11 +157,12 @@ export default function DashboardPage() {
                             <Table>
                                 <TableHeader>
                                     <TableRow className="border-gray-800">
-                                        <TableHead className="font-bold">Codi</TableHead>
-                                        <TableHead className="font-bold">Origen / Destí</TableHead>
+                                        <TableHead className="font-bold">Codi Tracking</TableHead>
+                                        <TableHead className="font-bold">Client</TableHead>
+                                        <TableHead className="font-bold">Ruta</TableHead>
                                         <TableHead className="font-bold">Estat</TableHead>
                                         <TableHead className="font-bold">Ubicació</TableHead>
-                                        <TableHead className="font-bold text-right">Data ETA</TableHead>
+                                        <TableHead className="font-bold text-right">ETA</TableHead>
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody>
@@ -162,10 +171,13 @@ export default function DashboardPage() {
                                             <TableCell className="font-mono text-amber-500 font-bold">
                                                 {shipment.tracking_code}
                                             </TableCell>
+                                            <TableCell className="text-xs">
+                                                {shipment.client}
+                                            </TableCell>
                                             <TableCell>
                                                 <div className="flex flex-col">
                                                     <span className="text-sm font-medium">{shipment.origin}</span>
-                                                    <span className="text-xs text-muted-foreground">fins a {shipment.destination}</span>
+                                                    <span className="text-[10px] text-muted-foreground uppercase">Cap a {shipment.destination}</span>
                                                 </div>
                                             </TableCell>
                                             <TableCell>
@@ -191,20 +203,20 @@ export default function DashboardPage() {
                         ) : (
                           <div className="flex flex-col items-center justify-center py-16 text-muted-foreground">
                             <Package className="h-12 w-12 mb-4 opacity-20" />
-                            <p>No s'ha trobat cap enviament actiu per al teu compte.</p>
+                            <p>No s'han trobat dades a la pestanya 'tracking'.</p>
                           </div>
                         )}
                     </CardContent>
                 </Card>
 
-                {/* Secció Informativa / Benvinguda */}
+                {/* Secció Informativa */}
                 <Card className="bg-amber-500/5 border-amber-500/20">
                     <CardHeader>
                         <CardTitle className="text-lg font-heading text-amber-500">Panell de Control Horse S.L.</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <p className="text-sm leading-relaxed text-muted-foreground">
-                            Benvingut a la teva àrea de gestió. Des d'aquí pots monitoritzar l'estat dels teus enviaments en temps real, gestionar noves comandes i accedir a tota la documentació fiscal de la teva empresa. Si necessites ajuda, no dubtis a contactar amb el teu gestor de flota.
+                            Aquest panell sincronitza en temps real amb la nostra flota. Els administradors tenen accés total per supervisar les operacions de tots els clients, mentre que els clients mantenen la seva privadesa veient només els seus actius.
                         </p>
                     </CardContent>
                 </Card>
