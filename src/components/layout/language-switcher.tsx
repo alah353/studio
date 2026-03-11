@@ -29,6 +29,12 @@ export function LanguageSwitcher() {
           Català (CA)
         </DropdownMenuItem>
         <DropdownMenuItem 
+          onClick={() => changeLanguage('es')}
+          className={language === 'es' ? 'text-amber-500 font-bold' : ''}
+        >
+          Castellano (ES)
+        </DropdownMenuItem>
+        <DropdownMenuItem 
           onClick={() => changeLanguage('en')}
           className={language === 'en' ? 'text-amber-500 font-bold' : ''}
         >
