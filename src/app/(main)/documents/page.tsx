@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { Loader2, Download, Printer, ArrowLeft } from 'lucide-react';
+import { Loader2, Printer, ArrowLeft } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 
@@ -16,7 +16,8 @@ type DocumentLine = {
   num_factura: string;
   data: string;
   usuari: string;
-  concepte: string;
+  concepte?: string;
+  descripcio?: string;
   unitats: string;
   preu_unitari: string;
   iva: string;
@@ -58,14 +59,16 @@ const COMPANY_INFO = {
     email: 'facturacion@horsesl.com'
 };
 
-const parseSpanishDate = (dateString: string): Date => {
-    if (!dateString || typeof dateString !== 'string') return new Date();
-    const parts = dateString.split('/');
+const parseSpanishDate = (dateString: any): Date => {
+    if (!dateString) return new Date();
+    const str = String(dateString);
+    const parts = str.split('/');
     if (parts.length === 3) {
         const [day, month, year] = parts;
         return new Date(Number(year), Number(month) - 1, Number(day));
     }
-    return new Date(dateString);
+    const parsed = new Date(str);
+    return isNaN(parsed.getTime()) ? new Date() : parsed;
 };
 
 export default function DocumentsPage() {
@@ -133,16 +136,18 @@ export default function DocumentsPage() {
         }, {});
 
         return Object.values(grouped).map((items): ProcessedInvoice | null => {
-            const clientInfo = users.find(u => (u.usuari || '').toLowerCase().trim() === items[0].usuari.toLowerCase().trim());
+            const firstItem = items[0];
+            const clientInfo = users.find(u => (u.usuari || '').toLowerCase().trim() === firstItem.usuari.toLowerCase().trim());
+            
             if (!clientInfo) return null;
 
-            const subtotal = items.reduce((sum, item) => sum + (parseFloat(item.preu_unitari) * parseInt(item.unitats)), 0);
-            const totalIva = items.reduce((sum, item) => sum + (parseFloat(item.preu_unitari) * parseInt(item.unitats) * (parseInt(item.iva) / 100)), 0);
+            const subtotal = items.reduce((sum, item) => sum + (parseFloat(item.preu_unitari || '0') * parseInt(item.unitats || '0')), 0);
+            const totalIva = items.reduce((sum, item) => sum + (parseFloat(item.preu_unitari || '0') * parseInt(item.unitats || '0') * (parseInt(item.iva || '0') / 100)), 0);
 
             return {
-                num_factura: items[0].num_factura,
-                data: items[0].data,
-                estat: items[0].estat,
+                num_factura: firstItem.num_factura,
+                data: firstItem.data,
+                estat: firstItem.estat,
                 clientInfo,
                 items,
                 subtotal,
@@ -155,7 +160,7 @@ export default function DocumentsPage() {
 
     const handlePrint = (invoiceId: string) => {
         setImprimiendoId(invoiceId);
-        // Donem temps al DOM per ocultar la resta d'elements abans de disparar el diàleg
+        // Donem un petit marge perquè l'estat d'aïllament (hidden de la resta) s'apliqui al DOM abans d'imprimir
         setTimeout(() => {
             window.print();
             setImprimiendoId(null);
@@ -239,11 +244,11 @@ export default function DocumentsPage() {
                                         <TableBody>
                                             {invoice.items.map((item, i) => (
                                                 <TableRow key={i}>
-                                                    <TableCell className="font-medium">{item.concepte}</TableCell>
+                                                    <TableCell className="font-medium">{item.concepte || item.descripcio || 'Serveis Logístics'}</TableCell>
                                                     <TableCell className="text-right">{item.unitats}</TableCell>
-                                                    <TableCell className="text-right">{parseFloat(item.preu_unitari).toFixed(2)} €</TableCell>
+                                                    <TableCell className="text-right">{parseFloat(item.preu_unitari || '0').toFixed(2)} €</TableCell>
                                                     <TableCell className="text-right">{item.iva}%</TableCell>
-                                                    <TableCell className="text-right">{(parseFloat(item.preu_unitari) * parseInt(item.unitats)).toFixed(2)} €</TableCell>
+                                                    <TableCell className="text-right">{(parseFloat(item.preu_unitari || '0') * parseInt(item.unitats || '0')).toFixed(2)} €</TableCell>
                                                 </TableRow>
                                             ))}
                                         </TableBody>

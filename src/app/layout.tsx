@@ -3,6 +3,7 @@ import { Toaster } from '@/components/ui/toaster';
 import './globals.css';
 import { cn } from '@/lib/utils';
 import { Montserrat, Open_Sans } from 'next/font/google';
+import { LanguageProvider } from '@/context/language-context';
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -30,10 +31,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className="dark">
+    <html lang="ca" className="dark">
       <body className={cn('min-h-screen bg-background font-body antialiased', montserrat.variable, openSans.variable)}>
-        {children}
-        <Toaster />
+        <LanguageProvider>
+          {children}
+          <Toaster />
+        </LanguageProvider>
       </body>
     </html>
   );

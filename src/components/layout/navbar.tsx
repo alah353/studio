@@ -8,21 +8,24 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
 import { Menu, User, CalendarPlus } from 'lucide-react';
 import { HorseLogo } from './horse-logo';
-
-const navLinks = [
-  { href: '/', label: 'Inicio' },
-  { href: '/about', label: 'Sobre Nosotros' },
-  { href: '/services', label: 'Servicios' },
-  { href: '/fleet', label: 'Flota' },
-  { href: '/tracking', label: 'Seguimiento' },
-  { href: '/blog', label: 'Blog' },
-  { href: '/contact', label: 'Contacto' },
-];
+import { useLanguage } from '@/context/language-context';
+import { LanguageSwitcher } from './language-switcher';
 
 export function Navbar() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { t } = useLanguage();
+
+  const navLinks = [
+    { href: '/', label: t('inici') },
+    { href: '/about', label: t('sobre_nosaltres') },
+    { href: '/services', label: t('serveis') },
+    { href: '/fleet', label: t('flota') },
+    { href: '/tracking', label: t('seguiment') },
+    { href: '/blog', label: t('blog') },
+    { href: '/contact', label: t('contacte') },
+  ];
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -30,7 +33,6 @@ export function Navbar() {
       setIsLoggedIn(!!user);
     }
   }, [pathname]);
-
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 print:hidden">
@@ -65,23 +67,28 @@ export function Navbar() {
               )}
             >
               <CalendarPlus className="h-4 w-4" />
-              <span>Booking</span>
+              <span>{t('booking')}</span>
             </Link>
           )}
 
-           <Link
-              href={isLoggedIn ? "/dashboard" : "/login"}
-              className={cn(
-                'transition-colors hover:text-primary',
-                (pathname === '/dashboard' || pathname === '/login') ? 'text-primary' : 'text-foreground/60'
-              )}
-            >
-              <User className="h-5 w-5" />
-              <span className="sr-only">{isLoggedIn ? "Dashboard" : "Login"}</span>
-            </Link>
+          <div className="flex items-center gap-2 ml-4">
+            <LanguageSwitcher />
+            
+            <Link
+                href={isLoggedIn ? "/dashboard" : "/login"}
+                className={cn(
+                  'transition-colors hover:text-primary p-2',
+                  (pathname === '/dashboard' || pathname === '/login') ? 'text-primary' : 'text-foreground/60'
+                )}
+              >
+                <User className="h-5 w-5" />
+                <span className="sr-only">{isLoggedIn ? t('dashboard') : t('login')}</span>
+              </Link>
+          </div>
         </nav>
 
-        <div className="flex flex-1 items-center justify-end md:hidden">
+        <div className="flex flex-1 items-center justify-end md:hidden gap-4">
+          <LanguageSwitcher />
           <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon">
@@ -89,7 +96,7 @@ export function Navbar() {
                 <span className="sr-only">Toggle Menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="left">
+            <SheetContent side="left" className="bg-background border-r border-border">
               <Link href="/" className="mb-8 flex items-center" onClick={() => setIsMobileMenuOpen(false)}>
                  <HorseLogo className="w-24 h-auto" />
                 <span className="ml-2 font-bold font-heading text-lg text-white">Horse S.L.</span>
@@ -117,7 +124,7 @@ export function Navbar() {
                       pathname === '/booking' ? 'text-amber-500 font-semibold' : 'text-muted-foreground'
                     )}
                   >
-                    Booking
+                    {t('booking')}
                   </Link>
                 )}
                 <Link
@@ -128,7 +135,7 @@ export function Navbar() {
                     pathname === '/dashboard' || pathname === '/login' ? 'text-primary font-semibold' : 'text-muted-foreground'
                   )}
                 >
-                  {isLoggedIn ? "Dashboard" : "Login"}
+                  {isLoggedIn ? t('dashboard') : t('login')}
                 </Link>
               </nav>
             </SheetContent>
