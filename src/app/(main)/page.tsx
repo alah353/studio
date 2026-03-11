@@ -24,57 +24,11 @@ import { ServiceRequestForm } from '@/app/(main)/services/service-request-form';
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-
-const features = [
-  {
-    icon: <Zap className="h-8 w-8 text-accent" />,
-    title: 'Velocidad y Fiabilidad',
-    description:
-      'Optimizamos cada ruta para garantizar la entrega más rápida y segura posible. Tu tiempo es nuestra prioridad.',
-  },
-  {
-    icon: <ShieldCheck className="h-8 w-8 text-accent" />,
-    title: 'Seguridad Integral',
-    description:
-      'Tu carga está protegida en cada etapa del viaje. Ofrecemos seguimiento y monitorización constantes para tu tranquilidad.',
-  },
-  {
-    icon: <Globe className="h-8 w-8 text-accent" />,
-    title: 'Cobertura Global',
-    description:
-      'Nuestra extensa red de socios nos permite llegar a cualquier rincón del planeta, sin importar la complejidad del destino.',
-  },
-];
-
-const services = [
-  {
-    id: 'land',
-    title: 'Transporte Terrestre',
-    description:
-      'Conectamos ciudades y países con una flota moderna y versátil.',
-    icon: <Truck className="h-10 w-10 text-accent" />,
-    imageId: 'service-land',
-  },
-  {
-    id: 'sea',
-    title: 'Transporte Marítimo',
-    description:
-      'Tu mejor aliado para el comercio internacional a gran escala.',
-    icon: <Ship className="h-10 w-10 text-accent" />,
-    imageId: 'service-sea',
-  },
-  {
-    id: 'air',
-    title: 'Transporte Aéreo',
-    description:
-      'La solución definitiva para envíos urgentes y de alto valor.',
-    icon: <Plane className="h-10 w-10 text-accent" />,
-    imageId: 'service-air',
-  },
-];
+import { useLanguage } from '@/context/language-context';
 
 export default function HomePage() {
   const [openDialog, setOpenDialog] = useState<string | null>(null);
+  const { t } = useLanguage();
 
   const mainHero = PlaceHolderImages.find(p => p.id === 'main-hero');
 
@@ -83,6 +37,48 @@ export default function HomePage() {
       setOpenDialog(null);
     }
   };
+
+  const features = [
+    {
+      icon: <Zap className="h-8 w-8 text-accent" />,
+      title: t('feature_speed_title'),
+      description: t('feature_speed_desc'),
+    },
+    {
+      icon: <ShieldCheck className="h-8 w-8 text-accent" />,
+      title: t('feature_security_title'),
+      description: t('feature_security_desc'),
+    },
+    {
+      icon: <Globe className="h-8 w-8 text-accent" />,
+      title: t('feature_global_title'),
+      description: t('feature_global_desc'),
+    },
+  ];
+
+  const services = [
+    {
+      id: 'land',
+      title: t('service_land_title'),
+      description: t('service_land_desc'),
+      icon: <Truck className="h-10 w-10 text-accent" />,
+      imageId: 'service-land',
+    },
+    {
+      id: 'sea',
+      title: t('service_sea_title'),
+      description: t('service_sea_desc'),
+      icon: <Ship className="h-10 w-10 text-accent" />,
+      imageId: 'service-sea',
+    },
+    {
+      id: 'air',
+      title: t('service_air_title'),
+      description: t('service_air_desc'),
+      icon: <Plane className="h-10 w-10 text-accent" />,
+      imageId: 'service-air',
+    },
+  ];
 
   return (
     <div>
@@ -103,11 +99,10 @@ export default function HomePage() {
         <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white">
           <div className="container">
             <h1 className="font-headline text-5xl font-extrabold tracking-tight md:text-6xl lg:text-7xl [text-shadow:_0_2px_4px_rgb(0_0_0_/_50%)]">
-              Horse S.L: Tu Mundo, Entregado.
+              {t('hero_title')}
             </h1>
             <p className="mx-auto mt-6 max-w-3xl text-lg text-white/90 md:text-xl [text-shadow:_0_1px_3px_rgb(0_0_0_/_40%)]">
-              Desbloquea el potencial de tu negocio con nuestra logística de
-              vanguardia. Velocidad, seguridad y alcance global a tu servicio.
+              {t('hero_subtitle')}
             </p>
             <Button
               asChild
@@ -115,7 +110,7 @@ export default function HomePage() {
               className="mt-8 bg-accent text-accent-foreground hover:bg-accent/90 font-bold"
             >
               <Link href="/contact">
-                Desata tu Potencial <ArrowRight className="ml-2 h-5 w-5" />
+                {t('hero_cta')} <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
           </div>
@@ -127,11 +122,10 @@ export default function HomePage() {
         <div className="container">
           <div className="mx-auto max-w-3xl text-center mb-12">
             <h2 className="font-headline text-3xl font-bold md:text-4xl">
-              Nuestros Servicios
+              {t('services_title')}
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              Soluciones a medida para cada necesidad logística. Descubre cómo
-              podemos ayudarte a mover tu mundo.
+              {t('services_subtitle')}
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -175,7 +169,7 @@ export default function HomePage() {
                     <div className="p-6 pt-0 w-full">
                       <DialogTrigger asChild>
                         <Button className="w-full bg-accent text-accent-foreground hover:bg-accent/90">
-                          Solicitar Servicio
+                          {t('request_service')}
                         </Button>
                       </DialogTrigger>
                     </div>
@@ -184,10 +178,10 @@ export default function HomePage() {
                   <DialogContent className="sm:max-w-4xl">
                     <DialogHeader>
                       <DialogTitle className="font-headline text-2xl">
-                        Solicitud de Servicio: {service.title}
+                        {t('dialog_title_request')}: {service.title}
                       </DialogTitle>
                       <DialogDescription>
-                        Cuanto más detalle nos facilite sobre la mercancía, cantidades, medidas y fechas, más precisa será nuestra oferta.
+                        {t('dialog_desc_request')}
                       </DialogDescription>
                     </DialogHeader>
                     <ServiceRequestForm
@@ -202,7 +196,7 @@ export default function HomePage() {
           <div className="text-center mt-12">
             <Button asChild variant="outline">
               <Link href="/services">
-                Ver todos los servicios <ArrowRight className="ml-2" />
+                {t('view_all_services')} <ArrowRight className="ml-2" />
               </Link>
             </Button>
           </div>
@@ -214,11 +208,10 @@ export default function HomePage() {
         <div className="container">
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="font-headline text-3xl font-bold md:text-4xl">
-              ¿Por Qué Elegirnos?
+              {t('why_choose_us_title')}
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              Combinamos tecnología de punta, una red global y un equipo de
-              expertos para ofrecer un servicio logístico sin igual.
+              {t('why_choose_us_subtitle')}
             </p>
           </div>
           <div className="mt-12 grid grid-cols-1 gap-12 md:grid-cols-3">
@@ -253,18 +246,17 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 container text-center text-white">
           <h2 className="font-headline text-3xl font-bold md:text-4xl">
-            ¿Listo para optimizar tu logística?
+            {t('cta_title')}
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-white/90">
-            Contacta con nuestros especialistas y descubre cómo Horse S.L. puede
-            transformar tu cadena de suministro.
+            {t('cta_subtitle')}
           </p>
           <Button
             asChild
             size="lg"
             className="mt-8 bg-accent text-accent-foreground hover:bg-accent/90 font-bold"
           >
-            <Link href="/contact">Habla con un experto</Link>
+            <Link href="/contact">{t('cta_button')}</Link>
           </Button>
         </div>
       </section>
